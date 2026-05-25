@@ -3,11 +3,21 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY", "")
-GEMINI_MODEL = "gemini-2.0-flash"
+
+def _get_secret(key: str, default: str = "") -> str:
+    """Read from env vars first, fall back to Streamlit secrets (for Cloud deploy)."""
+    val = os.getenv(key, "")
+    if val:
+        return val
+    try:
+        import streamlit as st
+        return st.secrets.get(key, default)
+    except Exception:
+        return default
+
 
 # Cerebras (primary LLM — free, fast)
-CEREBRAS_API_KEY = os.getenv("CEREBRAS_API_KEY", "")
+CEREBRAS_API_KEY = _get_secret("CEREBRAS_API_KEY")
 CEREBRAS_BASE_URL = "https://api.cerebras.ai/v1"
 CEREBRAS_MODEL = "llama3.1-8b"
 

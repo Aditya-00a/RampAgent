@@ -80,6 +80,20 @@ RampAgent/
 - **Analytics tabs** — spending by category, department, and vendor breakdowns
 - **AI Chat** — ask natural-language questions about the expense data
 
+## Deploy to Streamlit Cloud
+
+1. Fork or push this repo to your GitHub
+2. Go to [share.streamlit.io](https://share.streamlit.io)
+3. Connect your GitHub account and select this repo
+4. Set **Main file path** to `app.py`
+5. Under **Advanced settings → Secrets**, add:
+   ```toml
+   CEREBRAS_API_KEY = "your_key_here"
+   ```
+6. Click **Deploy**
+
+Free Cerebras API key: [cloud.cerebras.ai](https://cloud.cerebras.ai)
+
 ## Sample Data
 
 The included dataset has 495 synthetic transactions across 20 employees and 10 categories, with ~100 planted anomalies including duplicates, over-limit meals, weekend entertainment, velocity spikes, missing receipts, and unapproved travel.

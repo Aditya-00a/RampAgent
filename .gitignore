@@ -23,5 +23,5 @@ env/
 .DS_Store
 Thumbs.db
 
-# Streamlit
-.streamlit/
+# Streamlit secrets (config.toml is committed)
+.streamlit/secrets.toml
