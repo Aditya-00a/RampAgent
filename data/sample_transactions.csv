@@ -1,0 +1,496 @@
+transaction_id,date,employee_name,department,vendor,category,amount,description,receipt_attached,pre_approved
+TXN-0001,2024-02-09 15:07,Jordan Lee,Operations,Linear,Software & SaaS,8.23,Monthly subscription,True,False
+TXN-0002,2024-01-21 14:25,Hannah Morris,Finance,Best Buy,Office Supplies,462.0,Tech supplies,False,False
+TXN-0003,2024-01-19 10:04,Aisha Mohammed,Product,Best Buy,Office Supplies,43.24,USB-C hub,True,False
+TXN-0004,2024-01-10 09:24,Alex Petrov,Engineering,Lyft,Travel - Ground Transport,35.02,Ride to dinner venue,True,False
+TXN-0005,2024-01-29 09:35,Nina Kowalski,Product,B&H Photo,Office Supplies,340.21,Tech supplies,False,False
+TXN-0006,2024-02-05 19:56,Lisa Wang,Engineering,Hyatt,Travel - Hotels,171.42,2 nights for SFO trip,True,True
+TXN-0007,2024-02-12 19:07,James O'Brien,Engineering,T-Mobile,Telecommunications,57.77,International calling add-on,True,False
+TXN-0008,2024-01-30 10:12,Rachel Torres,Operations,United Airlines,Travel - Flights,264.18,Flight to BOS for partner meeting,True,True
+TXN-0009,2024-01-19 11:52,Mike Sullivan,Sales,LinkedIn Learning,Training & Education,31.66,Certification exam,True,False
+TXN-0010,2024-02-28 16:35,David Kim,Finance,Marriott,Travel - Hotels,167.8,2 nights for offsite,True,True
+TXN-0011,2024-01-15 12:26,Ryan Nakamura,Engineering,Hyatt,Travel - Hotels,249.79,2 nights for SFO trip,True,True
+TXN-0012,2024-01-10 12:45,Sarah Chen,Engineering,Best Buy,Office Supplies,50.84,Monitor stand + cables,True,False
+TXN-0013,2024-02-23 08:20,Tom Brennan,Sales,LinkedIn Learning,Training & Education,32.34,Annual subscription,True,False
+TXN-0014,2024-02-11 19:24,Jordan Lee,Operations,StubHub,Entertainment,243.01,Social outing,False,False
+TXN-0015,2024-02-21 13:07,Emily Zhang,HR,Topgolf,Entertainment,62.66,Team outing,True,False
+TXN-0016,2024-01-03 12:07,Mike Sullivan,Sales,PrivateJetShare,Travel - Ground Transport,871.01,Purchase,False,False
+TXN-0017,2024-03-19 19:56,Carlos Rivera,Marketing,Kinkos/FedEx,Professional Services,21.22,Contract signing service,True,False
+TXN-0018,2024-02-01 14:05,Alex Petrov,Engineering,Gramercy Tavern,Meals & Dining,60.06,Client dinner,True,False
+TXN-0019,2024-01-15 19:53,Marcus Johnson,Sales,Kinkos/FedEx,Professional Services,59.54,Print and bind report,True,False
+TXN-0020,2024-02-19 14:05,Alex Petrov,Engineering,Best Buy,Office Supplies,67.61,Notebook and pens,True,False
+TXN-0021,2024-01-24 10:15,Tom Brennan,Sales,LinkedIn Learning,Training & Education,33.55,Technical workshop,True,False
+TXN-0022,2024-03-15 11:45,Hannah Morris,Finance,Coursera,Training & Education,64.65,Certification exam,True,True
+TXN-0023,2024-02-01 14:40,Carlos Rivera,Marketing,Via,Travel - Ground Transport,8.85,Ride to dinner venue,True,False
+TXN-0024,2024-01-10 15:02,Priya Patel,Marketing,Verizon,Telecommunications,82.06,International calling add-on,True,False
+TXN-0025,2024-03-24 19:47,Alex Petrov,Engineering,Bowlero,Entertainment,125.46,Social outing,True,False
+TXN-0026,2024-03-28 17:03,Carlos Rivera,Marketing,Bowlero,Entertainment,52.11,Client dinner event,True,True
+TXN-0027,2024-02-14 19:11,Emily Zhang,HR,Udemy,Training & Education,26.52,Technical workshop,True,False
+TXN-0028,2024-01-15 14:55,Emily Zhang,HR,Broadway.com,Entertainment,70.67,Client entertainment - basketball game,True,False
+TXN-0029,2024-02-02 16:38,Rachel Torres,Operations,Via,Travel - Ground Transport,12.51,Taxi from JFK,True,False
+TXN-0030,2024-02-13 10:02,Mike Sullivan,Sales,Uber,Travel - Ground Transport,37.46,Taxi from JFK,True,False
+TXN-0031,2024-02-02 15:39,Tom Brennan,Sales,Lyft,Travel - Ground Transport,10.73,Uber to airport,True,False
+TXN-0032,2024-02-29 18:16,Aisha Mohammed,Product,JetBlue,Travel - Flights,212.5,Flight to LAX for conference,True,True
+TXN-0033,2024-03-07 09:54,Daniel Park,Legal,Kinkos/FedEx,Professional Services,17.56,Print and bind report,True,True
+TXN-0034,2024-03-21 10:15,Sarah Chen,Engineering,Lyft,Travel - Ground Transport,35.18,Lyft to client office,True,False
+TXN-0035,2024-03-29 14:38,Marcus Johnson,Sales,Delta Air Lines,Travel - Flights,418.04,Flight to SFO for client meeting,True,True
+TXN-0036,2024-01-24 13:40,James O'Brien,Engineering,American Airlines,Travel - Flights,336.5,Flight to SFO for client meeting,True,True
+TXN-0037,2024-03-25 11:48,Sarah Chen,Engineering,Verizon,Telecommunications,58.31,International calling add-on,True,False
+TXN-0038,2024-03-12 15:03,Marcus Johnson,Sales,American Airlines,Travel - Flights,347.23,Flight to SFO for client meeting,True,True
+TXN-0039,2024-03-14 09:56,Nina Kowalski,Product,Snowflake,Software & SaaS,639.5,Annual plan upgrade,True,False
+TXN-0040,2024-02-09 12:17,Mike Sullivan,Sales,Just Salad,Meals & Dining,14.9,Coffee meeting,True,False
+TXN-0041,2024-03-10 11:19,Nina Kowalski,Product,WineClubDirect,Entertainment,284.02,Purchase,False,False
+TXN-0042,2024-01-24 17:09,Mike Sullivan,Sales,Amazon Business,Office Supplies,28.9,Monitor stand + cables,True,False
+TXN-0043,2024-02-09 17:34,Lisa Wang,Engineering,Via,Travel - Ground Transport,8.88,Uber to airport,True,False
+TXN-0044,2024-02-13 16:27,James O'Brien,Engineering,Lyft,Travel - Ground Transport,26.56,Ride to dinner venue,True,False
+TXN-0045,2024-01-08 18:41,Mike Sullivan,Sales,Bowlero,Entertainment,41.35,Client entertainment - basketball game,True,False
+TXN-0046,2024-02-18 19:02,Alex Petrov,Engineering,American Airlines,Travel - Flights,880.28,Last-minute flight booking,True,False
+TXN-0047,2024-01-30 18:09,Daniel Park,Legal,NYC Taxi,Travel - Ground Transport,19.02,Taxi from JFK,True,True
+TXN-0048,2024-01-29 11:32,Daniel Park,Legal,StubHub,Entertainment,41.64,Client entertainment - basketball game,True,False
+TXN-0049,2024-01-23 17:38,Aisha Mohammed,Product,DocuSign,Professional Services,44.17,Coworking day pass,True,False
+TXN-0050,2024-01-02 15:47,Rachel Torres,Operations,AWS,Software & SaaS,95.94,Pro tier subscription,True,False
+TXN-0051,2024-03-06 10:31,Daniel Park,Legal,American Airlines,Travel - Flights,365.2,Flight to SFO for client meeting,True,True
+TXN-0052,2024-01-31 15:18,Ryan Nakamura,Engineering,United Airlines,Travel - Flights,458.1,Flight to ORD for team offsite,True,True
+TXN-0053,2024-03-26 17:55,Nina Kowalski,Product,AWS,Software & SaaS,151.32,Annual license renewal,True,False
+TXN-0054,2024-03-14 11:37,Tom Brennan,Sales,StubHub,Entertainment,91.79,Client entertainment - basketball game,True,False
+TXN-0055,2024-03-11 18:22,Tom Brennan,Sales,Staples,Office Supplies,78.76,Monitor stand + cables,True,False
+TXN-0056,2024-02-05 15:15,David Kim,Finance,Amazon Business,Office Supplies,47.32,Notebook and pens,True,False
+TXN-0057,2024-01-09 15:06,Aisha Mohammed,Product,Best Buy,Office Supplies,72.63,USB-C hub,False,True
+TXN-0058,2024-01-11 11:24,Emily Zhang,HR,American Airlines,Travel - Flights,419.63,Flight to SFO for client meeting,True,True
+TXN-0059,2024-02-07 15:38,Aisha Mohammed,Product,O'Reilly Media,Training & Education,40.49,Annual subscription,True,True
+TXN-0060,2024-03-07 13:01,Emily Zhang,HR,Marriott,Travel - Hotels,211.37,1 night for client visit,True,True
+TXN-0061,2024-01-23 18:56,Priya Patel,Marketing,Via,Travel - Ground Transport,14.88,Uber to airport,True,False
+TXN-0062,2024-03-26 14:37,Rachel Torres,Operations,JetBlue,Travel - Flights,372.11,Flight to SFO for client meeting,True,True
+TXN-0063,2024-02-05 09:36,Alex Petrov,Engineering,Via,Travel - Ground Transport,9.74,Taxi from JFK,True,False
+TXN-0064,2024-01-09 10:06,Hannah Morris,Finance,Broadway.com,Entertainment,64.52,Holiday party venue,True,False
+TXN-0065,2024-02-20 08:02,Alex Petrov,Engineering,Bowlero,Entertainment,58.79,Team outing,True,False
+TXN-0066,2024-01-16 08:54,Jordan Lee,Operations,Staples,Office Supplies,34.52,USB-C hub,True,False
+TXN-0067,2024-03-01 11:18,Sofia Gutierrez,Marketing,PersonalTrainerPro,Training & Education,317.92,Purchase,True,False
+TXN-0068,2024-03-14 16:20,Mike Sullivan,Sales,LegalZoom,Professional Services,47.2,Notary service,True,True
+TXN-0069,2024-02-22 16:02,Mike Sullivan,Sales,Hilton,Travel - Hotels,200.25,2 nights for SFO trip,True,True
+TXN-0070,2024-02-23 11:50,Rachel Torres,Operations,Datadog,Software & SaaS,694.07,Enterprise license,True,False
+TXN-0071,2024-02-05 10:06,Aisha Mohammed,Product,Via,Travel - Ground Transport,14.53,Lyft to client office,True,False
+TXN-0072,2024-01-22 13:22,David Kim,Finance,Topgolf,Entertainment,48.14,Team outing,True,False
+TXN-0073,2024-01-23 18:18,Hannah Morris,Finance,Uber,Travel - Ground Transport,12.85,Uber to airport,True,False
+TXN-0074,2024-03-29 10:21,Carlos Rivera,Marketing,DocuSign,Professional Services,35.84,Notary service,True,False
+TXN-0075,2024-03-12 14:00,Megan Foster,Sales,LegalZoom,Professional Services,30.79,Coworking day pass,True,False
+TXN-0076,2024-03-26 14:08,Rachel Torres,Operations,Apple Store,Office Supplies,146.12,Monitor stand + cables,True,False
+TXN-0077,2024-01-22 15:50,Lisa Wang,Engineering,Lyft,Travel - Ground Transport,27.29,Uber to airport,True,False
+TXN-0078,2024-03-05 19:18,David Kim,Finance,WeWork,Professional Services,329.54,Contract signing service,True,False
+TXN-0079,2024-03-15 11:21,Lisa Wang,Engineering,Bowlero,Entertainment,38.59,Team outing,True,False
+TXN-0080,2024-03-25 13:00,Alex Petrov,Engineering,WeWork,Professional Services,212.67,Print and bind report,False,False
+TXN-0081,2024-02-15 17:19,Jordan Lee,Operations,Slack,Software & SaaS,8.52,Pro tier subscription,True,False
+TXN-0082,2024-03-15 13:36,Marcus Johnson,Sales,Hyatt,Travel - Hotels,181.07,1 night for client visit,True,True
+TXN-0083,2024-03-28 14:51,Carlos Rivera,Marketing,Dos Toros,Meals & Dining,15.88,Solo working lunch,True,True
+TXN-0084,2024-03-14 09:05,Carlos Rivera,Marketing,Uber,Travel - Ground Transport,19.95,Ride to dinner venue,True,False
+TXN-0085,2024-03-27 09:33,Mike Sullivan,Sales,NYC Taxi,Travel - Ground Transport,21.56,Taxi from JFK,True,False
+TXN-0086,2024-02-28 10:27,David Kim,Finance,Lyft,Travel - Ground Transport,15.71,Lyft to client office,True,False
+TXN-0087,2024-02-08 08:00,Nina Kowalski,Product,Kinkos/FedEx,Professional Services,57.15,Contract signing service,True,False
+TXN-0088,2024-02-27 17:52,Rachel Torres,Operations,DocuSign,Professional Services,48.75,Notary service,True,False
+TXN-0089,2024-02-05 14:31,Nina Kowalski,Product,Broadway.com,Entertainment,79.53,Client entertainment - basketball game,True,False
+TXN-0090,2024-02-20 10:11,Marcus Johnson,Sales,Shake Shack,Meals & Dining,12.37,Team lunch,True,False
+TXN-0091,2024-01-26 12:14,Daniel Park,Legal,T-Mobile,Telecommunications,41.32,International calling add-on,True,True
+TXN-0092,2024-01-19 11:50,James O'Brien,Engineering,Amazon Business,Office Supplies,19.71,Desk lamp,True,False
+TXN-0093,2024-01-25 16:30,Alex Petrov,Engineering,Broadway.com,Entertainment,72.0,Team outing,True,False
+TXN-0094,2024-01-12 13:59,Rachel Torres,Operations,Figma,Software & SaaS,23.63,Pro tier subscription,True,False
+TXN-0095,2024-01-31 09:12,Nina Kowalski,Product,Apple Store,Office Supplies,84.33,Notebook and pens,True,False
+TXN-0096,2024-02-16 17:01,Daniel Park,Legal,Kinkos/FedEx,Professional Services,42.51,Print and bind report,True,False
+TXN-0097,2024-02-27 13:11,Hannah Morris,Finance,United Airlines,Travel - Flights,382.03,Flight to SFO for client meeting,True,True
+TXN-0098,2024-02-07 15:44,David Kim,Finance,Amazon Business,Office Supplies,21.01,Notebook and pens,True,False
+TXN-0099,2024-02-13 12:58,Priya Patel,Marketing,Lyft,Travel - Ground Transport,24.38,Uber to airport,True,False
+TXN-0100,2024-01-19 09:45,James O'Brien,Engineering,LegalZoom,Professional Services,61.59,Notary service,True,False
+TXN-0101,2024-01-16 20:28,Sofia Gutierrez,Marketing,Nobu,Meals & Dining,308.84,Dinner with prospects,True,False
+TXN-0102,2024-01-18 14:32,Sofia Gutierrez,Marketing,Udemy,Training & Education,25.82,Online course enrollment,True,False
+TXN-0103,2024-03-15 17:30,Alex Petrov,Engineering,Linear,Software & SaaS,9.31,Monthly subscription,True,False
+TXN-0104,2024-01-22 12:43,Marcus Johnson,Sales,Via,Travel - Ground Transport,13.25,Taxi from JFK,True,True
+TXN-0105,2024-01-29 10:35,Megan Foster,Sales,Chipotle,Meals & Dining,10.15,Lunch with candidate,True,False
+TXN-0106,2024-02-13 09:32,Marcus Johnson,Sales,Uber,Travel - Ground Transport,41.88,Lyft to client office,True,False
+TXN-0107,2024-02-22 09:56,Marcus Johnson,Sales,Hilton,Travel - Hotels,220.43,2 nights for offsite,True,True
+TXN-0108,2024-03-05 14:56,Priya Patel,Marketing,Via,Travel - Ground Transport,9.49,Ride to dinner venue,True,False
+TXN-0109,2024-02-15 18:42,Alex Petrov,Engineering,AT&T,Telecommunications,37.11,International calling add-on,True,False
+TXN-0110,2024-03-07 10:44,Marcus Johnson,Sales,AT&T,Telecommunications,72.75,Hotspot plan,True,False
+TXN-0111,2024-03-12 13:22,Hannah Morris,Finance,T-Mobile,Telecommunications,43.75,Hotspot plan,True,False
+TXN-0112,2024-02-27 12:53,Sofia Gutierrez,Marketing,The Smith,Meals & Dining,53.57,Lunch with candidate,True,False
+TXN-0113,2024-03-29 16:59,David Kim,Finance,DocuSign,Professional Services,28.99,Contract signing service,True,False
+TXN-0114,2024-03-22 16:18,Alex Petrov,Engineering,Coursera,Training & Education,59.42,Technical workshop,True,False
+TXN-0115,2024-01-26 12:02,Ryan Nakamura,Engineering,American Airlines,Travel - Flights,466.89,Flight to BOS for partner meeting,True,True
+TXN-0116,2024-02-17 13:13,David Kim,Finance,Best Buy,Office Supplies,122.49,Rush order,False,False
+TXN-0117,2024-03-22 11:16,Megan Foster,Sales,Chipotle,Meals & Dining,17.58,Lunch with candidate,True,False
+TXN-0118,2024-01-19 19:46,Daniel Park,Legal,Topgolf,Entertainment,45.35,Client entertainment - basketball game,True,False
+TXN-0119,2024-01-27 17:55,Marcus Johnson,Sales,Datadog,Software & SaaS,613.78,Enterprise license,True,False
+TXN-0120,2024-02-23 17:14,David Kim,Finance,JetBlue,Travel - Flights,341.64,Flight to SFO for client meeting,True,True
+TXN-0121,2024-01-22 11:51,Nina Kowalski,Product,T-Mobile,Telecommunications,46.75,Hotspot plan,True,False
+TXN-0122,2024-01-31 14:41,James O'Brien,Engineering,Gramercy Tavern,Meals & Dining,63.77,Team lunch,True,True
+TXN-0123,2024-03-12 10:27,David Kim,Finance,Delta Air Lines,Travel - Flights,400.03,Flight to LAX for conference,True,True
+TXN-0124,2024-01-11 17:40,Hannah Morris,Finance,United Airlines,Travel - Flights,342.16,Flight to SFO for client meeting,True,True
+TXN-0125,2024-03-21 13:05,James O'Brien,Engineering,JetBlue,Travel - Flights,283.09,Flight to LAX for conference,True,True
+TXN-0126,2024-02-22 13:14,Sofia Gutierrez,Marketing,AT&T,Telecommunications,68.62,Monthly phone plan,True,True
+TXN-0127,2024-01-08 22:53,Emily Zhang,HR,Eleven Madison Park,Meals & Dining,379.43,Team celebration dinner,False,False
+TXN-0128,2024-02-29 13:43,Nina Kowalski,Product,Dig Inn,Meals & Dining,15.29,Lunch with candidate,True,False
+TXN-0129,2024-01-26 13:43,Jordan Lee,Operations,Lyft,Travel - Ground Transport,19.28,Ride to dinner venue,True,False
+TXN-0130,2024-02-01 11:48,Sarah Chen,Engineering,Best Buy,Office Supplies,306.18,Equipment purchase,False,False
+TXN-0131,2024-02-12 09:49,Sofia Gutierrez,Marketing,The Smith,Meals & Dining,32.2,Coffee meeting,True,False
+TXN-0132,2024-01-30 14:44,Hannah Morris,Finance,WeWork,Professional Services,218.61,Print and bind report,True,False
+TXN-0133,2024-01-11 18:03,Hannah Morris,Finance,Marriott,Travel - Hotels,199.77,2 nights for SFO trip,True,True
+TXN-0134,2024-03-07 14:52,Aisha Mohammed,Product,Just Salad,Meals & Dining,15.6,Team dinner,True,True
+TXN-0135,2024-01-18 11:18,Daniel Park,Legal,Coursera,Training & Education,56.96,Technical workshop,True,False
+TXN-0136,2024-02-02 13:18,Lisa Wang,Engineering,Hyatt,Travel - Hotels,239.28,3 nights for conference,True,True
+TXN-0137,2024-02-21 13:18,Aisha Mohammed,Product,DocuSign,Professional Services,29.44,Notary service,False,False
+TXN-0138,2024-02-07 08:24,Daniel Park,Legal,AT&T,Telecommunications,50.49,Monthly phone plan,True,False
+TXN-0139,2024-03-08 15:07,Aisha Mohammed,Product,Udemy,Training & Education,14.96,Certification exam,True,False
+TXN-0140,2024-02-26 09:29,Tom Brennan,Sales,Shake Shack,Meals & Dining,12.69,Team dinner,True,False
+TXN-0141,2024-03-27 08:59,Tom Brennan,Sales,T-Mobile,Telecommunications,41.51,International calling add-on,True,False
+TXN-0142,2024-02-02 13:25,Marcus Johnson,Sales,Via,Travel - Ground Transport,9.04,Uber to airport,True,False
+TXN-0143,2024-02-02 15:22,Sofia Gutierrez,Marketing,Bowlero,Entertainment,53.82,Team outing,True,False
+TXN-0144,2024-03-01 19:19,James O'Brien,Engineering,AWS,Software & SaaS,111.48,Pro tier subscription,False,False
+TXN-0145,2024-02-29 13:23,Megan Foster,Sales,GitHub,Software & SaaS,35.71,Monthly subscription,True,False
+TXN-0146,2024-03-11 08:05,Priya Patel,Marketing,WeWork,Professional Services,210.12,Print and bind report,True,False
+TXN-0147,2024-02-20 13:16,Ryan Nakamura,Engineering,T-Mobile,Telecommunications,30.81,Hotspot plan,True,False
+TXN-0148,2024-02-09 18:38,Aisha Mohammed,Product,Delta Air Lines,Travel - Flights,302.42,Flight to SFO for client meeting,True,True
+TXN-0149,2024-03-11 15:26,Aisha Mohammed,Product,American Airlines,Travel - Flights,353.75,Flight to SFO for client meeting,True,True
+TXN-0150,2024-03-18 13:31,James O'Brien,Engineering,T-Mobile,Telecommunications,66.74,Monthly phone plan,True,False
+TXN-0151,2024-02-22 18:53,Priya Patel,Marketing,Zoom,Software & SaaS,21.41,Team plan upgrade,False,False
+TXN-0152,2024-03-05 14:56,Rachel Torres,Operations,Shake Shack,Meals & Dining,17.18,Team dinner,True,True
+TXN-0153,2024-03-13 16:08,Rachel Torres,Operations,WeWork,Professional Services,312.48,Notary service,True,False
+TXN-0154,2024-01-03 18:46,Megan Foster,Sales,DocuSign,Professional Services,49.28,Coworking day pass,True,False
+TXN-0155,2024-03-26 11:47,Daniel Park,Legal,Micro Center,Office Supplies,478.71,Equipment purchase,False,False
+TXN-0156,2024-01-23 09:32,Carlos Rivera,Marketing,Amazon Business,Office Supplies,36.65,Monitor stand + cables,True,False
+TXN-0157,2024-03-15 18:58,Carlos Rivera,Marketing,United Airlines,Travel - Flights,463.64,Flight to BOS for partner meeting,True,True
+TXN-0158,2024-01-08 16:18,Sofia Gutierrez,Marketing,Hyatt,Travel - Hotels,164.1,3 nights for conference,True,True
+TXN-0159,2024-02-08 18:03,Carlos Rivera,Marketing,Lyft,Travel - Ground Transport,32.44,Lyft to client office,True,False
+TXN-0160,2024-01-25 13:39,James O'Brien,Engineering,ExoticCars Rental,Travel - Ground Transport,1067.8,Purchase,True,False
+TXN-0161,2024-01-22 17:03,Emily Zhang,HR,Coursera,Training & Education,74.45,Online course enrollment,True,False
+TXN-0162,2024-03-03 03:28,Emily Zhang,HR,GrubHub,Travel - Ground Transport,108.18,Late night ride,True,False
+TXN-0163,2024-02-27 09:49,Jordan Lee,Operations,Zoom,Software & SaaS,23.62,Annual license renewal,True,False
+TXN-0164,2024-03-29 10:46,Tom Brennan,Sales,Gramercy Tavern,Meals & Dining,64.82,Team lunch,True,False
+TXN-0165,2024-02-21 16:18,Lisa Wang,Engineering,Uber,Travel - Ground Transport,42.45,Ride to dinner venue,True,False
+TXN-0166,2024-01-11 18:59,Tom Brennan,Sales,NYC Taxi,Travel - Ground Transport,24.49,Taxi from JFK,True,False
+TXN-0167,2024-03-26 16:17,Sarah Chen,Engineering,Linear,Software & SaaS,9.32,Annual license renewal,True,False
+TXN-0168,2024-02-23 13:45,Ryan Nakamura,Engineering,Lyft,Travel - Ground Transport,11.57,Ride to dinner venue,True,False
+TXN-0169,2024-03-12 11:37,Daniel Park,Legal,Uber,Travel - Ground Transport,39.38,Lyft to client office,True,False
+TXN-0170,2024-01-05 22:52,Sofia Gutierrez,Marketing,Le Bernardin,Meals & Dining,350.16,Dinner with prospects,False,False
+TXN-0171,2024-01-03 13:12,Carlos Rivera,Marketing,Staples,Office Supplies,50.95,USB-C hub,True,False
+TXN-0172,2024-02-02 10:41,Daniel Park,Legal,NYC Taxi,Travel - Ground Transport,32.3,Uber to airport,True,False
+TXN-0173,2024-03-04 13:30,Carlos Rivera,Marketing,GitHub,Software & SaaS,36.57,Team plan upgrade,True,False
+TXN-0174,2024-02-27 08:37,Rachel Torres,Operations,United Airlines,Travel - Flights,321.05,Flight to ORD for team offsite,True,True
+TXN-0175,2024-01-15 11:27,Megan Foster,Sales,DocuSign,Professional Services,27.2,Notary service,True,False
+TXN-0176,2024-02-21 13:50,Megan Foster,Sales,Delta Air Lines,Travel - Flights,494.52,Flight to ORD for team offsite,True,True
+TXN-0177,2024-03-27 14:21,Jordan Lee,Operations,NYC Taxi,Travel - Ground Transport,34.94,Uber to airport,True,False
+TXN-0178,2024-02-18 11:03,David Kim,Finance,Best Buy,Software & SaaS,329.06,Rush order,False,False
+TXN-0179,2024-03-21 16:01,Nina Kowalski,Product,Hampton Inn,Travel - Hotels,174.37,2 nights for offsite,True,True
+TXN-0180,2024-02-05 18:26,Aisha Mohammed,Product,Lyft,Travel - Ground Transport,30.33,Uber to airport,True,False
+TXN-0181,2024-02-06 08:35,Rachel Torres,Operations,Verizon,Telecommunications,58.61,Hotspot plan,True,False
+TXN-0182,2024-03-19 11:45,David Kim,Finance,Delta Air Lines,Travel - Flights,339.92,Flight to ORD for team offsite,True,True
+TXN-0183,2024-02-23 19:31,Priya Patel,Marketing,NYC Taxi,Travel - Ground Transport,22.4,Taxi from JFK,True,False
+TXN-0184,2024-03-14 11:47,Emily Zhang,HR,Via,Travel - Ground Transport,10.19,Lyft to client office,True,False
+TXN-0185,2024-01-08 13:45,Aisha Mohammed,Product,Shake Shack,Meals & Dining,12.26,Solo working lunch,True,False
+TXN-0186,2024-02-08 16:33,Tom Brennan,Sales,Just Salad,Meals & Dining,12.13,Client dinner,True,True
+TXN-0187,2024-03-06 19:26,Priya Patel,Marketing,LegalZoom,Professional Services,59.11,Coworking day pass,True,False
+TXN-0188,2024-03-07 15:29,Sofia Gutierrez,Marketing,Apple Store,Office Supplies,61.39,Monitor stand + cables,True,False
+TXN-0189,2024-02-20 11:58,Hannah Morris,Finance,NYC Taxi,Travel - Ground Transport,34.29,Lyft to client office,True,False
+TXN-0190,2024-02-21 13:41,Priya Patel,Marketing,Udemy,Training & Education,21.53,Technical workshop,True,False
+TXN-0191,2024-01-15 11:24,Carlos Rivera,Marketing,NYC Taxi,Travel - Ground Transport,44.87,Taxi from JFK,True,False
+TXN-0192,2024-02-24 22:34,Ryan Nakamura,Engineering,Peter Luger,Meals & Dining,260.51,Team celebration dinner,True,False
+TXN-0193,2024-01-30 23:47,Tom Brennan,Sales,Bar Tab NYC,Travel - Ground Transport,157.62,Late night ride,False,False
+TXN-0194,2024-03-16 19:44,Priya Patel,Marketing,StubHub,Entertainment,202.27,Social outing,True,False
+TXN-0195,2024-01-17 21:02,James O'Brien,Engineering,Eleven Madison Park,Meals & Dining,351.42,Dinner with prospects,True,False
+TXN-0196,2024-01-30 15:23,Ryan Nakamura,Engineering,T-Mobile,Telecommunications,57.51,International calling add-on,True,False
+TXN-0197,2024-03-28 12:36,Daniel Park,Legal,Coursera,Training & Education,78.98,Online course enrollment,True,False
+TXN-0198,2024-03-14 15:09,Rachel Torres,Operations,Hilton,Travel - Hotels,174.27,1 night for client visit,True,True
+TXN-0199,2024-02-01 12:42,Alex Petrov,Engineering,Kinkos/FedEx,Professional Services,43.5,Print and bind report,True,False
+TXN-0200,2024-02-05 13:54,Lisa Wang,Engineering,LinkedIn Learning,Training & Education,34.65,Certification exam,True,True
+TXN-0201,2024-02-28 09:39,Carlos Rivera,Marketing,Uber,Travel - Ground Transport,23.84,Lyft to client office,True,False
+TXN-0202,2024-02-29 19:09,Alex Petrov,Engineering,WeWork,Professional Services,286.7,Notary service,True,False
+TXN-0203,2024-02-16 09:25,Tom Brennan,Sales,T-Mobile,Telecommunications,63.33,Hotspot plan,True,True
+TXN-0204,2024-01-03 15:08,Jordan Lee,Operations,Coursera,Training & Education,73.76,Certification exam,True,False
+TXN-0205,2024-03-26 13:04,Daniel Park,Legal,Just Salad,Meals & Dining,13.2,Team dinner,True,True
+TXN-0206,2024-03-21 10:38,Sofia Gutierrez,Marketing,Verizon,Telecommunications,69.79,International calling add-on,True,False
+TXN-0207,2024-02-07 15:56,Marcus Johnson,Sales,Via,Travel - Ground Transport,11.84,Ride to dinner venue,True,False
+TXN-0208,2024-02-29 09:43,Tom Brennan,Sales,AWS,Software & SaaS,148.42,Annual license renewal,False,False
+TXN-0209,2024-01-02 14:16,Aisha Mohammed,Product,StubHub,Entertainment,49.06,Holiday party venue,True,False
+TXN-0210,2024-03-12 19:57,Priya Patel,Marketing,LinkedIn Learning,Training & Education,34.63,Online course enrollment,True,False
+TXN-0211,2024-01-03 10:31,James O'Brien,Engineering,United Airlines,Travel - Flights,412.82,Flight to ORD for team offsite,True,True
+TXN-0212,2024-02-02 18:17,James O'Brien,Engineering,LegalZoom,Professional Services,42.96,Notary service,True,False
+TXN-0213,2024-01-08 18:21,Aisha Mohammed,Product,Zoom,Software & SaaS,23.62,Team plan upgrade,True,False
+TXN-0214,2024-01-09 10:45,David Kim,Finance,Lyft,Travel - Ground Transport,22.59,Taxi from JFK,True,False
+TXN-0215,2024-02-23 09:34,Rachel Torres,Operations,Delta Air Lines,Travel - Flights,378.9,Flight to ORD for team offsite,False,True
+TXN-0216,2024-01-11 20:33,Sofia Gutierrez,Marketing,Le Bernardin,Meals & Dining,278.6,Client dinner,True,False
+TXN-0217,2024-03-21 17:33,Ryan Nakamura,Engineering,WeWork,Professional Services,357.31,Notary service,True,False
+TXN-0218,2024-02-02 08:16,James O'Brien,Engineering,Hampton Inn,Travel - Hotels,132.65,2 nights for offsite,True,True
+TXN-0219,2024-02-06 09:41,Rachel Torres,Operations,Slack,Software & SaaS,14.12,Team plan upgrade,True,False
+TXN-0220,2024-02-02 18:51,Nina Kowalski,Product,Hampton Inn,Travel - Hotels,123.96,2 nights for SFO trip,False,True
+TXN-0221,2024-01-11 08:29,Carlos Rivera,Marketing,DocuSign,Professional Services,48.23,Coworking day pass,True,False
+TXN-0222,2024-03-25 17:08,Emily Zhang,HR,DocuSign,Professional Services,35.77,Contract signing service,True,False
+TXN-0223,2024-02-13 12:03,James O'Brien,Engineering,American Airlines,Travel - Flights,333.75,Flight to LAX for conference,True,True
+TXN-0224,2024-02-22 13:02,David Kim,Finance,Broadway.com,Entertainment,95.3,Holiday party venue,True,False
+TXN-0225,2024-02-22 23:56,Marcus Johnson,Sales,Hilton,Travel - Hotels,225.26,2 nights for offsite,True,True
+TXN-0226,2024-02-22 14:32,Emily Zhang,HR,GitHub,Software & SaaS,24.21,Team plan upgrade,True,False
+TXN-0227,2024-02-23 18:09,Jordan Lee,Operations,American Airlines,Travel - Flights,263.53,Flight to SFO for client meeting,True,True
+TXN-0228,2024-02-26 18:52,Ryan Nakamura,Engineering,DocuSign,Professional Services,29.54,Notary service,False,False
+TXN-0229,2024-01-18 08:27,James O'Brien,Engineering,Hilton,Travel - Hotels,220.85,2 nights for SFO trip,False,True
+TXN-0230,2024-01-09 11:52,Sofia Gutierrez,Marketing,Via,Travel - Ground Transport,13.9,Uber to airport,True,False
+TXN-0231,2024-02-21 17:03,Daniel Park,Legal,DocuSign,Professional Services,26.14,Coworking day pass,True,False
+TXN-0232,2024-03-11 14:11,Nina Kowalski,Product,LegalZoom,Professional Services,74.74,Contract signing service,True,False
+TXN-0233,2024-03-14 18:49,Carlos Rivera,Marketing,Gramercy Tavern,Meals & Dining,53.23,Lunch with candidate,False,False
+TXN-0234,2024-03-05 11:46,Megan Foster,Sales,NYC Taxi,Travel - Ground Transport,27.89,Lyft to client office,True,False
+TXN-0235,2024-01-16 12:49,Hannah Morris,Finance,T-Mobile,Telecommunications,34.53,Hotspot plan,True,False
+TXN-0236,2024-01-22 15:00,Lisa Wang,Engineering,Staples,Office Supplies,34.08,USB-C hub,False,False
+TXN-0237,2024-02-19 09:35,Sarah Chen,Engineering,Chipotle,Meals & Dining,13.33,Client dinner,True,False
+TXN-0238,2024-03-06 15:23,Tom Brennan,Sales,Delta Air Lines,Travel - Flights,282.01,Flight to SFO for client meeting,True,True
+TXN-0239,2024-03-08 13:53,Emily Zhang,HR,B&H Photo,Software & SaaS,352.52,Tech supplies,False,False
+TXN-0240,2024-03-15 14:30,Alex Petrov,Engineering,StubHub,Entertainment,87.12,Client entertainment - basketball game,False,False
+TXN-0241,2024-02-13 18:54,Lisa Wang,Engineering,Best Buy,Office Supplies,86.73,Desk lamp,False,False
+TXN-0242,2024-03-04 16:48,Aisha Mohammed,Product,Delta Air Lines,Travel - Flights,438.42,Flight to LAX for conference,True,True
+TXN-0243,2024-03-13 16:21,David Kim,Finance,Amazon Business,Office Supplies,54.51,Monitor stand + cables,True,False
+TXN-0244,2024-02-08 15:00,Nina Kowalski,Product,Kinkos/FedEx,Professional Services,56.14,Contract signing service,True,False
+TXN-0245,2024-01-21 04:36,Daniel Park,Legal,GrubHub,Travel - Ground Transport,174.21,Late night ride,True,False
+TXN-0246,2024-03-14 10:36,Daniel Park,Legal,Just Salad,Meals & Dining,15.69,Solo working lunch,True,False
+TXN-0247,2024-01-05 08:30,Megan Foster,Sales,Dos Toros,Meals & Dining,12.81,Coffee meeting,True,False
+TXN-0248,2024-03-21 15:53,Emily Zhang,HR,Verizon,Telecommunications,40.58,Monthly phone plan,True,False
+TXN-0249,2024-03-21 19:18,Emily Zhang,HR,T-Mobile,Telecommunications,38.69,Hotspot plan,True,False
+TXN-0250,2024-01-02 18:46,Emily Zhang,HR,Verizon,Telecommunications,40.81,Monthly phone plan,True,False
+TXN-0251,2024-03-18 08:14,Sarah Chen,Engineering,Kinkos/FedEx,Professional Services,44.13,Contract signing service,True,False
+TXN-0252,2024-03-27 11:48,Alex Petrov,Engineering,AT&T,Telecommunications,69.08,Monthly phone plan,True,False
+TXN-0253,2024-01-26 19:21,Nina Kowalski,Product,NYC Taxi,Travel - Ground Transport,43.86,Uber to airport,True,True
+TXN-0254,2024-01-02 19:13,Carlos Rivera,Marketing,Gramercy Tavern,Meals & Dining,52.63,Team dinner,True,False
+TXN-0255,2024-01-10 10:17,Jordan Lee,Operations,United Airlines,Travel - Flights,324.09,Flight to ORD for team offsite,True,True
+TXN-0256,2024-03-15 18:17,Emily Zhang,HR,NYC Taxi,Travel - Ground Transport,32.13,Ride to dinner venue,True,True
+TXN-0257,2024-03-15 12:41,Sarah Chen,Engineering,United Airlines,Travel - Flights,468.17,Flight to LAX for conference,True,True
+TXN-0258,2024-03-08 18:28,Hannah Morris,Finance,Delta Air Lines,Travel - Flights,410.61,Flight to SFO for client meeting,True,True
+TXN-0259,2024-02-23 11:06,Sofia Gutierrez,Marketing,Hampton Inn,Travel - Hotels,127.01,2 nights for SFO trip,True,True
+TXN-0260,2024-02-16 11:24,David Kim,Finance,Staples,Software & SaaS,238.67,Bulk purchase,True,False
+TXN-0261,2024-02-16 12:50,Rachel Torres,Operations,Lyft,Travel - Ground Transport,28.59,Ride to dinner venue,True,False
+TXN-0262,2024-01-23 09:52,Carlos Rivera,Marketing,Marriott,Travel - Hotels,186.44,2 nights for SFO trip,True,True
+TXN-0263,2024-02-15 11:41,Sarah Chen,Engineering,Verizon,Telecommunications,85.0,Monthly phone plan,True,False
+TXN-0264,2024-02-22 14:29,Priya Patel,Marketing,Apple Store,Office Supplies,51.94,USB-C hub,True,False
+TXN-0265,2024-01-14 12:08,Daniel Park,Legal,Delta Air Lines,Travel - Flights,844.46,Last-minute flight booking,True,False
+TXN-0266,2024-03-12 16:18,Priya Patel,Marketing,Apple Store,Office Supplies,115.14,USB-C hub,True,False
+TXN-0267,2024-01-29 16:57,Mike Sullivan,Sales,DesignerBags.co,Office Supplies,687.56,Purchase,False,False
+TXN-0268,2024-01-26 12:28,Mike Sullivan,Sales,Udemy,Training & Education,25.97,Certification exam,False,True
+TXN-0269,2024-02-29 15:20,Priya Patel,Marketing,Topgolf,Entertainment,57.79,Client entertainment - basketball game,True,False
+TXN-0270,2024-01-31 10:16,Tom Brennan,Sales,B&H Photo,Professional Services,231.91,Tech supplies,False,False
+TXN-0271,2024-02-29 13:10,Sarah Chen,Engineering,Delta Air Lines,Travel - Flights,362.76,Flight to ORD for team offsite,True,True
+TXN-0272,2024-02-01 17:20,Rachel Torres,Operations,Just Salad,Meals & Dining,14.74,Team lunch,True,True
+TXN-0273,2024-03-18 08:03,David Kim,Finance,WeWork,Professional Services,332.55,Contract signing service,True,False
+TXN-0274,2024-03-10 13:08,James O'Brien,Engineering,CryptoGear.io,Office Supplies,336.69,Purchase,False,False
+TXN-0275,2024-02-13 17:54,Priya Patel,Marketing,LegalZoom,Professional Services,62.25,Coworking day pass,True,False
+TXN-0276,2024-03-11 14:29,Hannah Morris,Finance,Apple Store,Office Supplies,96.23,USB-C hub,True,False
+TXN-0277,2024-01-03 16:26,Megan Foster,Sales,Lyft,Travel - Ground Transport,19.32,Uber to airport,True,False
+TXN-0278,2024-01-29 16:07,Hannah Morris,Finance,LinkedIn Learning,Training & Education,34.14,Technical workshop,True,False
+TXN-0279,2024-01-24 11:08,Priya Patel,Marketing,Zoom,Software & SaaS,22.47,Team plan upgrade,True,False
+TXN-0280,2024-01-19 09:28,Megan Foster,Sales,Vercel,Software & SaaS,24.0,Annual license renewal,True,False
+TXN-0281,2024-03-08 09:18,Hannah Morris,Finance,Staples,Office Supplies,61.24,Monitor stand + cables,True,False
+TXN-0282,2024-02-21 11:35,David Kim,Finance,Kinkos/FedEx,Professional Services,46.3,Contract signing service,True,False
+TXN-0283,2024-03-30 21:21,Carlos Rivera,Marketing,DocuSign,Professional Services,35.91,Notary service,True,False
+TXN-0284,2024-03-18 14:39,David Kim,Finance,Vercel,Software & SaaS,30.55,Pro tier subscription,True,False
+TXN-0285,2024-02-01 10:51,Alex Petrov,Engineering,Udemy,Training & Education,28.66,Certification exam,True,True
+TXN-0286,2024-03-19 19:27,Priya Patel,Marketing,Apple Store,Office Supplies,66.78,Notebook and pens,True,False
+TXN-0287,2024-01-11 08:18,Hannah Morris,Finance,Udemy,Training & Education,14.93,Online course enrollment,True,False
+TXN-0288,2024-02-27 18:13,Daniel Park,Legal,O'Reilly Media,Training & Education,44.65,Annual subscription,True,False
+TXN-0289,2024-01-09 13:53,Priya Patel,Marketing,Vercel,Software & SaaS,29.04,Team plan upgrade,True,False
+TXN-0290,2024-03-19 14:06,Megan Foster,Sales,AT&T,Telecommunications,55.42,Hotspot plan,True,False
+TXN-0291,2024-03-21 08:38,Mike Sullivan,Sales,Gramercy Tavern,Meals & Dining,71.3,Team lunch,True,False
+TXN-0292,2024-02-19 09:35,Jordan Lee,Operations,Verizon,Telecommunications,83.79,International calling add-on,True,False
+TXN-0293,2024-03-27 10:54,James O'Brien,Engineering,SpaRetreat NYC,Professional Services,437.76,Purchase,False,False
+TXN-0294,2024-03-14 09:50,Daniel Park,Legal,Coursera,Training & Education,76.07,Technical workshop,True,False
+TXN-0295,2024-01-23 14:31,Sarah Chen,Engineering,Gramercy Tavern,Meals & Dining,58.15,Coffee meeting,True,False
+TXN-0296,2024-01-14 11:30,Nina Kowalski,Product,Datadog,Software & SaaS,563.89,Premium tier,True,False
+TXN-0297,2024-03-01 17:32,Carlos Rivera,Marketing,Amazon Business,Software & SaaS,288.87,Tech supplies,False,False
+TXN-0298,2024-01-03 16:06,Alex Petrov,Engineering,AT&T,Telecommunications,74.49,Monthly phone plan,True,True
+TXN-0299,2024-02-08 19:55,James O'Brien,Engineering,Vercel,Software & SaaS,39.35,Team plan upgrade,True,False
+TXN-0300,2024-01-22 13:59,Nina Kowalski,Product,LinkedIn Learning,Training & Education,32.48,Technical workshop,True,False
+TXN-0301,2024-01-08 09:40,Lisa Wang,Engineering,AT&T,Telecommunications,46.3,International calling add-on,True,True
+TXN-0302,2024-01-16 12:36,Tom Brennan,Sales,JetBlue,Travel - Flights,349.07,Flight to LAX for conference,True,True
+TXN-0303,2024-01-15 17:43,Marcus Johnson,Sales,Kinkos/FedEx,Professional Services,31.55,Coworking day pass,True,False
+TXN-0304,2024-02-13 11:24,Daniel Park,Legal,LinkedIn Learning,Training & Education,32.95,Certification exam,True,False
+TXN-0305,2024-03-06 17:12,Ryan Nakamura,Engineering,JetBlue,Travel - Flights,348.33,Flight to LAX for conference,True,True
+TXN-0306,2024-01-24 14:19,Sofia Gutierrez,Marketing,O'Reilly Media,Training & Education,42.23,Technical workshop,True,False
+TXN-0307,2024-02-22 15:14,Megan Foster,Sales,Shake Shack,Meals & Dining,17.92,Team dinner,True,False
+TXN-0308,2024-01-04 11:13,David Kim,Finance,Gramercy Tavern,Meals & Dining,63.45,Team lunch,True,True
+TXN-0309,2024-03-26 13:45,Emily Zhang,HR,T-Mobile,Telecommunications,54.0,International calling add-on,True,False
+TXN-0310,2024-02-28 13:32,Alex Petrov,Engineering,Verizon,Telecommunications,73.55,Hotspot plan,True,False
+TXN-0311,2024-02-19 11:37,Hannah Morris,Finance,American Airlines,Travel - Flights,1137.34,International flight,True,False
+TXN-0312,2024-02-27 15:10,Ryan Nakamura,Engineering,LegalZoom,Professional Services,64.23,Coworking day pass,True,False
+TXN-0313,2024-02-15 14:08,Megan Foster,Sales,Hyatt,Travel - Hotels,237.53,1 night for client visit,True,True
+TXN-0314,2024-01-11 17:07,Priya Patel,Marketing,AT&T,Telecommunications,58.77,Monthly phone plan,True,False
+TXN-0315,2024-01-31 14:21,Sofia Gutierrez,Marketing,NYC Taxi,Travel - Ground Transport,30.8,Ride to dinner venue,True,False
+TXN-0316,2024-01-17 09:10,Aisha Mohammed,Product,DocuSign,Professional Services,36.58,Contract signing service,True,False
+TXN-0317,2024-02-26 09:00,Daniel Park,Legal,Topgolf,Entertainment,68.63,Client entertainment - basketball game,True,False
+TXN-0318,2024-03-26 17:16,Nina Kowalski,Product,Salesforce,Software & SaaS,637.27,Annual plan upgrade,True,False
+TXN-0319,2024-01-15 09:00,Rachel Torres,Operations,Broadway.com,Entertainment,89.59,Client dinner event,True,False
+TXN-0320,2024-03-01 10:03,Sarah Chen,Engineering,American Airlines,Travel - Flights,291.21,Flight to ORD for team offsite,True,True
+TXN-0321,2024-03-19 10:34,Lisa Wang,Engineering,American Airlines,Travel - Flights,278.15,Flight to ORD for team offsite,True,True
+TXN-0322,2024-02-27 16:33,James O'Brien,Engineering,Shake Shack,Meals & Dining,17.66,Team dinner,True,False
+TXN-0323,2024-02-21 09:19,Marcus Johnson,Sales,Hyatt,Travel - Hotels,161.41,3 nights for conference,True,True
+TXN-0324,2024-02-02 18:06,Mike Sullivan,Sales,Just Salad,Meals & Dining,11.26,Client dinner,True,False
+TXN-0325,2024-02-06 08:51,Megan Foster,Sales,Uber,Travel - Ground Transport,41.56,Ride to dinner venue,True,False
+TXN-0326,2024-01-11 09:54,Priya Patel,Marketing,Amazon Business,Office Supplies,434.42,Tech supplies,False,False
+TXN-0327,2024-01-11 13:38,Marcus Johnson,Sales,American Airlines,Travel - Flights,313.39,Flight to BOS for partner meeting,False,True
+TXN-0328,2024-01-24 15:58,Hannah Morris,Finance,AT&T,Telecommunications,49.12,Hotspot plan,True,False
+TXN-0329,2024-03-26 13:35,Megan Foster,Sales,StubHub,Entertainment,40.4,Client dinner event,True,False
+TXN-0330,2024-03-16 03:21,Aisha Mohammed,Product,GrubHub,Meals & Dining,133.98,Late night ride,True,False
+TXN-0331,2024-01-23 13:22,Marcus Johnson,Sales,Blue Bottle Coffee,Meals & Dining,9.64,Coffee meeting,False,False
+TXN-0332,2024-02-08 12:36,Sofia Gutierrez,Marketing,Slack,Software & SaaS,10.27,Team plan upgrade,False,False
+TXN-0333,2024-02-27 13:26,Marcus Johnson,Sales,Coursera,Training & Education,47.44,Certification exam,True,False
+TXN-0334,2024-01-30 08:48,James O'Brien,Engineering,AT&T,Telecommunications,58.8,Monthly phone plan,False,False
+TXN-0335,2024-02-27 13:17,Tom Brennan,Sales,Hyatt,Travel - Hotels,247.68,2 nights for offsite,True,True
+TXN-0336,2024-01-03 13:59,Hannah Morris,Finance,Coursera,Training & Education,60.6,Technical workshop,True,False
+TXN-0337,2024-03-21 16:20,Mike Sullivan,Sales,Delta Air Lines,Travel - Flights,383.72,Flight to LAX for conference,True,True
+TXN-0338,2024-01-22 19:04,Priya Patel,Marketing,Amazon Business,Office Supplies,81.03,Monitor stand + cables,True,False
+TXN-0339,2024-03-28 15:02,James O'Brien,Engineering,Blue Bottle Coffee,Meals & Dining,10.94,Solo working lunch,True,False
+TXN-0340,2024-03-19 10:43,Mike Sullivan,Sales,Best Buy,Office Supplies,115.2,Desk lamp,False,False
+TXN-0341,2024-02-21 11:27,Priya Patel,Marketing,DocuSign,Professional Services,46.25,Print and bind report,True,False
+TXN-0342,2024-01-07 20:57,Jordan Lee,Operations,Carbone,Meals & Dining,271.21,Team celebration dinner,True,False
+TXN-0343,2024-01-02 20:49,Sofia Gutierrez,Marketing,American Airlines,Travel - Flights,961.48,International flight,True,False
+TXN-0344,2024-02-23 08:35,David Kim,Finance,WeWork,Professional Services,220.53,Coworking day pass,True,False
+TXN-0345,2024-02-18 09:08,David Kim,Finance,Best Buy,Office Supplies,249.98,Bulk purchase,False,False
+TXN-0346,2024-02-27 16:45,Emily Zhang,HR,Hyatt,Travel - Hotels,174.54,2 nights for offsite,True,True
+TXN-0347,2024-02-02 10:29,Priya Patel,Marketing,Udemy,Training & Education,21.61,Annual subscription,True,False
+TXN-0348,2024-02-22 10:49,James O'Brien,Engineering,JetBlue,Travel - Flights,321.91,Flight to SFO for client meeting,True,True
+TXN-0349,2024-02-01 18:43,Hannah Morris,Finance,Verizon,Telecommunications,67.79,International calling add-on,False,False
+TXN-0350,2024-01-22 15:29,Jordan Lee,Operations,Chipotle,Meals & Dining,17.44,Team lunch,False,False
+TXN-0351,2024-01-09 19:08,Ryan Nakamura,Engineering,LinkedIn Learning,Training & Education,38.73,Certification exam,True,False
+TXN-0352,2024-03-07 10:20,Emily Zhang,HR,LegalZoom,Professional Services,37.45,Contract signing service,True,False
+TXN-0353,2024-02-01 12:34,Tom Brennan,Sales,Marriott,Travel - Hotels,173.55,2 nights for SFO trip,True,True
+TXN-0354,2024-01-17 12:49,James O'Brien,Engineering,LegalZoom,Professional Services,75.68,Contract signing service,True,False
+TXN-0355,2024-03-22 08:38,Emily Zhang,HR,American Airlines,Travel - Flights,394.25,Flight to BOS for partner meeting,True,True
+TXN-0356,2024-02-08 12:19,Sofia Gutierrez,Marketing,LuxuryPens.com,Office Supplies,403.19,Purchase,False,False
+TXN-0357,2024-03-27 13:39,Sofia Gutierrez,Marketing,Via,Travel - Ground Transport,11.02,Taxi from JFK,True,False
+TXN-0358,2024-02-27 12:55,Tom Brennan,Sales,AT&T,Telecommunications,55.27,Hotspot plan,False,False
+TXN-0359,2024-01-19 19:06,David Kim,Finance,Dig Inn,Meals & Dining,12.96,Lunch with candidate,True,False
+TXN-0360,2024-02-08 15:54,Carlos Rivera,Marketing,Topgolf,Entertainment,44.87,Client entertainment - basketball game,True,False
+TXN-0361,2024-01-18 16:16,Rachel Torres,Operations,Coursera,Training & Education,50.81,Certification exam,True,False
+TXN-0362,2024-01-10 12:25,Mike Sullivan,Sales,Kinkos/FedEx,Professional Services,42.54,Notary service,True,False
+TXN-0363,2024-03-27 18:23,Sofia Gutierrez,Marketing,Via,Travel - Ground Transport,10.79,Ride to dinner venue,True,False
+TXN-0364,2024-01-09 11:38,Hannah Morris,Finance,AT&T,Telecommunications,42.9,Monthly phone plan,True,False
+TXN-0365,2024-02-26 19:20,Hannah Morris,Finance,WeWork,Professional Services,319.61,Contract signing service,True,False
+TXN-0366,2024-01-26 16:07,Daniel Park,Legal,Coursera,Training & Education,58.42,Annual subscription,True,False
+TXN-0367,2024-02-06 08:44,Hannah Morris,Finance,LinkedIn Learning,Training & Education,39.39,Technical workshop,True,False
+TXN-0368,2024-03-11 12:42,Aisha Mohammed,Product,NYC Taxi,Travel - Ground Transport,39.4,Taxi from JFK,True,True
+TXN-0369,2024-02-12 14:00,Priya Patel,Marketing,Staples,Office Supplies,53.8,USB-C hub,True,False
+TXN-0370,2024-03-21 12:51,James O'Brien,Engineering,LinkedIn Learning,Training & Education,30.86,Certification exam,True,True
+TXN-0371,2024-01-17 07:30,Ryan Nakamura,Engineering,American Airlines,Travel - Flights,608.62,International flight,True,False
+TXN-0372,2024-03-12 10:16,Sofia Gutierrez,Marketing,Hilton,Travel - Hotels,205.98,2 nights for offsite,False,True
+TXN-0373,2024-01-18 16:37,Nina Kowalski,Product,Hampton Inn,Travel - Hotels,177.54,1 night for client visit,True,True
+TXN-0374,2024-03-26 16:11,Hannah Morris,Finance,Apple Store,Office Supplies,131.45,USB-C hub,True,False
+TXN-0375,2024-01-23 10:17,Sofia Gutierrez,Marketing,Lyft,Travel - Ground Transport,30.56,Taxi from JFK,True,False
+TXN-0376,2024-03-01 08:10,Rachel Torres,Operations,JetBlue,Travel - Flights,204.51,Flight to BOS for partner meeting,True,True
+TXN-0377,2024-02-09 08:02,Alex Petrov,Engineering,United Airlines,Travel - Flights,352.05,Flight to ORD for team offsite,True,True
+TXN-0378,2024-03-26 11:49,Mike Sullivan,Sales,Udemy,Training & Education,24.68,Technical workshop,False,False
+TXN-0379,2024-01-19 15:09,Carlos Rivera,Marketing,Amazon Business,Office Supplies,27.53,Desk lamp,True,False
+TXN-0380,2024-01-30 12:43,Jordan Lee,Operations,Udemy,Training & Education,29.82,Online course enrollment,True,False
+TXN-0381,2024-01-12 17:06,Ryan Nakamura,Engineering,Topgolf,Entertainment,48.34,Team outing,True,False
+TXN-0382,2024-01-22 13:26,Alex Petrov,Engineering,Apple Store,Office Supplies,110.42,Desk lamp,True,False
+TXN-0383,2024-03-27 19:20,Daniel Park,Legal,O'Reilly Media,Training & Education,49.35,Certification exam,True,False
+TXN-0384,2024-02-09 10:24,David Kim,Finance,JetBlue,Travel - Flights,253.51,Flight to LAX for conference,True,True
+TXN-0385,2024-03-15 18:39,Marcus Johnson,Sales,T-Mobile,Telecommunications,66.02,Monthly phone plan,True,False
+TXN-0386,2024-03-22 12:50,Rachel Torres,Operations,WeWork,Professional Services,293.78,Contract signing service,True,False
+TXN-0387,2024-02-16 15:58,David Kim,Finance,Best Buy,Software & SaaS,175.28,Equipment order,True,False
+TXN-0388,2024-02-17 15:30,Aisha Mohammed,Product,Micro Center,Office Supplies,458.54,Equipment purchase,False,False
+TXN-0389,2024-02-27 17:28,Nina Kowalski,Product,Broadway.com,Entertainment,63.15,Client entertainment - basketball game,True,False
+TXN-0390,2024-02-23 09:16,James O'Brien,Engineering,Kinkos/FedEx,Professional Services,51.98,Print and bind report,True,False
+TXN-0391,2024-03-05 08:05,Ryan Nakamura,Engineering,LegalZoom,Professional Services,73.95,Notary service,True,False
+TXN-0392,2024-02-13 19:15,Megan Foster,Sales,LinkedIn Learning,Training & Education,30.39,Online course enrollment,True,False
+TXN-0393,2024-03-12 11:37,Tom Brennan,Sales,Uber,Travel - Ground Transport,23.16,Lyft to client office,True,False
+TXN-0394,2024-01-24 15:49,Daniel Park,Legal,Topgolf,Entertainment,51.85,Client entertainment - basketball game,True,True
+TXN-0395,2024-01-31 11:01,Jordan Lee,Operations,Apple Store,Office Supplies,128.46,Notebook and pens,True,False
+TXN-0396,2024-02-03 02:39,Tom Brennan,Sales,Lyft,Travel - Ground Transport,11.03,Uber to airport,True,False
+TXN-0397,2024-03-28 14:54,Priya Patel,Marketing,Hilton,Travel - Hotels,226.01,1 night for client visit,True,True
+TXN-0398,2024-03-14 18:25,Carlos Rivera,Marketing,Apple Store,Office Supplies,30.73,Monitor stand + cables,True,False
+TXN-0399,2024-03-12 12:59,Sofia Gutierrez,Marketing,Figma,Software & SaaS,35.04,Monthly subscription,False,False
+TXN-0400,2024-02-12 14:44,Carlos Rivera,Marketing,AT&T,Telecommunications,65.01,International calling add-on,True,False
+TXN-0401,2024-03-15 08:16,Lisa Wang,Engineering,Apple Store,Office Supplies,99.9,USB-C hub,True,True
+TXN-0402,2024-01-19 09:37,Rachel Torres,Operations,Bowlero,Entertainment,55.1,Holiday party venue,True,False
+TXN-0403,2024-01-26 08:17,Priya Patel,Marketing,DocuSign,Professional Services,27.31,Notary service,True,False
+TXN-0404,2024-01-25 11:13,Tom Brennan,Sales,Delta Air Lines,Travel - Flights,349.42,Flight to BOS for partner meeting,True,True
+TXN-0405,2024-01-02 12:18,Nina Kowalski,Product,Hyatt,Travel - Hotels,196.55,3 nights for conference,True,True
+TXN-0406,2024-01-29 16:38,Priya Patel,Marketing,Atlassian,Software & SaaS,721.71,Enterprise license,True,False
+TXN-0407,2024-01-03 13:00,Sarah Chen,Engineering,Via,Travel - Ground Transport,12.45,Ride to dinner venue,True,False
+TXN-0408,2024-03-06 15:48,Mike Sullivan,Sales,AT&T,Telecommunications,38.31,Hotspot plan,True,False
+TXN-0409,2024-02-20 14:38,David Kim,Finance,Topgolf,Entertainment,50.16,Team outing,True,False
+TXN-0410,2024-01-29 08:37,Sofia Gutierrez,Marketing,Kinkos/FedEx,Professional Services,23.55,Coworking day pass,True,True
+TXN-0411,2024-02-03 18:21,James O'Brien,Engineering,Eleven Madison Park,Meals & Dining,355.96,Client dinner,True,False
+TXN-0412,2024-03-20 11:40,Daniel Park,Legal,StubHub,Entertainment,50.01,Client entertainment - basketball game,False,False
+TXN-0413,2024-01-23 17:56,Hannah Morris,Finance,Gramercy Tavern,Meals & Dining,73.27,Coffee meeting,True,False
+TXN-0414,2024-03-25 18:41,Rachel Torres,Operations,AT&T,Telecommunications,52.58,Monthly phone plan,True,False
+TXN-0415,2024-03-20 11:28,James O'Brien,Engineering,Hampton Inn,Travel - Hotels,137.69,2 nights for offsite,True,True
+TXN-0416,2024-03-21 09:27,Emily Zhang,HR,T-Mobile,Telecommunications,57.53,Hotspot plan,True,False
+TXN-0417,2024-01-25 15:44,Nina Kowalski,Product,LegalZoom,Professional Services,46.95,Notary service,True,False
+TXN-0418,2024-01-16 17:42,Tom Brennan,Sales,Sweetgreen,Meals & Dining,18.72,Coffee meeting,True,True
+TXN-0419,2024-01-23 16:40,Daniel Park,Legal,Udemy,Training & Education,24.99,Annual subscription,True,False
+TXN-0420,2024-02-28 15:14,Emily Zhang,HR,Dig Inn,Meals & Dining,17.27,Client dinner,True,False
+TXN-0421,2024-02-16 11:40,Hannah Morris,Finance,GitHub,Software & SaaS,34.57,Annual license renewal,True,False
+TXN-0422,2024-03-08 15:03,David Kim,Finance,Broadway.com,Entertainment,67.04,Team outing,True,False
+TXN-0423,2024-02-28 19:38,Sofia Gutierrez,Marketing,Delta Air Lines,Travel - Flights,280.59,Flight to BOS for partner meeting,True,True
+TXN-0424,2024-01-02 14:05,Nina Kowalski,Product,LinkedIn Learning,Training & Education,31.54,Technical workshop,True,False
+TXN-0425,2024-01-15 15:12,Ryan Nakamura,Engineering,Coursera,Training & Education,51.03,Certification exam,True,False
+TXN-0426,2024-03-07 14:29,Ryan Nakamura,Engineering,WeWork,Professional Services,290.69,Coworking day pass,True,False
+TXN-0427,2024-03-11 14:37,Nina Kowalski,Product,DocuSign,Professional Services,41.76,Print and bind report,True,False
+TXN-0428,2024-02-06 12:41,Priya Patel,Marketing,Apple Store,Office Supplies,106.87,USB-C hub,True,False
+TXN-0429,2024-02-16 16:56,David Kim,Finance,Amazon Business,Office Supplies,198.77,Bulk purchase,True,False
+TXN-0430,2024-01-24 13:13,Nina Kowalski,Product,WeWork,Professional Services,276.55,Print and bind report,True,False
+TXN-0431,2024-02-14 12:56,Hannah Morris,Finance,Via,Travel - Ground Transport,13.58,Taxi from JFK,True,False
+TXN-0432,2024-02-01 13:31,Ryan Nakamura,Engineering,StubHub,Entertainment,77.46,Holiday party venue,True,False
+TXN-0433,2024-01-13 21:48,Carlos Rivera,Marketing,AMC Theatres,Entertainment,207.73,Social outing,True,False
+TXN-0434,2024-01-30 12:36,Jordan Lee,Operations,Dig Inn,Meals & Dining,14.52,Team lunch,True,False
+TXN-0435,2024-01-18 11:46,Nina Kowalski,Product,Shake Shack,Meals & Dining,13.79,Team lunch,True,False
+TXN-0436,2024-01-09 09:42,Marcus Johnson,Sales,Best Buy,Office Supplies,51.08,Desk lamp,True,False
+TXN-0437,2024-02-17 10:42,David Kim,Finance,Best Buy,Software & SaaS,299.02,Rush order,True,False
+TXN-0438,2024-03-28 19:15,Megan Foster,Sales,Hampton Inn,Travel - Hotels,113.06,2 nights for offsite,True,True
+TXN-0439,2024-01-10 01:20,Megan Foster,Sales,Bar Tab NYC,Travel - Ground Transport,85.97,After-hours transport,False,False
+TXN-0440,2024-02-20 15:11,Marcus Johnson,Sales,Shake Shack,Meals & Dining,12.16,Team lunch,True,False
+TXN-0441,2024-02-09 17:37,Jordan Lee,Operations,Udemy,Training & Education,26.65,Online course enrollment,True,False
+TXN-0442,2024-01-24 16:10,Hannah Morris,Finance,T-Mobile,Telecommunications,66.77,International calling add-on,True,False
+TXN-0443,2024-03-19 13:53,Daniel Park,Legal,Hilton,Travel - Hotels,205.87,2 nights for SFO trip,True,True
+TXN-0444,2024-01-26 16:23,Sarah Chen,Engineering,AT&T,Telecommunications,53.6,Hotspot plan,True,False
+TXN-0445,2024-03-04 15:10,Emily Zhang,HR,Vercel,Software & SaaS,39.33,Team plan upgrade,True,False
+TXN-0446,2024-03-07 14:26,Tom Brennan,Sales,Notion,Software & SaaS,11.83,Annual license renewal,True,False
+TXN-0447,2024-03-12 15:58,Aisha Mohammed,Product,Best Buy,Office Supplies,53.06,Notebook and pens,True,False
+TXN-0448,2024-01-10 17:06,Aisha Mohammed,Product,Via,Travel - Ground Transport,13.27,Lyft to client office,True,False
+TXN-0449,2024-03-11 14:57,Lisa Wang,Engineering,Notion,Software & SaaS,15.73,Pro tier subscription,True,False
+TXN-0450,2024-02-02 16:26,Carlos Rivera,Marketing,Apple Store,Office Supplies,81.68,Notebook and pens,True,True
+TXN-0451,2024-02-13 18:05,Lisa Wang,Engineering,Verizon,Telecommunications,82.61,Monthly phone plan,True,False
+TXN-0452,2024-03-07 16:31,Carlos Rivera,Marketing,O'Reilly Media,Training & Education,45.07,Technical workshop,True,True
+TXN-0453,2024-02-26 18:31,Emily Zhang,HR,Hilton,Travel - Hotels,213.24,1 night for client visit,True,True
+TXN-0454,2024-02-08 09:25,Priya Patel,Marketing,Best Buy,Office Supplies,79.47,Monitor stand + cables,False,False
+TXN-0455,2024-01-12 12:05,Sofia Gutierrez,Marketing,T-Mobile,Telecommunications,36.11,Hotspot plan,False,False
+TXN-0456,2024-01-30 13:33,Carlos Rivera,Marketing,Hilton,Travel - Hotels,172.27,1 night for client visit,True,True
+TXN-0457,2024-02-07 10:49,Tom Brennan,Sales,Figma,Software & SaaS,23.25,Pro tier subscription,True,False
+TXN-0458,2024-01-24 14:56,Priya Patel,Marketing,Udemy,Training & Education,21.63,Certification exam,False,True
+TXN-0459,2024-02-02 18:42,Sofia Gutierrez,Marketing,Coursera,Training & Education,44.27,Technical workshop,True,False
+TXN-0460,2024-02-13 20:18,Aisha Mohammed,Product,Le Bernardin,Meals & Dining,278.4,Dinner with prospects,True,False
+TXN-0461,2024-03-26 19:17,Sofia Gutierrez,Marketing,Coursera,Training & Education,63.75,Online course enrollment,True,False
+TXN-0462,2024-03-29 15:04,Emily Zhang,HR,Topgolf,Entertainment,56.6,Client entertainment - basketball game,True,True
+TXN-0463,2024-03-04 13:57,Carlos Rivera,Marketing,Amazon Business,Office Supplies,55.29,Monitor stand + cables,True,False
+TXN-0464,2024-03-13 19:35,James O'Brien,Engineering,Gramercy Tavern,Meals & Dining,70.64,Solo working lunch,True,False
+TXN-0465,2024-03-11 16:31,Emily Zhang,HR,Vercel,Software & SaaS,39.78,Annual license renewal,True,False
+TXN-0466,2024-01-17 16:48,Daniel Park,Legal,Notion,Software & SaaS,19.94,Pro tier subscription,True,False
+TXN-0467,2024-03-11 09:08,Priya Patel,Marketing,GitHub,Software & SaaS,26.52,Annual license renewal,True,False
+TXN-0468,2024-01-11 15:29,Daniel Park,Legal,Delta Air Lines,Travel - Flights,493.92,Flight to ORD for team offsite,True,True
+TXN-0469,2024-02-29 10:14,Megan Foster,Sales,Atlassian,Software & SaaS,437.42,Enterprise license,True,False
+TXN-0470,2024-01-30 15:56,Ryan Nakamura,Engineering,Hampton Inn,Travel - Hotels,116.42,1 night for client visit,False,True
+TXN-0471,2024-01-22 16:54,Nina Kowalski,Product,Marriott,Travel - Hotels,151.11,2 nights for offsite,True,True
+TXN-0472,2024-02-02 19:04,Emily Zhang,HR,WeWork,Professional Services,253.04,Contract signing service,True,False
+TXN-0473,2024-01-31 15:40,Nina Kowalski,Product,Udemy,Training & Education,20.96,Technical workshop,True,False
+TXN-0474,2024-01-11 08:04,Priya Patel,Marketing,O'Reilly Media,Training & Education,49.17,Certification exam,True,False
+TXN-0475,2024-01-09 10:28,Nina Kowalski,Product,Vercel,Software & SaaS,21.46,Pro tier subscription,True,False
+TXN-0476,2024-02-17 16:30,David Kim,Finance,Best Buy,Office Supplies,254.76,Equipment order,True,False
+TXN-0477,2024-01-11 13:16,James O'Brien,Engineering,Topgolf,Entertainment,46.84,Team outing,True,False
+TXN-0478,2024-02-19 12:48,Aisha Mohammed,Product,DocuSign,Professional Services,33.44,Notary service,True,True
+TXN-0479,2024-02-09 08:25,Megan Foster,Sales,NYC Taxi,Travel - Ground Transport,18.74,Taxi from JFK,True,False
+TXN-0480,2024-02-06 18:08,David Kim,Finance,Hampton Inn,Travel - Hotels,174.31,3 nights for conference,True,True
+TXN-0481,2024-02-19 09:22,Rachel Torres,Operations,Via,Travel - Ground Transport,8.72,Taxi from JFK,True,False
+TXN-0482,2024-03-28 13:27,David Kim,Finance,Marriott,Travel - Hotels,230.96,2 nights for SFO trip,True,True
+TXN-0483,2024-02-29 12:13,Lisa Wang,Engineering,Bowlero,Entertainment,54.81,Holiday party venue,True,False
+TXN-0484,2024-02-01 15:19,Ryan Nakamura,Engineering,Bowlero,Entertainment,45.05,Client entertainment - basketball game,True,False
+TXN-0485,2024-02-06 08:48,Sofia Gutierrez,Marketing,Broadway.com,Entertainment,77.97,Team outing,True,False
+TXN-0486,2024-02-07 19:19,Alex Petrov,Engineering,Apple Store,Office Supplies,128.47,Desk lamp,True,False
+TXN-0487,2024-02-16 09:36,Alex Petrov,Engineering,Dig Inn,Meals & Dining,15.8,Team dinner,True,False
+TXN-0488,2024-02-02 12:35,Lisa Wang,Engineering,LinkedIn Learning,Training & Education,31.92,Technical workshop,True,False
+TXN-0489,2024-03-08 15:22,Rachel Torres,Operations,Apple Store,Office Supplies,71.17,Desk lamp,True,False
+TXN-0490,2024-02-03 23:04,Priya Patel,Marketing,TopGolf,Entertainment,308.97,Personal entertainment,True,False
+TXN-0491,2024-01-23 15:22,Rachel Torres,Operations,United Airlines,Travel - Flights,390.37,Flight to LAX for conference,True,True
+TXN-0492,2024-03-14 18:40,Hannah Morris,Finance,LegalZoom,Professional Services,64.06,Contract signing service,True,False
+TXN-0493,2024-03-18 14:22,Lisa Wang,Engineering,Hyatt,Travel - Hotels,163.44,1 night for client visit,True,True
+TXN-0494,2024-01-07 20:24,Megan Foster,Sales,Peter Luger,Meals & Dining,337.39,Client dinner,True,False
+TXN-0495,2024-02-06 11:57,Megan Foster,Sales,Best Buy,Software & SaaS,242.13,Tech supplies,False,False
