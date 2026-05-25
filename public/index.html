@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ramp Expense Intelligence</title>
+<script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#010518;--card:#111318;--card-hover:#161922;
+  --border:#1e2028;--border-hover:rgba(228,255,84,0.35);
+  --text:#E2E8F0;--text-muted:#A0AEC0;--text-dim:#4A5568;
+  --accent:#E4FF54;--accent-dim:rgba(228,255,84,0.12);--accent-glow:rgba(228,255,84,0.06);
+  --red:#E53E3E;--orange:#ED8936;--green:#48BB78;
+  --sidebar:#0a0c10;
+}
+body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.5;min-height:100vh}
+a{color:var(--accent);text-decoration:none}
+
+/* ---- Header ---- */
+.header{background:var(--bg);border-bottom:1px solid var(--border);padding:2rem 2.5rem 1.5rem;
+  background-image:radial-gradient(ellipse 80% 60% at 50% 0%,var(--accent-glow),transparent)}
+.header h1{font-size:1.75rem;font-weight:700;display:flex;align-items:center;gap:0.6rem;flex-wrap:wrap}
+.logo{color:var(--accent);font-weight:800;font-size:1.9rem;letter-spacing:-0.02em}
+.badge{font-size:0.65rem;font-weight:700;letter-spacing:0.08em;padding:3px 10px;border-radius:20px;
+  background:var(--accent-dim);border:1px solid rgba(228,255,84,0.3);color:var(--accent)}
+.header .sub{color:var(--text-muted);font-size:0.85rem;margin-top:0.3rem}
+
+/* ---- Layout ---- */
+.container{max-width:1360px;margin:0 auto;padding:1.5rem 2.5rem 3rem}
+
+/* ---- Metrics ---- */
+.metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:2rem}
+.metric{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.25rem 1.5rem;transition:border-color .2s}
+.metric:hover{border-color:var(--border-hover)}
+.metric-label{font-size:0.7rem;font-weight:600;letter-spacing:0.08em;color:var(--text-muted);text-transform:uppercase;margin-bottom:0.3rem}
+.metric-value{font-size:1.65rem;font-weight:700;color:var(--text)}
+.metric-delta{font-size:0.75rem;font-weight:600;margin-top:0.15rem}
+.delta-warn{color:var(--orange)}
+.delta-bad{color:var(--red)}
+.delta-good{color:var(--green)}
+.delta-accent{color:var(--accent)}
+
+/* ---- Charts row ---- */
+.charts-row{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-bottom:2rem}
+.chart-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.25rem;overflow:hidden}
+.chart-card h3{font-size:0.85rem;font-weight:600;color:var(--text-muted);letter-spacing:0.04em;text-transform:uppercase;margin-bottom:0.75rem}
+
+/* ---- Insights ---- */
+.insights{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:2rem}
+.insight{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.25rem 1.5rem;transition:border-color .2s}
+.insight:hover{border-color:var(--border-hover)}
+.insight-icon{font-size:1.2rem;margin-bottom:0.4rem}
+.insight-title{font-size:0.7rem;font-weight:600;letter-spacing:0.08em;color:var(--text-muted);text-transform:uppercase;margin-bottom:0.25rem}
+.insight-value{font-size:1.1rem;font-weight:700}
+.insight-detail{font-size:0.75rem;color:var(--text-dim);margin-top:0.15rem}
+
+/* ---- Section header ---- */
+.section-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem}
+.section-header h2{font-size:1.15rem;font-weight:700}
+.section-header .count{font-size:0.75rem;color:var(--text-muted);font-weight:500}
+.filter-row{display:flex;gap:0.5rem;margin-bottom:1rem;flex-wrap:wrap}
+.filter-btn{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:6px 14px;
+  font-size:0.75rem;font-weight:600;color:var(--text-muted);cursor:pointer;transition:all .15s;font-family:inherit}
+.filter-btn:hover,.filter-btn.active{background:var(--accent-dim);border-color:rgba(228,255,84,0.3);color:var(--accent)}
+
+/* ---- Transaction cards ---- */
+.tx-list{display:flex;flex-direction:column;gap:0.75rem;margin-bottom:2rem}
+.tx-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.25rem 1.5rem;
+  cursor:pointer;transition:all .2s}
+.tx-card:hover{border-color:var(--border-hover);background:var(--card-hover)}
+.tx-top{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem}
+.tx-main{flex:1}
+.tx-vendor{font-weight:700;font-size:0.95rem}
+.tx-meta{font-size:0.75rem;color:var(--text-muted);margin-top:0.15rem}
+.tx-right{text-align:right;flex-shrink:0}
+.tx-amount{font-size:1.1rem;font-weight:700}
+.tx-id{font-size:0.65rem;color:var(--text-dim);margin-top:0.15rem;font-family:'Courier New',monospace}
+
+/* Severity badges */
+.sev{display:inline-block;font-size:0.6rem;font-weight:700;letter-spacing:0.06em;padding:2px 8px;border-radius:4px;margin-right:0.4rem}
+.sev-critical{background:rgba(229,62,62,0.15);color:var(--red);border:1px solid rgba(229,62,62,0.3)}
+.sev-high{background:rgba(237,137,54,0.15);color:var(--orange);border:1px solid rgba(237,137,54,0.3)}
+.sev-medium{background:var(--accent-dim);color:var(--accent);border:1px solid rgba(228,255,84,0.3)}
+.sev-low{background:rgba(72,187,120,0.15);color:var(--green);border:1px solid rgba(72,187,120,0.3)}
+
+/* Risk bar */
+.risk-bar-wrap{display:flex;align-items:center;gap:8px;margin-top:4px}
+.risk-bar-label{font-size:0.8rem;font-weight:700;min-width:36px}
+.risk-bar{flex:1;height:6px;background:rgba(255,255,255,0.06);border-radius:3px;overflow:hidden}
+.risk-bar-fill{height:100%;border-radius:3px;transition:width .4s ease}
+
+/* Expanded details */
+.tx-details{display:none;margin-top:1rem;padding-top:1rem;border-top:1px solid var(--border)}
+.tx-card.open .tx-details{display:block}
+.detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.5rem 1.5rem;margin-bottom:1rem}
+.detail-item{font-size:0.75rem}
+.detail-label{color:var(--text-dim);font-weight:500}
+.detail-value{color:var(--text);font-weight:600}
+.flags-list{display:flex;flex-wrap:wrap;gap:0.35rem;margin-bottom:1rem}
+.flag-chip{font-size:0.65rem;background:rgba(255,255,255,0.04);border:1px solid var(--border);
+  border-radius:6px;padding:2px 8px;color:var(--text-muted)}
+.narrative-box{border-left:3px solid var(--accent);background:rgba(228,255,84,0.04);
+  border-radius:0 8px 8px 0;padding:0.85rem 1rem}
+.narrative-label{font-size:0.6rem;font-weight:700;letter-spacing:0.1em;color:var(--accent);margin-bottom:0.3rem}
+.narrative-text{font-size:0.8rem;color:var(--text);line-height:1.55}
+
+/* ---- Tabs ---- */
+.tabs{display:flex;gap:0;margin-bottom:1.25rem;border-bottom:1px solid var(--border)}
+.tab{padding:0.65rem 1.25rem;font-size:0.8rem;font-weight:600;color:var(--text-muted);cursor:pointer;
+  border-bottom:2px solid transparent;transition:all .15s;font-family:inherit;background:none;border-top:none;border-left:none;border-right:none}
+.tab:hover{color:var(--text)}
+.tab.active{color:var(--accent);border-bottom-color:var(--accent)}
+.tab-panel{display:none}
+.tab-panel.active{display:block}
+
+/* ---- Chat ---- */
+.chat-section{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.5rem;margin-bottom:2rem}
+.chat-section h3{font-size:0.85rem;font-weight:600;color:var(--text-muted);letter-spacing:0.04em;text-transform:uppercase;margin-bottom:0.75rem}
+.chat-row{display:flex;gap:0.75rem}
+.chat-input{flex:1;background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:0.6rem 1rem;
+  color:var(--text);font-size:0.85rem;font-family:inherit;outline:none;transition:border-color .15s}
+.chat-input:focus{border-color:rgba(228,255,84,0.4)}
+.chat-input::placeholder{color:var(--text-dim)}
+.chat-btn{background:var(--accent);color:var(--bg);border:none;border-radius:8px;padding:0.6rem 1.25rem;
+  font-weight:700;font-size:0.8rem;cursor:pointer;font-family:inherit;transition:opacity .15s}
+.chat-btn:hover{opacity:0.9}
+.chat-btn:disabled{opacity:0.5;cursor:not-allowed}
+.chat-response{margin-top:1rem;padding:1rem;background:var(--bg);border:1px solid var(--border);
+  border-radius:8px;font-size:0.82rem;line-height:1.6;display:none}
+
+/* ---- Footer ---- */
+.footer{text-align:center;padding:2rem;border-top:1px solid var(--border);margin-top:2rem;
+  font-size:0.75rem;color:var(--text-dim)}
+.footer strong{color:var(--text-muted)}
+
+/* ---- Loading ---- */
+.loading{text-align:center;padding:4rem;color:var(--text-muted)}
+.spinner{display:inline-block;width:24px;height:24px;border:3px solid var(--border);
+  border-top-color:var(--accent);border-radius:50%;animation:spin .6s linear infinite;margin-bottom:0.75rem}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ---- Responsive ---- */
+@media(max-width:900px){
+  .metrics{grid-template-columns:repeat(2,1fr)}
+  .charts-row{grid-template-columns:1fr}
+  .insights{grid-template-columns:1fr}
+  .container{padding:1rem}
+  .header{padding:1.5rem 1rem 1rem}
+}
+@media(max-width:520px){
+  .metrics{grid-template-columns:1fr}
+  .detail-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1><span class="logo">ramp</span> Expense Intelligence <span class="badge">AI-POWERED</span></h1>
+  <p class="sub">Ensemble anomaly detection + LLM policy enforcement for corporate card spend</p>
+</div>
+
+<div class="container" id="app">
+  <div class="loading" id="loading"><div class="spinner"></div><br>Loading analysis results&hellip;</div>
+</div>
+
+<script>
+const COLORS={CRITICAL:'#E53E3E',HIGH:'#ED8936',MEDIUM:'#E4FF54',LOW:'#48BB78'};
+const PLOTLY_LAYOUT={paper_bgcolor:'transparent',plot_bgcolor:'transparent',
+  font:{family:'Inter',color:'#A0AEC0',size:12},margin:{l:40,r:20,t:10,b:40},
+  legend:{font:{size:11},bgcolor:'transparent'}};
+
+let DATA=null;
+let activeFilter='ALL';
+
+async function init(){
+  try{
+    const r=await fetch('/data/results.json');
+    DATA=await r.json();
+    render();
+  }catch(e){
+    document.getElementById('loading').innerHTML='<p style="color:#E53E3E">Failed to load data: '+e.message+'</p>';
+  }
+}
+
+function $(s){return document.querySelector(s)}
+function $$(s){return document.querySelectorAll(s)}
+
+function fmt(n){return n>=1000?'$'+n.toLocaleString('en-US',{minimumFractionDigits:0,maximumFractionDigits:0}):'$'+n.toFixed(2)}
+
+function sevClass(l){return 'sev sev-'+l.toLowerCase()}
+function riskColor(l){return COLORS[l]||COLORS.LOW}
+
+function render(){
+  const s=DATA.summary;
+  const app=document.getElementById('app');
+  app.innerHTML=`
+
+  <!-- Metrics -->
+  <div class="metrics">
+    <div class="metric">
+      <div class="metric-label">Total Spend Analyzed</div>
+      <div class="metric-value">${fmt(s.total_spend)}</div>
+      <div class="metric-delta delta-accent">${s.total_transactions} transactions</div>
+    </div>
+    <div class="metric">
+      <div class="metric-label">Flagged Rate</div>
+      <div class="metric-value">${s.flag_rate.toFixed(1)}%</div>
+      <div class="metric-delta delta-warn">${s.flagged_count} transactions flagged</div>
+    </div>
+    <div class="metric">
+      <div class="metric-label">Policy Violations</div>
+      <div class="metric-value">${s.violation_count}</div>
+      <div class="metric-delta delta-bad">Across ${s.total_transactions} transactions</div>
+    </div>
+    <div class="metric">
+      <div class="metric-label">Estimated Savings</div>
+      <div class="metric-value">${fmt(s.estimated_savings)}</div>
+      <div class="metric-delta delta-good">If violations recovered</div>
+    </div>
+  </div>
+
+  <!-- Charts -->
+  <div class="charts-row">
+    <div class="chart-card"><h3>Risk Distribution</h3><div id="chart-risk"></div></div>
+    <div class="chart-card"><h3>Spend by Category</h3><div id="chart-category"></div></div>
+  </div>
+
+  <!-- Executive Insights -->
+  <div class="insights">
+    <div class="insight">
+      <div class="insight-icon">&#9888;</div>
+      <div class="insight-title">Highest-Risk Employee</div>
+      <div class="insight-value">${DATA.executive_insights.highest_risk_employee}</div>
+      <div class="insight-detail">${DATA.executive_insights.highest_risk_employee_flags} HIGH/CRITICAL flags</div>
+    </div>
+    <div class="insight">
+      <div class="insight-icon">&#128200;</div>
+      <div class="insight-title">Highest-Risk Category</div>
+      <div class="insight-value">${DATA.executive_insights.highest_risk_category}</div>
+      <div class="insight-detail">${DATA.executive_insights.highest_risk_category_flags} flags &middot; ${fmt(DATA.executive_insights.highest_risk_category_spend)}</div>
+    </div>
+    <div class="insight">
+      <div class="insight-icon">&#128161;</div>
+      <div class="insight-title">Detection Methods Active</div>
+      <div class="insight-value">${DATA.executive_insights.detection_methods}</div>
+      <div class="insight-detail">Isolation Forest, Z-Score, Duplicate, Temporal, Velocity, First-Time Vendor</div>
+    </div>
+  </div>
+
+  <!-- AI Chat -->
+  <div class="chat-section">
+    <h3>&#9889; AI Expense Analyst</h3>
+    <div class="chat-row">
+      <input class="chat-input" id="chat-input" placeholder="Ask about the expense data&hellip; e.g. &quot;Which employees have the most violations?&quot;" />
+      <button class="chat-btn" id="chat-btn" onclick="askChat()">Ask</button>
+    </div>
+    <div class="chat-response" id="chat-response"></div>
+  </div>
+
+  <!-- Flagged Transactions -->
+  <div class="section-header">
+    <h2>Flagged Transactions</h2>
+    <span class="count" id="tx-count">${s.flagged_count} flagged</span>
+  </div>
+  <div class="filter-row" id="filters">
+    <button class="filter-btn active" data-level="ALL" onclick="setFilter('ALL',this)">All</button>
+    <button class="filter-btn" data-level="CRITICAL" onclick="setFilter('CRITICAL',this)">&#128308; Critical (${DATA.risk_distribution.CRITICAL||0})</button>
+    <button class="filter-btn" data-level="HIGH" onclick="setFilter('HIGH',this)">&#128992; High (${DATA.risk_distribution.HIGH||0})</button>
+    <button class="filter-btn" data-level="MEDIUM" onclick="setFilter('MEDIUM',this)">&#128993; Medium (${DATA.risk_distribution.MEDIUM||0})</button>
+  </div>
+  <div class="tx-list" id="tx-list"></div>
+
+  <!-- Analytics Tabs -->
+  <div class="section-header"><h2>Analytics</h2></div>
+  <div class="tabs">
+    <button class="tab active" onclick="showTab('tab-dept',this)">By Department</button>
+    <button class="tab" onclick="showTab('tab-vendor',this)">Top Vendors</button>
+    <button class="tab" onclick="showTab('tab-all',this)">All Transactions</button>
+  </div>
+  <div class="tab-panel active" id="tab-dept"><div class="chart-card"><div id="chart-dept"></div></div></div>
+  <div class="tab-panel" id="tab-vendor"><div class="chart-card"><div id="chart-vendor"></div></div></div>
+  <div class="tab-panel" id="tab-all"><div class="chart-card" style="overflow-x:auto"><table id="all-table" style="width:100%;font-size:0.78rem;border-collapse:collapse"></table></div></div>
+
+  <div class="footer">
+    Built by <strong>Aditya Sakhale</strong> &nbsp;&middot;&nbsp;
+    Ensemble ML anomaly detection (Isolation Forest + Z-score + velocity + temporal) &nbsp;&middot;&nbsp;
+    LLM policy enforcement (Llama 3.1 via Cerebras) &nbsp;&middot;&nbsp;
+    Inspired by <a href="https://ramp.com" target="_blank">Ramp</a>
+  </div>
+  `;
+
+  drawCharts();
+  renderTransactions();
+  renderAllTable();
+
+  // Enter key for chat
+  document.getElementById('chat-input').addEventListener('keydown',e=>{if(e.key==='Enter')askChat()});
+}
+
+/* ---- Charts ---- */
+function drawCharts(){
+  const rd=DATA.risk_distribution;
+  const levels=['CRITICAL','HIGH','MEDIUM','LOW'];
+  const vals=levels.map(l=>rd[l]||0);
+  Plotly.newPlot('chart-risk',[{
+    labels:levels,values:vals,type:'pie',hole:0.5,
+    marker:{colors:levels.map(l=>COLORS[l])},
+    textfont:{color:'#E2E8F0',size:12},
+    textinfo:'label+value',
+    hoverinfo:'label+percent+value',
+  }],{...PLOTLY_LAYOUT,height:280,showlegend:false},{displayModeBar:false,responsive:true});
+
+  const cs=DATA.category_spend;
+  Plotly.newPlot('chart-category',[{
+    x:cs.values,y:cs.labels,type:'bar',orientation:'h',
+    marker:{color:'rgba(228,255,84,0.6)',line:{color:'rgba(228,255,84,0.9)',width:1}},
+    text:cs.values.map(v=>fmt(v)),textposition:'outside',textfont:{size:10,color:'#A0AEC0'},
+  }],{...PLOTLY_LAYOUT,height:320,yaxis:{autorange:'reversed'},xaxis:{showgrid:false,showticklabels:false}},{displayModeBar:false,responsive:true});
+
+  const ds=DATA.department_spend;
+  Plotly.newPlot('chart-dept',[{
+    x:ds.labels,y:ds.values,type:'bar',
+    marker:{color:'rgba(228,255,84,0.5)',line:{color:'rgba(228,255,84,0.8)',width:1}},
+    text:ds.values.map(v=>fmt(v)),textposition:'outside',textfont:{size:10,color:'#A0AEC0'},
+  }],{...PLOTLY_LAYOUT,height:300,xaxis:{tickangle:-30},yaxis:{showgrid:false,showticklabels:false}},{displayModeBar:false,responsive:true});
+
+  // Top vendors by flagged amount
+  const vendorMap={};
+  DATA.flagged_transactions.forEach(t=>{vendorMap[t.vendor]=(vendorMap[t.vendor]||0)+t.amount});
+  const vendorSorted=Object.entries(vendorMap).sort((a,b)=>b[1]-a[1]).slice(0,12);
+  Plotly.newPlot('chart-vendor',[{
+    x:vendorSorted.map(v=>v[0]),y:vendorSorted.map(v=>v[1]),type:'bar',
+    marker:{color:vendorSorted.map((_,i)=>i<3?'rgba(229,62,62,0.6)':'rgba(228,255,84,0.4)'),
+      line:{color:vendorSorted.map((_,i)=>i<3?'rgba(229,62,62,0.9)':'rgba(228,255,84,0.8)'),width:1}},
+    text:vendorSorted.map(v=>fmt(v[1])),textposition:'outside',textfont:{size:10,color:'#A0AEC0'},
+  }],{...PLOTLY_LAYOUT,height:300,xaxis:{tickangle:-35},yaxis:{showgrid:false,showticklabels:false}},{displayModeBar:false,responsive:true});
+}
+
+/* ---- Transactions ---- */
+function renderTransactions(){
+  const list=document.getElementById('tx-list');
+  let txs=DATA.flagged_transactions;
+  if(activeFilter!=='ALL')txs=txs.filter(t=>t.risk_level===activeFilter);
+  document.getElementById('tx-count').textContent=txs.length+' flagged';
+
+  list.innerHTML=txs.slice(0,50).map((t,i)=>`
+    <div class="tx-card" onclick="toggleCard(this)" data-idx="${i}">
+      <div class="tx-top">
+        <div class="tx-main">
+          <span class="${sevClass(t.risk_level)}">${t.risk_level}</span>
+          <span class="tx-vendor">${esc(t.vendor)}</span>
+          <div class="tx-meta">${esc(t.employee_name)} &middot; ${esc(t.department)} &middot; ${esc(t.category)} &middot; ${t.date.split(' ')[0]}</div>
+        </div>
+        <div class="tx-right">
+          <div class="tx-amount" style="color:${riskColor(t.risk_level)}">${fmt(t.amount)}</div>
+          <div class="tx-id">${t.transaction_id}</div>
+        </div>
+      </div>
+      <div class="risk-bar-wrap">
+        <span class="risk-bar-label" style="color:${riskColor(t.risk_level)}">${(t.combined_score*100).toFixed(0)}%</span>
+        <div class="risk-bar"><div class="risk-bar-fill" style="width:${Math.min(t.combined_score*100,100)}%;background:${riskColor(t.risk_level)}"></div></div>
+      </div>
+      <div class="tx-details">
+        <div class="detail-grid">
+          <div class="detail-item"><span class="detail-label">Description:</span> <span class="detail-value">${esc(t.description)}</span></div>
+          <div class="detail-item"><span class="detail-label">Receipt:</span> <span class="detail-value">${t.receipt_attached?'&#9989; Attached':'&#10060; Missing'}</span></div>
+          <div class="detail-item"><span class="detail-label">Pre-approved:</span> <span class="detail-value">${t.pre_approved?'&#9989; Yes':'&#10060; No'}</span></div>
+          <div class="detail-item"><span class="detail-label">Date:</span> <span class="detail-value">${t.date}</span></div>
+        </div>
+        ${t.anomaly_flags.length?'<div class="flags-list">'+t.anomaly_flags.map(f=>'<span class="flag-chip">'+esc(f)+'</span>').join('')+'</div>':''}
+        ${t.policy_violations.length?'<div class="flags-list">'+t.policy_violations.map(v=>'<span class="flag-chip" style="border-color:rgba(229,62,62,0.3);color:#E53E3E">'+esc(v)+'</span>').join('')+'</div>':''}
+        ${t.narrative?`<div class="narrative-box"><div class="narrative-label">&#9889; AI RISK ANALYSIS</div><div class="narrative-text">${esc(t.narrative)}</div></div>`:''}
+      </div>
+    </div>
+  `).join('');
+}
+
+function toggleCard(el){el.classList.toggle('open')}
+
+function setFilter(level,btn){
+  activeFilter=level;
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderTransactions();
+}
+
+function showTab(id,btn){
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+}
+
+function renderAllTable(){
+  const t=document.getElementById('all-table');
+  const hdr='<tr style="border-bottom:1px solid #1e2028">'+
+    ['ID','Employee','Vendor','Category','Amount','Date','Risk'].map(h=>
+    `<th style="text-align:left;padding:8px 6px;color:#A0AEC0;font-size:0.7rem;font-weight:600;letter-spacing:0.05em;text-transform:uppercase">${h}</th>`).join('')+'</tr>';
+  const rows=DATA.all_transactions.slice(0,100).map(r=>`<tr style="border-bottom:1px solid #111318">
+    <td style="padding:6px;font-family:monospace;font-size:0.7rem;color:#4A5568">${r.transaction_id}</td>
+    <td style="padding:6px">${esc(r.employee_name)}</td>
+    <td style="padding:6px">${esc(r.vendor)}</td>
+    <td style="padding:6px;color:#A0AEC0">${esc(r.category)}</td>
+    <td style="padding:6px;font-weight:600">${fmt(r.amount)}</td>
+    <td style="padding:6px;color:#A0AEC0">${r.date.split(' ')[0]}</td>
+    <td style="padding:6px"><span class="${sevClass(r.risk_level)}">${r.risk_level}</span></td>
+  </tr>`).join('');
+  t.innerHTML=hdr+rows;
+}
+
+/* ---- Chat ---- */
+async function askChat(){
+  const input=document.getElementById('chat-input');
+  const btn=document.getElementById('chat-btn');
+  const resp=document.getElementById('chat-response');
+  const q=input.value.trim();
+  if(!q)return;
+
+  btn.disabled=true;btn.textContent='Thinking...';
+  resp.style.display='block';resp.textContent='Analyzing...';
+
+  try{
+    const r=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({question:q})});
+    const d=await r.json();
+    resp.textContent=d.answer||d.error||'No response';
+  }catch(e){
+    resp.textContent='Error: '+e.message;
+  }
+  btn.disabled=false;btn.textContent='Ask';
+}
+
+function esc(s){const d=document.createElement('div');d.textContent=s||'';return d.innerHTML}
+
+init();
+</script>
+</body>
+</html>
