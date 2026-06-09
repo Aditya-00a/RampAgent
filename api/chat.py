@@ -17,9 +17,13 @@ try:
         RESULTS = json.load(f)
     SUMMARY_CONTEXT = json.dumps(RESULTS["summary"], indent=2)
     FLAGGED_BRIEF = json.dumps(RESULTS["flagged_transactions"][:15], indent=2)
+    KRI_CONTEXT = json.dumps(RESULTS.get("kris", []), indent=2)
+    REGISTER_CONTEXT = json.dumps(RESULTS.get("risk_register", []), indent=2)
 except Exception:
     SUMMARY_CONTEXT = "{}"
     FLAGGED_BRIEF = "[]"
+    KRI_CONTEXT = "[]"
+    REGISTER_CONTEXT = "[]"
 
 
 class handler(BaseHTTPRequestHandler):
@@ -38,12 +42,18 @@ class handler(BaseHTTPRequestHandler):
 
         try:
             client = OpenAI(base_url=CEREBRAS_BASE_URL, api_key=CEREBRAS_API_KEY)
-            system_prompt = f"""You are an AI expense analyst for a corporate finance team. Answer questions about the expense data below. Be specific — cite dollar amounts, employee names, percentages.
+            system_prompt = f"""You are an AI risk analyst for an enterprise risk & controls monitoring platform covering corporate spend. Answer questions using the data below. Speak the language of a risk / internal audit team: exposure, control exceptions, risk rating, likelihood and impact. Be specific — cite dollar amounts, names, percentages, risk IDs and control IDs.
 
-SUMMARY:
+SUMMARY (incl. exposure & expected loss):
 {SUMMARY_CONTEXT}
 
-TOP FLAGGED TRANSACTIONS:
+KEY RISK INDICATORS:
+{KRI_CONTEXT}
+
+RISK REGISTER:
+{REGISTER_CONTEXT}
+
+TOP CONTROL EXCEPTIONS / RISK EVENTS:
 {FLAGGED_BRIEF}"""
 
             response = client.chat.completions.create(

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ramp Expense Intelligence</title>
+<title>RampAgent — Risk & Controls Monitoring</title>
 <script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -57,6 +57,37 @@ a{color:var(--accent);text-decoration:none}
 .insight-title{font-size:0.7rem;font-weight:600;letter-spacing:0.08em;color:var(--text-muted);text-transform:uppercase;margin-bottom:0.25rem}
 .insight-value{font-size:1.1rem;font-weight:700}
 .insight-detail{font-size:0.75rem;color:var(--text-dim);margin-top:0.15rem}
+
+/* ---- KRIs ---- */
+.kri-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:2rem}
+.kri{background:var(--card);border:1px solid var(--border);border-left-width:4px;border-radius:10px;padding:1rem 1.25rem;transition:border-color .2s}
+.kri.rag-red{border-left-color:var(--red)}
+.kri.rag-amber{border-left-color:var(--orange)}
+.kri.rag-green{border-left-color:var(--green)}
+.kri-name{font-size:0.68rem;font-weight:600;letter-spacing:0.06em;color:var(--text-muted);text-transform:uppercase;margin-bottom:0.3rem}
+.kri-value{font-size:1.6rem;font-weight:800}
+.kri.rag-red .kri-value{color:#fc8181}
+.kri.rag-amber .kri-value{color:#fbd38d}
+.kri.rag-green .kri-value{color:#9ae6b4}
+.kri-detail{font-size:0.7rem;color:var(--text-dim);margin-top:0.15rem}
+.kri-appetite{font-size:0.65rem;color:var(--text-dim);margin-top:0.35rem}
+.rag-pill{display:inline-block;font-size:0.58rem;font-weight:700;padding:1px 7px;border-radius:10px;letter-spacing:0.05em;margin-left:6px;vertical-align:middle}
+.rag-pill.rag-red{background:rgba(229,62,62,0.15);color:#fc8181}
+.rag-pill.rag-amber{background:rgba(237,137,54,0.15);color:#fbd38d}
+.rag-pill.rag-green{background:rgba(72,187,120,0.15);color:#9ae6b4}
+
+/* ---- Risk tables ---- */
+.risk-table{width:100%;border-collapse:collapse;font-size:0.78rem}
+.risk-table th{text-align:left;padding:8px 10px;color:var(--text-muted);font-size:0.68rem;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;border-bottom:1px solid var(--border)}
+.risk-table td{padding:9px 10px;border-bottom:1px solid #111318;color:var(--text)}
+.risk-table tr:hover td{background:var(--card-hover)}
+.rate-critical{color:var(--red);font-weight:700}
+.rate-high{color:var(--orange);font-weight:700}
+.rate-medium{color:var(--accent);font-weight:700}
+.rate-low{color:var(--green);font-weight:700}
+.eff-effective{color:var(--green);font-weight:700}
+.eff-needs{color:var(--orange);font-weight:700}
+.eff-ineffective{color:var(--red);font-weight:700}
 
 /* ---- Section header ---- */
 .section-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem}
@@ -160,8 +191,8 @@ a{color:var(--accent);text-decoration:none}
 <body>
 
 <div class="header">
-  <h1><span class="logo">ramp</span> Expense Intelligence <span class="badge">AI-POWERED</span></h1>
-  <p class="sub">Ensemble anomaly detection + LLM policy enforcement for corporate card spend</p>
+  <h1><span class="logo">RampAgent</span> Risk Intelligence <span class="badge">CONTINUOUS CONTROLS MONITORING</span></h1>
+  <p class="sub">AI-driven anomaly detection, automated control testing &amp; enterprise risk scoring across 100% of corporate spend</p>
 </div>
 
 <div class="container" id="app">
@@ -203,26 +234,39 @@ function render(){
   <!-- Metrics -->
   <div class="metrics">
     <div class="metric">
-      <div class="metric-label">Total Spend Analyzed</div>
+      <div class="metric-label">Spend Under Monitoring</div>
       <div class="metric-value">${fmt(s.total_spend)}</div>
-      <div class="metric-delta delta-accent">${s.total_transactions} transactions</div>
+      <div class="metric-delta delta-accent">${s.total_transactions} txns &middot; 100% coverage</div>
     </div>
     <div class="metric">
-      <div class="metric-label">Flagged Rate</div>
-      <div class="metric-value">${s.flag_rate.toFixed(1)}%</div>
-      <div class="metric-delta delta-warn">${s.flagged_count} transactions flagged</div>
+      <div class="metric-label">Exposure at Risk</div>
+      <div class="metric-value">${fmt(s.flagged_exposure!=null?s.flagged_exposure:0)}</div>
+      <div class="metric-delta delta-warn">${(s.exposure_rate!=null?s.exposure_rate:s.flag_rate).toFixed(1)}% of spend</div>
     </div>
     <div class="metric">
-      <div class="metric-label">Policy Violations</div>
-      <div class="metric-value">${s.violation_count}</div>
-      <div class="metric-delta delta-bad">Across ${s.total_transactions} transactions</div>
+      <div class="metric-label">Expected Loss</div>
+      <div class="metric-value">${fmt(s.expected_loss!=null?s.expected_loss:0)}</div>
+      <div class="metric-delta delta-bad">Probability-weighted</div>
     </div>
     <div class="metric">
-      <div class="metric-label">Estimated Savings</div>
-      <div class="metric-value">${fmt(s.estimated_savings)}</div>
-      <div class="metric-delta delta-good">If violations recovered</div>
+      <div class="metric-label">Control Exceptions</div>
+      <div class="metric-value">${s.flagged_count}</div>
+      <div class="metric-delta delta-warn">${s.flag_rate.toFixed(1)}% failure rate</div>
     </div>
   </div>
+
+  <!-- Key Risk Indicators -->
+  ${(DATA.kris&&DATA.kris.length)?`
+  <div class="section-header"><h2>Key Risk Indicators</h2><span class="count">vs. defined risk appetite</span></div>
+  <div class="kri-grid">
+    ${DATA.kris.map(k=>`
+      <div class="kri rag-${k.status.toLowerCase()}">
+        <div class="kri-name">${esc(k.name)}<span class="rag-pill rag-${k.status.toLowerCase()}">${k.status}</span></div>
+        <div class="kri-value">${k.value.toFixed(1)}${k.unit}</div>
+        <div class="kri-detail">${esc(k.detail)}</div>
+        <div class="kri-appetite">Appetite: amber &ge; ${k.amber}${k.unit} &middot; red &ge; ${k.red}${k.unit}</div>
+      </div>`).join('')}
+  </div>`:''}
 
   <!-- Charts -->
   <div class="charts-row">
@@ -245,18 +289,18 @@ function render(){
       <div class="insight-detail">${DATA.executive_insights.highest_risk_category_flags} flags &middot; ${fmt(DATA.executive_insights.highest_risk_category_spend)}</div>
     </div>
     <div class="insight">
-      <div class="insight-icon">&#128161;</div>
-      <div class="insight-title">Detection Methods Active</div>
-      <div class="insight-value">${DATA.executive_insights.detection_methods}</div>
-      <div class="insight-detail">Isolation Forest, Z-Score, Duplicate, Temporal, Velocity, First-Time Vendor</div>
+      <div class="insight-icon">&#128737;</div>
+      <div class="insight-title">Automated Controls Monitored</div>
+      <div class="insight-value">${DATA.controls?DATA.controls.length:DATA.executive_insights.detection_methods}</div>
+      <div class="insight-detail">Continuous testing across 100% of transactions</div>
     </div>
   </div>
 
   <!-- AI Chat -->
   <div class="chat-section">
-    <h3>&#9889; AI Expense Analyst</h3>
+    <h3>&#128737; AI Risk Analyst</h3>
     <div class="chat-row">
-      <input class="chat-input" id="chat-input" placeholder="Ask about the expense data&hellip; e.g. &quot;Which employees have the most violations?&quot;" />
+      <input class="chat-input" id="chat-input" placeholder="Ask about the risk data&hellip; e.g. &quot;Where is our largest risk exposure?&quot;" />
       <button class="chat-btn" id="chat-btn" onclick="askChat()">Ask</button>
     </div>
     <div class="chat-response" id="chat-response"></div>
@@ -276,27 +320,34 @@ function render(){
   <div class="tx-list" id="tx-list"></div>
 
   <!-- Analytics Tabs -->
-  <div class="section-header"><h2>Analytics</h2></div>
+  <div class="section-header"><h2>Risk &amp; Controls Analytics</h2></div>
   <div class="tabs">
-    <button class="tab active" onclick="showTab('tab-dept',this)">By Department</button>
+    ${(DATA.risk_register&&DATA.risk_register.length)?'<button class="tab active" onclick="showTab(\'tab-register\',this)">Risk Register</button>':''}
+    ${(DATA.controls&&DATA.controls.length)?'<button class="tab" onclick="showTab(\'tab-ccm\',this)">Controls (CCM)</button>':''}
+    <button class="tab" onclick="showTab('tab-dept',this)">By Department</button>
     <button class="tab" onclick="showTab('tab-vendor',this)">Top Vendors</button>
     <button class="tab" onclick="showTab('tab-all',this)">All Transactions</button>
   </div>
-  <div class="tab-panel active" id="tab-dept"><div class="chart-card"><div id="chart-dept"></div></div></div>
+  ${(DATA.risk_register&&DATA.risk_register.length)?`<div class="tab-panel active" id="tab-register"><div class="chart-card" style="overflow-x:auto"><table class="risk-table" id="register-table"></table></div></div>`:''}
+  ${(DATA.controls&&DATA.controls.length)?`<div class="tab-panel" id="tab-ccm"><div class="chart-card" style="overflow-x:auto"><table class="risk-table" id="ccm-table"></table></div></div>`:''}
+  <div class="tab-panel" id="tab-dept"><div class="chart-card"><div id="chart-dept"></div></div></div>
   <div class="tab-panel" id="tab-vendor"><div class="chart-card"><div id="chart-vendor"></div></div></div>
   <div class="tab-panel" id="tab-all"><div class="chart-card" style="overflow-x:auto"><table id="all-table" style="width:100%;font-size:0.78rem;border-collapse:collapse"></table></div></div>
 
   <div class="footer">
-    Built by <strong>Aditya Sakhale</strong> &nbsp;&middot;&nbsp;
-    Ensemble ML anomaly detection (Isolation Forest + Z-score + velocity + temporal) &nbsp;&middot;&nbsp;
-    LLM policy enforcement (Llama 3.1 via Cerebras) &nbsp;&middot;&nbsp;
-    Inspired by <a href="https://ramp.com" target="_blank">Ramp</a>
+    <strong>RampAgent</strong> — Continuous Controls Monitoring &amp; Risk Intelligence &nbsp;&middot;&nbsp;
+    Ensemble ML anomaly detection &nbsp;&middot;&nbsp;
+    LLM-based control testing (Llama 3.1 via Cerebras) &nbsp;&middot;&nbsp;
+    9 automated controls &middot; risk register &middot; KRIs &nbsp;&middot;&nbsp;
+    Built by <strong>Aditya Sakhale</strong>
   </div>
   `;
 
   drawCharts();
   renderTransactions();
   renderAllTable();
+  renderRegisterTable();
+  renderCcmTable();
 
   // Enter key for chat
   document.getElementById('chat-input').addEventListener('keydown',e=>{if(e.key==='Enter')askChat()});
@@ -394,6 +445,53 @@ function showTab(id,btn){
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
   document.getElementById(id).classList.add('active');
   btn.classList.add('active');
+  // Re-size any Plotly charts revealed in the now-visible panel.
+  document.getElementById(id).querySelectorAll('.js-plotly-plot').forEach(p=>Plotly.Plots.resize(p));
+}
+
+function rateClass(r){return 'rate-'+(r||'low').toLowerCase()}
+
+function renderRegisterTable(){
+  const t=document.getElementById('register-table');
+  if(!t||!DATA.risk_register)return;
+  const hdr='<tr>'+['Risk ID','Risk','Category','Likelihood','Impact','Rating','Events','Exposure','Mapped Control']
+    .map(h=>`<th>${h}</th>`).join('')+'</tr>';
+  const rows=DATA.risk_register.map(r=>`<tr>
+    <td style="font-family:monospace;color:var(--text-dim)">${r.risk_id}</td>
+    <td style="font-weight:600">${esc(r.risk_name)}</td>
+    <td style="color:var(--text-muted)">${esc(r.risk_category)}</td>
+    <td>${esc(r.likelihood)}</td>
+    <td>${esc(r.impact_label)}</td>
+    <td class="${rateClass(r.rating)}">${r.rating}</td>
+    <td>${r.events}</td>
+    <td style="font-weight:600">${fmt(r.exposure)}</td>
+    <td style="color:var(--text-muted)">${r.control_id} &middot; ${esc(r.control_name)}</td>
+  </tr>`).join('');
+  t.innerHTML=hdr+rows;
+}
+
+function effClass(e){
+  const k=(e||'').toLowerCase();
+  if(k.startsWith('eff'))return 'eff-effective';
+  if(k.startsWith('inef'))return 'eff-ineffective';
+  return 'eff-needs';
+}
+
+function renderCcmTable(){
+  const t=document.getElementById('ccm-table');
+  if(!t||!DATA.controls)return;
+  const hdr='<tr>'+['Control','Objective','Tested','Exceptions','Exception Rate','Exposure','Effectiveness']
+    .map(h=>`<th>${h}</th>`).join('')+'</tr>';
+  const rows=DATA.controls.map(c=>`<tr>
+    <td style="font-weight:600">${c.control_id} &middot; ${esc(c.control_name)}</td>
+    <td style="color:var(--text-muted);max-width:320px">${esc(c.objective)}</td>
+    <td>${c.tested}</td>
+    <td>${c.exceptions}</td>
+    <td style="font-weight:600">${c.exception_rate.toFixed(1)}%</td>
+    <td>${fmt(c.exposure)}</td>
+    <td class="${effClass(c.effectiveness)}">${esc(c.effectiveness)}</td>
+  </tr>`).join('');
+  t.innerHTML=hdr+rows;
 }
 
 function renderAllTable(){

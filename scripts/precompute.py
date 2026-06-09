@@ -7,6 +7,7 @@ from utils.data_loader import load_transactions, load_policy, preprocess_for_ano
 from engine.anomaly_detector import AnomalyDetector
 from engine.policy_checker import PolicyChecker
 from engine.risk_scorer import RiskScorer
+from engine.risk_framework import build_risk_framework
 from config import CEREBRAS_API_KEY
 
 DATA_DIR = os.path.join(os.path.dirname(__file__), "..", "data")
@@ -51,6 +52,10 @@ def main():
 
     print("Generating narratives...")
     risk_df = scorer.generate_narratives(risk_df)
+
+    # --- Enterprise risk framework ---
+    print("Building risk framework (exposure, KRIs, register, controls)...")
+    framework = build_risk_framework(risk_df)
 
     # --- Build output JSON ---
     print("Building output JSON...")
@@ -144,7 +149,15 @@ def main():
             "flag_rate": flag_rate,
             "violation_count": violation_count,
             "estimated_savings": savings,
+            "flagged_exposure": framework["exposure"]["flagged_exposure"],
+            "exposure_rate": framework["exposure"]["exposure_rate"],
+            "expected_loss": framework["exposure"]["expected_loss"],
+            "critical_exposure": framework["exposure"]["critical_exposure"],
         },
+        "exposure": framework["exposure"],
+        "kris": framework["kris"],
+        "controls": framework["controls"],
+        "risk_register": framework["risk_register"],
         "risk_distribution": risk_dist,
         "category_spend": category_data,
         "department_spend": department_data,

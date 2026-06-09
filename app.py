@@ -14,12 +14,13 @@ from utils.data_loader import load_transactions, load_policy, preprocess_for_ano
 from engine.anomaly_detector import AnomalyDetector
 from engine.policy_checker import PolicyChecker
 from engine.risk_scorer import RiskScorer
+from engine.risk_framework import build_risk_framework
 
 # -- Page config ---------------------------------------------------------------
 
 st.set_page_config(
-    page_title="Ramp Expense Intelligence",
-    page_icon="⚡",
+    page_title="RampAgent — Risk & Controls Monitoring",
+    page_icon="🛡️",
     layout="wide",
     initial_sidebar_state="collapsed",
 )
@@ -202,6 +203,42 @@ st.markdown("""
         color: #fff;
     }
 
+    /* ── KRI / RAG cards ────────────────────────────── */
+    .kri-card {
+        background: #111318;
+        border: 1px solid #1e2028;
+        border-left-width: 4px;
+        border-radius: 8px;
+        padding: 0.85rem 1rem;
+        margin-bottom: 0.6rem;
+        height: 100%;
+    }
+    .kri-card.rag-red    { border-left-color: #E53E3E; }
+    .kri-card.rag-amber  { border-left-color: #ED8936; }
+    .kri-card.rag-green  { border-left-color: #48BB78; }
+    .kri-name {
+        color: #A0AEC0;
+        font-size: 0.68rem;
+        text-transform: uppercase;
+        letter-spacing: 0.6px;
+        font-weight: 600;
+        margin-bottom: 4px;
+    }
+    .kri-value { font-size: 1.5rem; font-weight: 800; }
+    .kri-card.rag-red    .kri-value { color: #fc8181; }
+    .kri-card.rag-amber  .kri-value { color: #fbd38d; }
+    .kri-card.rag-green  .kri-value { color: #9ae6b4; }
+    .kri-detail { color: #4A5568; font-size: 0.7rem; margin-top: 2px; }
+    .kri-appetite { color: #4A5568; font-size: 0.65rem; margin-top: 4px; }
+    .rag-pill {
+        display: inline-block; font-size: 0.6rem; font-weight: 700;
+        padding: 1px 7px; border-radius: 10px; letter-spacing: 0.5px;
+        vertical-align: middle; margin-left: 6px;
+    }
+    .rag-pill.rag-red   { background: rgba(229,62,62,0.15); color: #fc8181; }
+    .rag-pill.rag-amber { background: rgba(237,137,54,0.15); color: #fbd38d; }
+    .rag-pill.rag-green { background: rgba(72,187,120,0.15); color: #9ae6b4; }
+
     /* ── Tabs ───────────────────────────────────────── */
     button[data-baseweb="tab"] {
         font-weight: 600 !important;
@@ -234,8 +271,8 @@ col_title, col_upload = st.columns([3, 1])
 with col_title:
     st.markdown("""
     <div class="ramp-header">
-        <h1><span class="ramp-logo">ramp</span> Expense Intelligence <span class="badge">AI-POWERED</span></h1>
-        <p class="sub">Ensemble anomaly detection + LLM policy enforcement for corporate card spend</p>
+        <h1><span class="ramp-logo">RampAgent</span> Risk Intelligence <span class="badge">CONTINUOUS CONTROLS MONITORING</span></h1>
+        <p class="sub">AI-driven anomaly detection, automated control testing &amp; enterprise risk scoring across 100% of corporate spend</p>
     </div>
     """, unsafe_allow_html=True)
 
@@ -404,6 +441,14 @@ for idx, row in risk_df.iterrows():
         parts.append("Recommend manual review by finance team.")
         risk_df.at[idx, "narrative"] = " ".join(parts)
 
+# -- Enterprise risk framework --------------------------------------------------
+
+framework = build_risk_framework(risk_df)
+exposure = framework["exposure"]
+kris = framework["kris"]
+controls = framework["controls"]
+risk_register = framework["risk_register"]
+
 # -- Helper functions -----------------------------------------------------------
 
 def risk_color(level):
@@ -432,11 +477,27 @@ critical_count = len(risk_df[risk_df["risk_level"] == "CRITICAL"])
 flagged_amount = flagged["amount"].sum()
 
 m1, m2, m3, m4, m5 = st.columns(5)
-m1.metric("Total Spend", f"${total_spend:,.0f}", f"{len(df)} transactions")
-m2.metric("Flagged", f"{flagged_count}", f"{flagged_pct:.1f}% of total")
-m3.metric("Policy Violations", f"{len(policy_violations)}")
-m4.metric("Critical Alerts", f"{critical_count}", delta=f"{critical_count}" if critical_count > 0 else None, delta_color="inverse")
-m5.metric("At-Risk Spend", f"${flagged_amount:,.0f}")
+m1.metric("Spend Under Monitoring", f"${total_spend:,.0f}", f"{len(df)} txns · 100% coverage")
+m2.metric("Exposure at Risk", f"${exposure['flagged_exposure']:,.0f}", f"{exposure['exposure_rate']:.1f}% of spend", delta_color="inverse")
+m3.metric("Expected Loss", f"${exposure['expected_loss']:,.0f}", "probability-weighted", delta_color="off")
+m4.metric("Critical Risks", f"{critical_count}", delta=f"{critical_count}" if critical_count > 0 else None, delta_color="inverse")
+m5.metric("Control Exceptions", f"{flagged_count}", f"{flagged_pct:.1f}% failure rate", delta_color="inverse")
+
+# -- Key Risk Indicators (KRIs) -------------------------------------------------
+
+st.markdown("")  # spacer
+st.markdown("##### Key Risk Indicators &nbsp;·&nbsp; <span style='color:#4A5568;font-size:0.8rem;font-weight:400;'>measured against defined risk appetite</span>", unsafe_allow_html=True)
+
+kri_cols = st.columns(3)
+for i, k in enumerate(kris):
+    rag = k["status"].lower()
+    with kri_cols[i % 3]:
+        st.markdown(f"""<div class="kri-card rag-{rag}">
+            <div class="kri-name">{k['name']}<span class="rag-pill rag-{rag}">{k['status']}</span></div>
+            <div class="kri-value">{k['value']:.1f}{k['unit']}</div>
+            <div class="kri-detail">{k['detail']}</div>
+            <div class="kri-appetite">Appetite: amber ≥ {k['amber']:.0f}{k['unit']} · red ≥ {k['red']:.0f}{k['unit']}</div>
+        </div>""", unsafe_allow_html=True)
 
 # -- Executive Insights ---------------------------------------------------------
 
@@ -546,7 +607,8 @@ with chart2:
 # -- Flagged transactions detail -------------------------------------------------
 
 st.divider()
-st.subheader("Flagged Transactions")
+st.subheader("Control Exceptions / Risk Events")
+st.caption("Transactions where one or more automated controls raised an exception, ranked by risk score.")
 
 level_filter = st.multiselect(
     "Filter by risk level",
@@ -630,11 +692,72 @@ for _, row in flagged_display.iterrows():
 # -- Analytics section -----------------------------------------------------------
 
 st.divider()
-st.subheader("Analytics")
+st.subheader("Risk & Controls Analytics")
 
-tab_cat, tab_emp, tab_vendor, tab_policy = st.tabs(
-    ["📊 By Category", "👤 By Employee", "🏢 By Vendor", "📋 Policy Violations"]
+tab_register, tab_ccm, tab_cat, tab_emp, tab_vendor, tab_policy = st.tabs(
+    ["🗂 Risk Register", "🛡 Controls (CCM)", "📊 By Category", "👤 By Employee", "🏢 By Vendor", "📋 Policy Violations"]
 )
+
+with tab_register:
+    st.caption("Inherent risks aggregated from transaction-level control exceptions, ranked by severity. "
+               "Each risk maps to the automated control that detects it.")
+    if risk_register:
+        reg_df = pd.DataFrame([{
+            "Risk ID": r["risk_id"],
+            "Risk": r["risk_name"],
+            "Category": r["risk_category"],
+            "Likelihood": r["likelihood"],
+            "Impact": r["impact_label"],
+            "Rating": r["rating"],
+            "Events": r["events"],
+            "Exposure": r["exposure"],
+            "Avg Score": r["avg_risk_score"],
+            "Mapped Control": f"{r['control_id']} · {r['control_name']}",
+        } for r in risk_register])
+
+        def _rate_style(val):
+            colors = {"CRITICAL": "#E53E3E", "HIGH": "#ED8936", "MEDIUM": "#E4FF54", "LOW": "#48BB78"}
+            return f"color: {colors.get(val, '#A0AEC0')}; font-weight: 700;"
+
+        styled = (reg_df.style
+                  .format({"Exposure": "${:,.0f}", "Avg Score": "{:.3f}"})
+                  .map(_rate_style, subset=["Rating"]))
+        st.dataframe(styled, use_container_width=True, hide_index=True)
+
+        rc1, rc2, rc3 = st.columns(3)
+        rc1.metric("Distinct Risks", len(risk_register))
+        rc2.metric("Total Risk Exposure", f"${sum(r['exposure'] for r in risk_register):,.0f}")
+        crit_high = sum(1 for r in risk_register if r["rating"] in ("CRITICAL", "HIGH"))
+        rc3.metric("Critical / High Risks", crit_high)
+    else:
+        st.info("No risks recorded.")
+
+with tab_ccm:
+    st.caption("Continuous Controls Monitoring — every automated control runs against 100% of transactions. "
+               "Exception rate drives the effectiveness rating.")
+    if controls:
+        ccm_df = pd.DataFrame([{
+            "Control": f"{c['control_id']} · {c['control_name']}",
+            "Objective": c["objective"],
+            "Tested": c["tested"],
+            "Exceptions": c["exceptions"],
+            "Exception Rate": c["exception_rate"],
+            "Exposure": c["exposure"],
+            "Effectiveness": c["effectiveness"],
+        } for c in controls])
+
+        def _eff_style(val):
+            colors = {"Effective": "#48BB78", "Needs Improvement": "#ED8936", "Ineffective": "#E53E3E"}
+            return f"color: {colors.get(val, '#A0AEC0')}; font-weight: 700;"
+
+        styled = (ccm_df.style
+                  .format({"Exception Rate": "{:.1f}%", "Exposure": "${:,.0f}"})
+                  .map(_eff_style, subset=["Effectiveness"]))
+        st.dataframe(styled, use_container_width=True, hide_index=True)
+
+        st.bar_chart(ccm_df.set_index("Control")["Exception Rate"], height=280)
+    else:
+        st.info("No controls evaluated.")
 
 with tab_cat:
     cat_risk = risk_df.groupby("category").agg(
@@ -713,7 +836,7 @@ with tab_policy:
 # -- AI Chat sidebar -------------------------------------------------------------
 
 with st.sidebar:
-    st.markdown("### Ask AI About Expenses")
+    st.markdown("### Ask the Risk Analyst")
     st.caption("Powered by Llama 3.1 via Cerebras")
 
     if "chat_history" not in st.session_state:
@@ -723,7 +846,7 @@ with st.sidebar:
         with st.chat_message(msg["role"]):
             st.markdown(msg["content"])
 
-    if user_q := st.chat_input("e.g. Who has the most violations?"):
+    if user_q := st.chat_input("e.g. Where is our largest risk exposure?"):
         st.session_state.chat_history.append({"role": "user", "content": user_q})
         with st.chat_message("user"):
             st.markdown(user_q)
@@ -753,7 +876,7 @@ with st.sidebar:
             flagged=("risk_level", lambda x: (x != "LOW").sum()),
         ).sort_values("flagged", ascending=False).to_dict("index")
 
-        context = f"""You are an AI expense analyst assistant for a corporate expense review dashboard (similar to Ramp's AI-powered expense management). Answer the user's question using ONLY the data provided. Be specific with dollar amounts, names, and percentages. Keep answers concise (3-5 sentences max). Sound like an automated finance AI system — data-driven, precise, actionable.
+        context = f"""You are an AI risk analyst for an enterprise risk & controls monitoring platform covering corporate spend. Answer the user's question using ONLY the data provided. Speak the language of a risk / internal audit team: exposure, control exceptions, risk rating, likelihood and impact. Be specific with dollar amounts, names, and percentages. Keep answers concise (3-5 sentences max). Sound like an automated risk-intelligence system — data-driven, precise, actionable.
 
 SUMMARY:
 {json.dumps(summary_stats, indent=2)}
@@ -794,9 +917,10 @@ USER QUESTION: {user_q}"""
 
 st.markdown("""
 <div class="ramp-footer">
-    Built by <strong>Aditya Sakhale</strong> &nbsp;&middot;&nbsp;
-    Ensemble ML anomaly detection (Isolation Forest + Z-score + velocity + temporal) &nbsp;&middot;&nbsp;
-    LLM policy enforcement (Llama 3.1 via Cerebras) &nbsp;&middot;&nbsp;
-    Inspired by <a href="https://ramp.com" target="_blank">Ramp</a>
+    <strong>RampAgent</strong> — Continuous Controls Monitoring &amp; Risk Intelligence &nbsp;&middot;&nbsp;
+    Ensemble ML anomaly detection &nbsp;&middot;&nbsp;
+    LLM-based control testing (Llama 3.1 via Cerebras) &nbsp;&middot;&nbsp;
+    9 automated controls · risk register · KRIs &nbsp;&middot;&nbsp;
+    Built by <strong>Aditya Sakhale</strong>
 </div>
 """, unsafe_allow_html=True)
