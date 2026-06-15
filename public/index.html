@@ -194,6 +194,35 @@ svg{display:block}
 .chat-resp{margin-top:.9rem;padding:.9rem 1rem;background:var(--panel-2);border:1px solid var(--border-2);
   border-radius:10px;font-size:.83rem;line-height:1.6;display:none}
 
+/* ---- Intro / explainer ---- */
+.intro{display:flex;gap:1rem;align-items:flex-start;background:linear-gradient(120deg,#eef3ff,#f6f9ff);
+  border:1px solid #dce6ff;border-radius:var(--radius);padding:1.1rem 1.25rem;margin-bottom:1.3rem}
+.intro-ic{width:36px;height:36px;border-radius:10px;background:#3366ff;flex-shrink:0;display:flex;
+  align-items:center;justify-content:center;color:#fff}
+.intro-ic svg{width:19px;height:19px;stroke:#fff;stroke-width:2;fill:none}
+.intro h3{font-size:.95rem;font-weight:700;margin-bottom:.2rem}
+.intro p{font-size:.83rem;color:#42506e;line-height:1.55}
+.intro p strong{color:#1e2a4a}
+
+/* ---- Panel description ---- */
+.panel-desc{font-size:.76rem;color:var(--muted);margin:-.2rem 0 .85rem;line-height:1.45}
+
+/* ---- Info tooltip ---- */
+.help{display:inline-flex;align-items:center;justify-content:center;width:14px;height:14px;border-radius:50%;
+  border:1px solid var(--dim);color:var(--dim);font-size:.6rem;font-weight:700;margin-left:.35rem;cursor:help;vertical-align:middle}
+
+/* ---- Methodology ---- */
+.method-head{font-size:1.05rem;font-weight:800;margin:.4rem 0 1rem;letter-spacing:-.01em}
+.method-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:1.1rem}
+.method-card{background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);padding:1.1rem 1.2rem;box-shadow:var(--shadow)}
+.method-step{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:7px;
+  background:var(--primary-soft);color:var(--primary);font-size:.78rem;font-weight:800;margin-bottom:.6rem}
+.method-card h4{font-size:.9rem;font-weight:700;margin-bottom:.35rem}
+.method-card p{font-size:.8rem;color:var(--muted);line-height:1.55}
+.method-card p strong{color:var(--text)}
+.method-card code{background:var(--panel-2);border:1px solid var(--border-2);border-radius:5px;padding:.05rem .3rem;
+  font-size:.74rem;font-family:'SF Mono',ui-monospace,monospace;color:#3a4a6b}
+
 /* ---- Footer ---- */
 .footer{text-align:center;padding:1.6rem;color:var(--dim);font-size:.76rem}
 .footer strong{color:var(--muted)}
@@ -327,13 +356,22 @@ function render(){
     </div>
   </div>
 
+  <!-- Intro / explainer -->
+  <div class="intro">
+    <div class="intro-ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="16"/><line x1="12" y1="8" x2="12" y2="8"/></svg></div>
+    <div>
+      <h3>What you're looking at</h3>
+      <p>RampAgent screens <strong>100% of corporate-card transactions</strong> through ${(DATA.controls||[]).length} automated controls — combining machine-learning anomaly detection with policy/compliance testing — and rolls the results up into the metrics, KRIs, risk register and control ratings below. This view analyses <strong>${s.total_transactions} transactions (${fmt(s.total_spend)})</strong>, of which <strong>${s.flagged_count}</strong> triggered a control exception. It replaces sample-based, after-the-fact audit with continuous, quantified monitoring. <em style="color:#6b7488">Demo data is synthetic.</em></p>
+    </div>
+  </div>
+
   <!-- Metrics -->
   <div class="metrics">
-    ${metricCard('spend','ic-blue','Spend Under Monitoring',fmt(s.total_spend),'d-muted',null,s.total_transactions+' txns · 100% coverage')}
-    ${metricCard('exposure','ic-red','Exposure at Risk',fmt(s.flagged_exposure!=null?s.flagged_exposure:0),'d-red','up',(s.exposure_rate!=null?s.exposure_rate:s.flag_rate).toFixed(1)+'% of spend')}
-    ${metricCard('loss','ic-amber','Expected Loss',fmt(s.expected_loss!=null?s.expected_loss:0),'d-amber',null,'Probability-weighted')}
-    ${metricCard('critical','ic-violet','Critical Risks',crit,'d-red','up',crit+' need review')}
-    ${metricCard('control','ic-green','Control Exceptions',s.flagged_count,'d-amber','up',s.flag_rate.toFixed(1)+'% failure rate')}
+    ${metricCard('spend','ic-blue','Spend Under Monitoring',fmt(s.total_spend),'d-muted',null,s.total_transactions+' txns · 100% coverage','Total corporate-card spend screened. Every transaction is tested — no sampling.')}
+    ${metricCard('exposure','ic-red','Exposure at Risk',fmt(s.flagged_exposure!=null?s.flagged_exposure:0),'d-red','up',(s.exposure_rate!=null?s.exposure_rate:s.flag_rate).toFixed(1)+'% of spend','Total dollar value of transactions that triggered at least one control exception.')}
+    ${metricCard('loss','ic-amber','Expected Loss',fmt(s.expected_loss!=null?s.expected_loss:0),'d-amber',null,'Probability-weighted','Risk-weighted exposure: each flagged amount multiplied by its risk score, then summed. A realistic loss estimate, not the worst case.')}
+    ${metricCard('critical','ic-violet','Critical Risks',crit,'d-red','up',crit+' need review','Transactions rated CRITICAL by the combined anomaly + policy risk score — the highest-priority items.')}
+    ${metricCard('control','ic-green','Control Exceptions',s.flagged_count,'d-amber','up',s.flag_rate.toFixed(1)+'% failure rate','Count of transactions where one or more automated controls raised an exception (the control failure rate).')}
   </div>
 
   <!-- Watchlist + Review Queue -->
@@ -344,6 +382,7 @@ function render(){
         <span class="panel-link" onclick="goTo('sec-audit')">View all</span>
       </div>
       <div class="panel-body">
+        <div class="panel-desc">Highest-risk transactions the agent surfaced, with the issue detected and a recommended action. <strong>Block</strong> = critical/high severity; <strong>Review</strong> = needs a human check.</div>
         <table class="tbl"><thead><tr><th>Item</th><th>Issue</th><th>Exposure</th><th>Severity</th><th style="text-align:right">Action</th></tr></thead>
         <tbody id="watchlist-body"></tbody></table>
       </div>
@@ -354,7 +393,10 @@ function render(){
         <div class="panel-title"><svg viewBox="0 0 24 24"><path d="M9 11l3 3 8-8"/><path d="M20 12v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h9"/></svg>Review Queue</div>
         <span class="panel-link">${(DATA.flagged_transactions||[]).length} open</span>
       </div>
-      <div class="panel-body" id="queue-body"></div>
+      <div class="panel-body">
+        <div class="panel-desc">Flagged items awaiting a reviewer's decision, grouped by the employee who incurred the spend.</div>
+        <div id="queue-body"></div>
+      </div>
     </div>
   </div>
 
@@ -365,7 +407,10 @@ function render(){
         <div class="panel-title"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Key Risk Indicators</div>
         <span class="panel-link muted" style="cursor:default">vs. appetite</span>
       </div>
-      <div class="panel-body" id="kri-body"></div>
+      <div class="panel-body">
+        <div class="panel-desc">Each KRI is measured against a defined <strong>risk appetite</strong>. <span style="color:var(--green)">●</span> within appetite · <span style="color:var(--amber)">●</span> warning · <span style="color:var(--red)">●</span> breach.</div>
+        <div id="kri-body"></div>
+      </div>
     </div>
 
     <div class="panel" id="sec-controls">
@@ -373,7 +418,10 @@ function render(){
         <div class="panel-title"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Controls (CCM)</div>
         <span class="panel-link" onclick="goTo('sec-audit')">View all</span>
       </div>
-      <div class="panel-body" id="controls-body"></div>
+      <div class="panel-body">
+        <div class="panel-desc">Continuous Controls Monitoring. Each control runs on every transaction; its exception rate drives an effectiveness rating.</div>
+        <div id="controls-body"></div>
+      </div>
     </div>
 
     <div class="panel" id="sec-vendors">
@@ -381,7 +429,10 @@ function render(){
         <div class="panel-title"><svg viewBox="0 0 24 24"><path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M19 21V11l-6-4"/></svg>Top Risk Vendors</div>
         <span class="panel-link muted" style="cursor:default">by exposure</span>
       </div>
-      <div class="panel-body"><table class="tbl"><tbody id="vendors-body"></tbody></table></div>
+      <div class="panel-body">
+        <div class="panel-desc">Vendors ranked by total flagged exposure — where third-party spend risk concentrates.</div>
+        <table class="tbl"><tbody id="vendors-body"></tbody></table>
+      </div>
     </div>
   </div>
 
@@ -390,6 +441,7 @@ function render(){
     <div class="panel">
       <div class="panel-head"><div class="panel-title"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>AI Risk Analyst</div></div>
       <div class="panel-body">
+        <div class="panel-desc">Ask questions in plain English — the analyst answers from this dataset's exposure, KRIs, register and control exceptions. Try: <em>"Which control is least effective?"</em> or <em>"Where is our largest exposure?"</em></div>
         <div class="chat-row">
           <input class="chat-input" id="chat-input" placeholder='Ask about risk… e.g. "Where is our largest exposure?"'>
           <button class="chat-btn" id="chat-btn" onclick="askChat()">Ask</button>
@@ -404,6 +456,7 @@ function render(){
     <div class="panel">
       <div class="panel-head"><div class="panel-title"><svg viewBox="0 0 24 24"><path d="M10.3 3.3a2 2 0 0 1 3.4 0l7.3 12.6a2 2 0 0 1-1.7 3H4.7a2 2 0 0 1-1.7-3z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12" y2="17"/></svg>Risk Register</div><span class="panel-link muted" style="cursor:default">likelihood × impact</span></div>
       <div class="panel-body" style="overflow-x:auto">
+        <div class="panel-desc">Transaction-level exceptions aggregated into inherent risks, each rated on a standard <strong>likelihood × impact</strong> matrix and linked to the control that detects it.</div>
         <table class="tbl"><thead><tr><th>ID</th><th>Risk</th><th>Category</th><th>Likelihood</th><th>Impact</th><th>Rating</th><th>Events</th><th>Exposure</th><th>Mapped Control</th></tr></thead>
         <tbody id="register-body"></tbody></table>
       </div>
@@ -415,9 +468,30 @@ function render(){
     <div class="panel">
       <div class="panel-head"><div class="panel-title"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Risk Event Log</div><span class="panel-link muted" style="cursor:default">most recent</span></div>
       <div class="panel-body" style="overflow-x:auto">
+        <div class="panel-desc">An immutable, timestamped record of every action the agent and policy engine took — the evidence trail an auditor needs.</div>
         <table class="tbl"><thead><tr><th>Event</th><th>Time</th><th>Actor</th><th>Status</th><th>Details</th></tr></thead>
         <tbody id="audit-body"></tbody></table>
       </div>
+    </div>
+  </div>
+
+  <!-- How it works -->
+  <div class="method-head">How RampAgent works</div>
+  <div class="method-grid">
+    <div class="method-card">
+      <div class="method-step">1</div>
+      <h4>Detect</h4>
+      <p>Every transaction runs through an <strong>ensemble of 6 ML / statistical detectors</strong> (Isolation Forest, category z-score, duplicate detection, velocity, off-hours, new-vendor) plus <strong>LLM-based policy testing</strong> against the company's expense policy.</p>
+    </div>
+    <div class="method-card">
+      <div class="method-step">2</div>
+      <h4>Score</h4>
+      <p>Signals combine into one risk score — <code>anomaly × 0.55 + policy × 0.45</code> — mapped to <strong>LOW → CRITICAL</strong>. <strong>Expected loss</strong> = each flagged amount × its score, so dollars are prioritised by probability, not just size.</p>
+    </div>
+    <div class="method-card">
+      <div class="method-step">3</div>
+      <h4>Govern</h4>
+      <p>Scores roll up into a <strong>risk register</strong> (likelihood × impact), <strong>KRIs</strong> tracked against risk appetite, and <strong>control-effectiveness ratings</strong> — turning raw flags into the artifacts a risk, audit or GRC team acts on.</p>
     </div>
   </div>
   `;
@@ -434,12 +508,13 @@ function render(){
   document.getElementById('chat-input').addEventListener('keydown',e=>{if(e.key==='Enter')askChat()});
 }
 
-function metricCard(icon,iccls,label,value,dcls,dir,delta){
+function metricCard(icon,iccls,label,value,dcls,dir,delta,help){
   const arrow=dir==='up'?arrowUp():(dir==='down'?arrowDn():'');
-  return `<div class="metric">
+  const tip=help?`<span class="help" title="${esc(help)}">i</span>`:'';
+  return `<div class="metric" title="${esc(help||'')}">
     <div class="metric-top">
       <div class="metric-ic ${iccls}">${ICONS[icon]}</div>
-      <div class="metric-label">${label}</div>
+      <div class="metric-label">${label}${tip}</div>
     </div>
     <div class="metric-value">${value}</div>
     <div class="metric-delta ${dcls}">${arrow}${delta}</div>

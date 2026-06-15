@@ -56,6 +56,54 @@ def _get_client():
     return OpenAI(base_url=CEREBRAS_BASE_URL, api_key=CEREBRAS_API_KEY)
 
 
+# Deterministic policy limits used when no LLM key is available. Mirrors the
+# quantitative rules in data/sample_policy.md so the platform produces real
+# compliance findings even offline.
+_FALLBACK_RULES = [
+    ("Meals & Dining", 75, "meal_limit", "medium", lambda r: True,
+     "${amount:.2f} exceeds $75/person client meal limit"),
+    ("Travel - Flights", 500, "flight_preapproval", "high", lambda r: not r["pre_approved"],
+     "Flight ${amount:.2f} exceeds $500 — requires pre-approval"),
+    ("Travel - Hotels", 250, "hotel_nightly", "medium", lambda r: True,
+     "${amount:.2f} exceeds $250/night hotel limit"),
+    ("Software & SaaS", 200, "software_it_approval", "high", lambda r: not r["pre_approved"],
+     "Software purchase ${amount:.2f} exceeds $200 — requires IT sign-off"),
+    ("Entertainment", 100, "entertainment_limit", "medium", lambda r: True,
+     "${amount:.2f} exceeds $100/person entertainment limit"),
+]
+
+
+def fallback_policy_check(df: pd.DataFrame) -> pd.DataFrame:
+    """Rule-based policy checking that needs no LLM. Used when CEREBRAS_API_KEY
+    is unset, so both the app and the static precompute still surface violations."""
+    results = []
+    for _, row in df.iterrows():
+        violations = []
+        for category, limit, rule_id, severity, cond, msg in _FALLBACK_RULES:
+            if row["category"] == category and row["amount"] > limit and cond(row):
+                violations.append({
+                    "rule_id": rule_id, "severity": severity,
+                    "explanation": msg.format(amount=row["amount"]),
+                })
+        if not row["receipt_attached"] and row["amount"] > 25:
+            violations.append({
+                "rule_id": "receipt_required", "severity": "low",
+                "explanation": f"Missing receipt for ${row['amount']:.2f} transaction (required over $25)",
+            })
+        hour = row.get("hour", 12)
+        if hour >= 23 or hour <= 4:
+            violations.append({
+                "rule_id": "late_night", "severity": "medium",
+                "explanation": f"Transaction at {int(hour):02d}:00 — auto-flagged (11PM-5AM policy)",
+            })
+        results.append({
+            "has_violation": bool(violations),
+            "violations": violations,
+            "compliance_score": max(0.0, 1.0 - 0.25 * len(violations)) if violations else 1.0,
+        })
+    return pd.DataFrame(results, index=df.index)
+
+
 def _llm_call(client: OpenAI, prompt: str) -> str:
     response = client.chat.completions.create(
         model=CEREBRAS_MODEL,

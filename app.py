@@ -12,7 +12,7 @@ from pathlib import Path
 from config import RISK_THRESHOLDS, CEREBRAS_API_KEY
 from utils.data_loader import load_transactions, load_policy, preprocess_for_anomaly
 from engine.anomaly_detector import AnomalyDetector
-from engine.policy_checker import PolicyChecker
+from engine.policy_checker import PolicyChecker, fallback_policy_check
 from engine.risk_scorer import RiskScorer
 from engine.risk_framework import build_risk_framework
 
@@ -308,72 +308,14 @@ def run_anomaly_detection(_df):
 @st.cache_data(show_spinner="Extracting policy rules & checking compliance...")
 def run_policy_check(_df, _policy_text):
     if not CEREBRAS_API_KEY or CEREBRAS_API_KEY == "":
-        results = []
-        for _, row in _df.iterrows():
-            violations = []
-            has_v = False
+        return fallback_policy_check(_df)
 
-            if row["category"] == "Meals & Dining" and row["amount"] > 75:
-                has_v = True
-                violations.append({
-                    "rule_id": "meal_limit",
-                    "severity": "medium",
-                    "explanation": f"${row['amount']:.2f} exceeds $75/person client meal limit",
-                })
-            if row["category"] == "Travel - Flights" and row["amount"] > 500 and not row["pre_approved"]:
-                has_v = True
-                violations.append({
-                    "rule_id": "flight_preapproval",
-                    "severity": "high",
-                    "explanation": f"Flight ${row['amount']:.2f} exceeds $500 — requires pre-approval",
-                })
-            if row["category"] == "Travel - Hotels" and row["amount"] > 250:
-                has_v = True
-                violations.append({
-                    "rule_id": "hotel_nightly",
-                    "severity": "medium",
-                    "explanation": f"${row['amount']:.2f} exceeds $250/night hotel limit",
-                })
-            if row["category"] == "Software & SaaS" and row["amount"] > 200 and not row["pre_approved"]:
-                has_v = True
-                violations.append({
-                    "rule_id": "software_it_approval",
-                    "severity": "high",
-                    "explanation": f"Software purchase ${row['amount']:.2f} exceeds $200 — requires IT sign-off",
-                })
-            if row["category"] == "Entertainment" and row["amount"] > 100:
-                has_v = True
-                violations.append({
-                    "rule_id": "entertainment_limit",
-                    "severity": "medium",
-                    "explanation": f"${row['amount']:.2f} exceeds $100/person entertainment limit",
-                })
-            if not row["receipt_attached"] and row["amount"] > 25:
-                has_v = True
-                violations.append({
-                    "rule_id": "receipt_required",
-                    "severity": "low",
-                    "explanation": f"Missing receipt for ${row['amount']:.2f} transaction (required over $25)",
-                })
-            if row.get("hour", 12) >= 23 or row.get("hour", 12) <= 4:
-                has_v = True
-                violations.append({
-                    "rule_id": "late_night",
-                    "severity": "medium",
-                    "explanation": f"Transaction at {row.get('hour', 0):02d}:00 — auto-flagged (11PM-5AM policy)",
-                })
-
-            score = max(0.0, 1.0 - 0.25 * len(violations)) if violations else 1.0
-            results.append({
-                "has_violation": has_v,
-                "violations": violations,
-                "compliance_score": score,
-            })
-        return pd.DataFrame(results, index=_df.index)
-
-    checker = PolicyChecker(_policy_text)
-    checker.extract_rules()
-    return checker.check_all(_df, use_llm_for_ambiguous=True)
+    try:
+        checker = PolicyChecker(_policy_text)
+        checker.extract_rules()
+        return checker.check_all(_df, use_llm_for_ambiguous=True)
+    except Exception:
+        return fallback_policy_check(_df)
 
 
 # -- Run pipeline ---------------------------------------------------------------

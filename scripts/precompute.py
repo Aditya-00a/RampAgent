@@ -5,7 +5,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
 from utils.data_loader import load_transactions, load_policy, preprocess_for_anomaly
 from engine.anomaly_detector import AnomalyDetector
-from engine.policy_checker import PolicyChecker
+from engine.policy_checker import PolicyChecker, fallback_policy_check
 from engine.risk_scorer import RiskScorer
 from engine.risk_framework import build_risk_framework
 from config import CEREBRAS_API_KEY
@@ -30,20 +30,19 @@ def main():
     anomaly_results = detector.run_all()
 
     # --- Policy Checking ---
-    print("Extracting policy rules...")
-    checker = PolicyChecker(policy_text)
-    try:
-        rules = checker.extract_rules()
-        print(f"Extracted {len(rules)} policy rules")
-        policy_results = checker.check_all(df_feat)
-    except Exception as e:
-        print(f"Policy check failed: {e}")
-        import pandas as pd
-        policy_results = pd.DataFrame({
-            "has_violation": [False] * len(df),
-            "violations": [[] for _ in range(len(df))],
-            "compliance_score": [1.0] * len(df),
-        }, index=df.index)
+    if CEREBRAS_API_KEY:
+        print("Extracting policy rules (LLM)...")
+        try:
+            checker = PolicyChecker(policy_text)
+            rules = checker.extract_rules()
+            print(f"Extracted {len(rules)} policy rules")
+            policy_results = checker.check_all(df_feat)
+        except Exception as e:
+            print(f"LLM policy check failed ({e}); using rule-based fallback")
+            policy_results = fallback_policy_check(df_feat)
+    else:
+        print("No CEREBRAS_API_KEY — using rule-based policy fallback")
+        policy_results = fallback_policy_check(df_feat)
 
     # --- Risk Scoring ---
     print("Computing risk scores...")
