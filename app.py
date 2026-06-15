@@ -25,64 +25,65 @@ st.set_page_config(
     initial_sidebar_state="collapsed",
 )
 
-# -- Ramp Brand Colors ---------------------------------------------------------
-# Primary: #1C1B17 (near-black), #010518 (dark navy)
-# Accent:  #E4FF54 (chartreuse/lime — Ramp's signature highlight)
-# Grays:   #2B2E35, #2D3748, #4A5568, #A0AEC0, #E2E8F0
-# Alert:   #E53E3E (crimson)
+# -- Brand Colors (light theme) ------------------------------------------------
+# Primary: #3366ff (blue)  Bg: #f5f7fa  Panel: #ffffff  Border: #e7eaf0
+# Text: #141b2d  Muted: #667085  Dim: #98a2b3
+# Risk: CRITICAL #dc2626 · HIGH #d97706 · MEDIUM #2563eb · LOW #16a34a
 
-RAMP_CHARTREUSE = "#E4FF54"
-RAMP_DARK = "#010518"
-RAMP_CARD = "#111318"
-RAMP_BORDER = "#1e2028"
-RAMP_GRAY = "#4A5568"
-RAMP_LIGHT_GRAY = "#A0AEC0"
+PRIMARY = "#3366ff"
+PANEL = "#ffffff"
+BORDER = "#e7eaf0"
+TEXT = "#141b2d"
+MUTED = "#667085"
+DIM = "#98a2b3"
 
 st.markdown("""
 <style>
     /* ── Global ─────────────────────────────────────── */
-    .main .block-container { padding-top: 1rem; max-width: 1200px; }
-    h1, h2, h3 { letter-spacing: -0.3px; }
+    .stApp { background: #f5f7fa; }
+    .main .block-container { padding-top: 1rem; max-width: 1240px; }
+    h1, h2, h3 { letter-spacing: -0.3px; color: #141b2d; }
 
     /* ── Header banner ──────────────────────────────── */
     .ramp-header {
-        background: #010518;
-        border: 1px solid #1e2028;
-        border-radius: 12px;
+        background: linear-gradient(120deg, #eef3ff, #f7faff);
+        border: 1px solid #dce6ff;
+        border-radius: 14px;
         padding: 1.5rem 2rem;
         margin-bottom: 1rem;
         position: relative;
         overflow: hidden;
+        box-shadow: 0 1px 3px rgba(16,24,40,0.05);
     }
     .ramp-header::before {
         content: '';
         position: absolute;
         top: -40%; right: -10%;
         width: 300px; height: 300px;
-        background: radial-gradient(circle, rgba(228,255,84,0.06) 0%, transparent 70%);
+        background: radial-gradient(circle, rgba(51,102,255,0.10) 0%, transparent 70%);
         pointer-events: none;
     }
     .ramp-header h1 {
         margin: 0 0 0.25rem 0;
-        color: #fff;
+        color: #141b2d;
         font-size: 1.6rem !important;
         font-weight: 800;
         letter-spacing: -0.5px;
     }
     .ramp-header .ramp-logo {
-        color: #E4FF54;
+        color: #3366ff;
         font-weight: 800;
     }
     .ramp-header .sub {
-        color: #A0AEC0;
+        color: #667085;
         font-size: 0.85rem;
         margin: 0;
     }
     .ramp-header .badge {
         display: inline-block;
-        background: rgba(228,255,84,0.12);
-        border: 1px solid rgba(228,255,84,0.3);
-        color: #E4FF54;
+        background: rgba(51,102,255,0.1);
+        border: 1px solid rgba(51,102,255,0.3);
+        color: #3366ff;
         font-size: 0.65rem;
         font-weight: 700;
         padding: 2px 10px;
@@ -94,43 +95,43 @@ st.markdown("""
 
     /* ── Metric cards ───────────────────────────────── */
     div[data-testid="stMetric"] {
-        background: #111318;
+        background: #ffffff;
         padding: 1rem 1.2rem;
-        border-radius: 10px;
-        border: 1px solid #1e2028;
+        border-radius: 12px;
+        border: 1px solid #e7eaf0;
+        box-shadow: 0 1px 2px rgba(16,24,40,0.04), 0 1px 3px rgba(16,24,40,0.06);
     }
     div[data-testid="stMetric"] label {
-        color: #A0AEC0 !important;
+        color: #667085 !important;
         font-size: 0.72rem !important;
         text-transform: uppercase;
         letter-spacing: 0.8px;
         font-weight: 600;
     }
     div[data-testid="stMetric"] [data-testid="stMetricValue"] {
-        color: #ffffff !important;
-        font-size: 1.7rem !important;
-        font-weight: 700;
-    }
-    div[data-testid="stMetric"] [data-testid="stMetricDelta"] {
-        color: #E4FF54 !important;
+        color: #141b2d !important;
+        font-size: 1.65rem !important;
+        font-weight: 800;
     }
 
     /* ── Expander cards ─────────────────────────────── */
     div[data-testid="stExpander"] {
-        border: 1px solid #1e2028;
-        border-radius: 10px;
+        border: 1px solid #e7eaf0;
+        border-radius: 12px;
         margin-bottom: 0.5rem;
-        transition: border-color 0.2s;
+        background: #ffffff;
+        transition: border-color 0.2s, box-shadow 0.2s;
     }
     div[data-testid="stExpander"]:hover {
-        border-color: rgba(228,255,84,0.35);
+        border-color: #c9d6ff;
+        box-shadow: 0 2px 8px rgba(16,24,40,0.06);
     }
 
     /* ── Risk score bar ─────────────────────────────── */
     .risk-bar {
         width: 100%;
         height: 5px;
-        background: #1e2028;
+        background: #eceff4;
         border-radius: 3px;
         overflow: hidden;
         margin-top: 4px;
@@ -145,32 +146,32 @@ st.markdown("""
     .sev-badge {
         display: inline-block;
         padding: 2px 8px;
-        border-radius: 4px;
+        border-radius: 6px;
         font-size: 0.68rem;
         font-weight: 700;
         letter-spacing: 0.4px;
         margin-right: 6px;
         vertical-align: middle;
     }
-    .sev-critical { background: rgba(229,62,62,0.15); color: #fc8181; border: 1px solid rgba(229,62,62,0.3); }
-    .sev-high { background: rgba(237,137,54,0.15); color: #fbd38d; border: 1px solid rgba(237,137,54,0.3); }
-    .sev-medium { background: rgba(228,255,84,0.12); color: #E4FF54; border: 1px solid rgba(228,255,84,0.25); }
-    .sev-low { background: rgba(72,187,120,0.15); color: #9ae6b4; border: 1px solid rgba(72,187,120,0.3); }
+    .sev-critical { background: rgba(220,38,38,0.10); color: #b91c1c; border: 1px solid rgba(220,38,38,0.25); }
+    .sev-high { background: rgba(217,119,6,0.10); color: #b45309; border: 1px solid rgba(217,119,6,0.25); }
+    .sev-medium { background: rgba(37,99,235,0.10); color: #2563eb; border: 1px solid rgba(37,99,235,0.25); }
+    .sev-low { background: rgba(22,163,74,0.10); color: #16a34a; border: 1px solid rgba(22,163,74,0.25); }
 
     /* ── AI narrative box ───────────────────────────── */
     .ai-narrative {
-        background: rgba(228,255,84,0.04);
-        border: 1px solid rgba(228,255,84,0.15);
-        border-left: 3px solid #E4FF54;
+        background: rgba(51,102,255,0.04);
+        border: 1px solid rgba(51,102,255,0.15);
+        border-left: 3px solid #3366ff;
         border-radius: 0 8px 8px 0;
         padding: 0.75rem 1rem;
         margin-top: 0.5rem;
         font-size: 0.88rem;
         line-height: 1.5;
-        color: #E2E8F0;
+        color: #2a3550;
     }
     .ai-narrative .ai-label {
-        color: #E4FF54;
+        color: #3366ff;
         font-weight: 700;
         font-size: 0.68rem;
         text-transform: uppercase;
@@ -180,14 +181,15 @@ st.markdown("""
 
     /* ── Executive insight cards ────────────────────── */
     .insight-card {
-        background: #111318;
-        border: 1px solid #1e2028;
-        border-radius: 10px;
+        background: #ffffff;
+        border: 1px solid #e7eaf0;
+        border-radius: 12px;
         padding: 1rem 1.2rem;
         margin-bottom: 0.5rem;
+        box-shadow: 0 1px 2px rgba(16,24,40,0.04);
     }
     .insight-card .insight-title {
-        color: #A0AEC0;
+        color: #667085;
         font-size: 0.68rem;
         text-transform: uppercase;
         letter-spacing: 0.8px;
@@ -195,29 +197,30 @@ st.markdown("""
         margin-bottom: 6px;
     }
     .insight-card .insight-value {
-        color: #E2E8F0;
+        color: #2a3550;
         font-size: 0.92rem;
         line-height: 1.45;
     }
     .insight-card strong {
-        color: #fff;
+        color: #141b2d;
     }
 
     /* ── KRI / RAG cards ────────────────────────────── */
     .kri-card {
-        background: #111318;
-        border: 1px solid #1e2028;
+        background: #ffffff;
+        border: 1px solid #e7eaf0;
         border-left-width: 4px;
-        border-radius: 8px;
+        border-radius: 10px;
         padding: 0.85rem 1rem;
         margin-bottom: 0.6rem;
         height: 100%;
+        box-shadow: 0 1px 2px rgba(16,24,40,0.04);
     }
-    .kri-card.rag-red    { border-left-color: #E53E3E; }
-    .kri-card.rag-amber  { border-left-color: #ED8936; }
-    .kri-card.rag-green  { border-left-color: #48BB78; }
+    .kri-card.rag-red    { border-left-color: #dc2626; }
+    .kri-card.rag-amber  { border-left-color: #d97706; }
+    .kri-card.rag-green  { border-left-color: #16a34a; }
     .kri-name {
-        color: #A0AEC0;
+        color: #667085;
         font-size: 0.68rem;
         text-transform: uppercase;
         letter-spacing: 0.6px;
@@ -225,19 +228,19 @@ st.markdown("""
         margin-bottom: 4px;
     }
     .kri-value { font-size: 1.5rem; font-weight: 800; }
-    .kri-card.rag-red    .kri-value { color: #fc8181; }
-    .kri-card.rag-amber  .kri-value { color: #fbd38d; }
-    .kri-card.rag-green  .kri-value { color: #9ae6b4; }
-    .kri-detail { color: #4A5568; font-size: 0.7rem; margin-top: 2px; }
-    .kri-appetite { color: #4A5568; font-size: 0.65rem; margin-top: 4px; }
+    .kri-card.rag-red    .kri-value { color: #dc2626; }
+    .kri-card.rag-amber  .kri-value { color: #d97706; }
+    .kri-card.rag-green  .kri-value { color: #16a34a; }
+    .kri-detail { color: #98a2b3; font-size: 0.7rem; margin-top: 2px; }
+    .kri-appetite { color: #98a2b3; font-size: 0.65rem; margin-top: 4px; }
     .rag-pill {
         display: inline-block; font-size: 0.6rem; font-weight: 700;
         padding: 1px 7px; border-radius: 10px; letter-spacing: 0.5px;
         vertical-align: middle; margin-left: 6px;
     }
-    .rag-pill.rag-red   { background: rgba(229,62,62,0.15); color: #fc8181; }
-    .rag-pill.rag-amber { background: rgba(237,137,54,0.15); color: #fbd38d; }
-    .rag-pill.rag-green { background: rgba(72,187,120,0.15); color: #9ae6b4; }
+    .rag-pill.rag-red   { background: rgba(220,38,38,0.12); color: #dc2626; }
+    .rag-pill.rag-amber { background: rgba(217,119,6,0.12); color: #d97706; }
+    .rag-pill.rag-green { background: rgba(22,163,74,0.12); color: #16a34a; }
 
     /* ── Tabs ───────────────────────────────────────── */
     button[data-baseweb="tab"] {
@@ -248,19 +251,19 @@ st.markdown("""
     /* ── Footer ─────────────────────────────────────── */
     .ramp-footer {
         text-align: center;
-        color: #4A5568;
+        color: #98a2b3;
         font-size: 0.75rem;
         padding: 1.5rem 0;
-        border-top: 1px solid #1e2028;
+        border-top: 1px solid #e7eaf0;
         margin-top: 1rem;
     }
-    .ramp-footer a { color: #E4FF54; text-decoration: none; }
-    .ramp-footer strong { color: #A0AEC0; }
+    .ramp-footer a { color: #3366ff; text-decoration: none; }
+    .ramp-footer strong { color: #667085; }
 
     /* ── Sidebar ────────────────────────────────────── */
     section[data-testid="stSidebar"] {
-        background: #0a0c10;
-        border-right: 1px solid #1e2028;
+        background: #ffffff;
+        border-right: 1px solid #e7eaf0;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -390,11 +393,23 @@ exposure = framework["exposure"]
 kris = framework["kris"]
 controls = framework["controls"]
 risk_register = framework["risk_register"]
+trends = framework["trends"]
+
+
+def trend_delta(key):
+    """Format a period-over-period delta string for st.metric, e.g. '+12.6% vs prior 44d'."""
+    if not trends.get("available"):
+        return None
+    m = trends.get("metrics", {}).get(key)
+    if not m:
+        return None
+    sign = "+" if m["direction"] == "up" else ("-" if m["direction"] == "down" else "")
+    return f"{sign}{abs(m['delta_pct']):.1f}% vs prior {trends['period_days']}d"
 
 # -- Helper functions -----------------------------------------------------------
 
 def risk_color(level):
-    return {"CRITICAL": "#E53E3E", "HIGH": "#ED8936", "MEDIUM": "#E4FF54", "LOW": "#48BB78"}.get(level, "#4A5568")
+    return {"CRITICAL": "#dc2626", "HIGH": "#d97706", "MEDIUM": "#2563eb", "LOW": "#16a34a"}.get(level, "#98a2b3")
 
 def severity_badge(sev):
     sev_lower = sev.lower()
@@ -419,16 +434,26 @@ critical_count = len(risk_df[risk_df["risk_level"] == "CRITICAL"])
 flagged_amount = flagged["amount"].sum()
 
 m1, m2, m3, m4, m5 = st.columns(5)
-m1.metric("Spend Under Monitoring", f"${total_spend:,.0f}", f"{len(df)} txns · 100% coverage")
-m2.metric("Exposure at Risk", f"${exposure['flagged_exposure']:,.0f}", f"{exposure['exposure_rate']:.1f}% of spend", delta_color="inverse")
-m3.metric("Expected Loss", f"${exposure['expected_loss']:,.0f}", "probability-weighted", delta_color="off")
-m4.metric("Critical Risks", f"{critical_count}", delta=f"{critical_count}" if critical_count > 0 else None, delta_color="inverse")
-m5.metric("Control Exceptions", f"{flagged_count}", f"{flagged_pct:.1f}% failure rate", delta_color="inverse")
+m1.metric("Spend Under Monitoring", f"${total_spend:,.0f}",
+          trend_delta("total_spend") or f"{len(df)} txns", delta_color="off",
+          help=f"{len(df)} transactions · 100% coverage. Total corporate-card spend screened — no sampling.")
+m2.metric("Exposure at Risk", f"${exposure['flagged_exposure']:,.0f}",
+          trend_delta("flagged_exposure"), delta_color="inverse",
+          help=f"{exposure['exposure_rate']:.1f}% of spend. Dollar value of transactions with at least one control exception.")
+m3.metric("Expected Loss", f"${exposure['expected_loss']:,.0f}",
+          trend_delta("expected_loss"), delta_color="inverse",
+          help="Probability-weighted: each flagged amount × its risk score, summed.")
+m4.metric("Critical Risks", f"{critical_count}",
+          trend_delta("critical_count"), delta_color="inverse",
+          help="Transactions rated CRITICAL by the combined anomaly + policy score.")
+m5.metric("Control Exceptions", f"{flagged_count}",
+          trend_delta("control_exceptions"), delta_color="inverse",
+          help=f"{flagged_pct:.1f}% control failure rate across all transactions.")
 
 # -- Key Risk Indicators (KRIs) -------------------------------------------------
 
 st.markdown("")  # spacer
-st.markdown("##### Key Risk Indicators &nbsp;·&nbsp; <span style='color:#4A5568;font-size:0.8rem;font-weight:400;'>measured against defined risk appetite</span>", unsafe_allow_html=True)
+st.markdown("##### Key Risk Indicators &nbsp;·&nbsp; <span style='color:#98a2b3;font-size:0.8rem;font-weight:400;'>measured against defined risk appetite</span>", unsafe_allow_html=True)
 
 kri_cols = st.columns(3)
 for i, k in enumerate(kris):
@@ -440,6 +465,27 @@ for i, k in enumerate(kris):
             <div class="kri-detail">{k['detail']}</div>
             <div class="kri-appetite">Appetite: amber ≥ {k['amber']:.0f}{k['unit']} · red ≥ {k['red']:.0f}{k['unit']}</div>
         </div>""", unsafe_allow_html=True)
+
+# -- Risk exposure trend --------------------------------------------------------
+
+if trends.get("available") and trends.get("weekly"):
+    st.markdown("")  # spacer
+    st.markdown("##### Risk Exposure Trend &nbsp;·&nbsp; <span style='color:#98a2b3;font-size:0.8rem;font-weight:400;'>weekly flagged exposure vs. probability-weighted expected loss</span>", unsafe_allow_html=True)
+    wk = pd.DataFrame(trends["weekly"])
+    fig_trend = go.Figure()
+    fig_trend.add_bar(x=wk["week"], y=wk["exposure"], name="Flagged exposure",
+                      marker_color="rgba(51,102,255,0.55)", marker_line_color="rgba(51,102,255,0.9)", marker_line_width=1)
+    fig_trend.add_scatter(x=wk["week"], y=wk["expected_loss"], name="Expected loss",
+                          mode="lines+markers", line=dict(color="#ED8936", width=2.5), marker=dict(size=6))
+    fig_trend.update_layout(
+        barmode="overlay", height=280,
+        margin=dict(t=10, b=10, l=10, r=10),
+        paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)",
+        legend=dict(orientation="h", y=1.15, x=0),
+        xaxis=dict(showgrid=False),
+        yaxis=dict(tickprefix="$", gridcolor="#eef1f5"),
+    )
+    st.plotly_chart(fig_trend, use_container_width=True)
 
 # -- Executive Insights ---------------------------------------------------------
 
@@ -495,7 +541,7 @@ with ic3:
 st.divider()
 chart1, chart2 = st.columns(2)
 
-color_map = {"CRITICAL": "#E53E3E", "HIGH": "#ED8936", "MEDIUM": "#E4FF54", "LOW": "#48BB78"}
+color_map = {"CRITICAL": "#dc2626", "HIGH": "#d97706", "MEDIUM": "#2563eb", "LOW": "#16a34a"}
 
 with chart1:
     st.subheader("Risk Distribution")
@@ -570,7 +616,7 @@ risk_icons = {"CRITICAL": "🔴", "HIGH": "🟠", "MEDIUM": "🟡", "LOW": "🟢
 risk_dots = {
     "CRITICAL": '<span style="color:#E53E3E;font-size:0.9rem;">&#x25CF;</span>',
     "HIGH": '<span style="color:#ED8936;font-size:0.9rem;">&#x25CF;</span>',
-    "MEDIUM": '<span style="color:#E4FF54;font-size:0.9rem;">&#x25CF;</span>',
+    "MEDIUM": '<span style="color:#2563eb;font-size:0.9rem;">&#x25CF;</span>',
     "LOW": '<span style="color:#48BB78;font-size:0.9rem;">&#x25CF;</span>',
 }
 
@@ -658,8 +704,8 @@ with tab_register:
         } for r in risk_register])
 
         def _rate_style(val):
-            colors = {"CRITICAL": "#E53E3E", "HIGH": "#ED8936", "MEDIUM": "#E4FF54", "LOW": "#48BB78"}
-            return f"color: {colors.get(val, '#A0AEC0')}; font-weight: 700;"
+            colors = {"CRITICAL": "#dc2626", "HIGH": "#d97706", "MEDIUM": "#2563eb", "LOW": "#16a34a"}
+            return f"color: {colors.get(val, '#667085')}; font-weight: 700;"
 
         styled = (reg_df.style
                   .format({"Exposure": "${:,.0f}", "Avg Score": "{:.3f}"})
@@ -690,7 +736,7 @@ with tab_ccm:
 
         def _eff_style(val):
             colors = {"Effective": "#48BB78", "Needs Improvement": "#ED8936", "Ineffective": "#E53E3E"}
-            return f"color: {colors.get(val, '#A0AEC0')}; font-weight: 700;"
+            return f"color: {colors.get(val, '#667085')}; font-weight: 700;"
 
         styled = (ccm_df.style
                   .format({"Exception Rate": "{:.1f}%", "Exposure": "${:,.0f}"})

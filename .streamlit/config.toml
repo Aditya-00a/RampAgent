@@ -5,11 +5,11 @@ enableCORS = false
 enableXsrfProtection = false
 
 [theme]
-base = "dark"
-primaryColor = "#E4FF54"
-backgroundColor = "#010518"
-secondaryBackgroundColor = "#111318"
-textColor = "#E2E8F0"
+base = "light"
+primaryColor = "#3366ff"
+backgroundColor = "#f5f7fa"
+secondaryBackgroundColor = "#ffffff"
+textColor = "#141b2d"
 
 [browser]
 gatherUsageStats = false

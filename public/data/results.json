@@ -321,6 +321,156 @@
       "rating": "MEDIUM"
     }
   ],
+  "trends": {
+    "available": true,
+    "period_days": 44,
+    "current": {
+      "total_spend": 34423.31,
+      "flagged_exposure": 25374.859999999997,
+      "expected_loss": 15221.549382903606,
+      "critical_count": 26,
+      "control_exceptions": 98,
+      "transactions": 243
+    },
+    "prior": {
+      "total_spend": 31072.840000000004,
+      "flagged_exposure": 23882.820000000003,
+      "expected_loss": 15092.656911233116,
+      "critical_count": 21,
+      "control_exceptions": 87,
+      "transactions": 252
+    },
+    "metrics": {
+      "total_spend": {
+        "current": 34423.31,
+        "prior": 31072.840000000004,
+        "delta_pct": 10.8,
+        "direction": "up",
+        "good": null
+      },
+      "flagged_exposure": {
+        "current": 25374.859999999997,
+        "prior": 23882.820000000003,
+        "delta_pct": 6.2,
+        "direction": "up",
+        "good": false
+      },
+      "expected_loss": {
+        "current": 15221.549382903606,
+        "prior": 15092.656911233116,
+        "delta_pct": 0.9,
+        "direction": "up",
+        "good": false
+      },
+      "critical_count": {
+        "current": 26,
+        "prior": 21,
+        "delta_pct": 23.8,
+        "direction": "up",
+        "good": false
+      },
+      "control_exceptions": {
+        "current": 98,
+        "prior": 87,
+        "delta_pct": 12.6,
+        "direction": "up",
+        "good": false
+      }
+    },
+    "weekly": [
+      {
+        "week": "2024-01-01",
+        "spend": 4087.71,
+        "exposure": 3747.0,
+        "expected_loss": 2775.7787066471665,
+        "exceptions": 12
+      },
+      {
+        "week": "2024-01-08",
+        "spend": 6106.18,
+        "exposure": 4843.83,
+        "expected_loss": 3181.6669716414326,
+        "exceptions": 13
+      },
+      {
+        "week": "2024-01-15",
+        "spend": 3965.28,
+        "exposure": 3061.14,
+        "expected_loss": 1866.8198229555169,
+        "exceptions": 12
+      },
+      {
+        "week": "2024-01-22",
+        "spend": 5334.580000000001,
+        "exposure": 3971.1,
+        "expected_loss": 2578.7313238679276,
+        "exceptions": 14
+      },
+      {
+        "week": "2024-01-29",
+        "spend": 6588.89,
+        "exposure": 4832.670000000001,
+        "expected_loss": 2818.970572935455,
+        "exceptions": 20
+      },
+      {
+        "week": "2024-02-05",
+        "spend": 3381.4299999999994,
+        "exposure": 2490.6699999999996,
+        "expected_loss": 1338.9635559756284,
+        "exceptions": 12
+      },
+      {
+        "week": "2024-02-12",
+        "spend": 5046.049999999999,
+        "exposure": 4143.26,
+        "expected_loss": 2899.9655169152734,
+        "exceptions": 14
+      },
+      {
+        "week": "2024-02-19",
+        "spend": 6125.24,
+        "exposure": 4851.3099999999995,
+        "expected_loss": 3291.549484636526,
+        "exceptions": 15
+      },
+      {
+        "week": "2024-02-26",
+        "spend": 5699.680000000001,
+        "exposure": 4323.77,
+        "expected_loss": 2427.1706200204944,
+        "exceptions": 18
+      },
+      {
+        "week": "2024-03-04",
+        "spend": 4482.58,
+        "exposure": 3029.17,
+        "expected_loss": 1776.837730218066,
+        "exceptions": 9
+      },
+      {
+        "week": "2024-03-11",
+        "spend": 5812.140000000001,
+        "exposure": 4036.7400000000002,
+        "expected_loss": 2276.9174415228617,
+        "exceptions": 17
+      },
+      {
+        "week": "2024-03-18",
+        "spend": 4340.58,
+        "exposure": 2731.88,
+        "expected_loss": 1356.6699095099116,
+        "exceptions": 13
+      },
+      {
+        "week": "2024-03-25",
+        "spend": 4525.81,
+        "exposure": 3195.14,
+        "expected_loss": 1724.1646372904597,
+        "exceptions": 16
+      }
+    ]
+  },
   "risk_distribution": {
     "LOW": 310,
     "MEDIUM": 75,

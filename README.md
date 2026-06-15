@@ -60,7 +60,11 @@ Six KRIs are measured against a defined **risk appetite** and flagged Red / Ambe
 - **Critical exposure** — spend sitting in CRITICAL-rated risk
 - **Recoverable value** — estimated recovery at a configurable rate
 
-### 5. AI risk narratives
+### 5. Trends (period-over-period)
+
+The dataset is split into a current vs. prior period (by date midpoint) to produce **real deltas** for every headline metric (e.g. *Critical Risks −50% vs. prior 44d*), plus a **weekly time series** of exposure and expected loss — so the team sees whether risk is improving or deteriorating, not just a snapshot.
+
+### 6. AI risk narratives
 
 For every flagged event, an LLM generates a concise, audit-ready narrative explaining what was detected, the exposure, and the recommended action.
 
@@ -87,9 +91,9 @@ For every flagged event, an LLM generates a concise, audit-ready narrative expla
 
 ## Tech stack
 
-- **UI:** Streamlit dashboard (dark, risk-themed) + a zero-dependency static HTML dashboard
+- **UI:** Light, modern SaaS dashboard — a Streamlit app and a zero-dependency static HTML build, sharing one design language
 - **ML:** scikit-learn (Isolation Forest), NumPy / Pandas (statistical methods)
-- **Risk engine:** `engine/risk_framework.py` — exposure, KRIs, register, CCM (pure Python, no LLM required)
+- **Risk engine:** `engine/risk_framework.py` — exposure, KRIs, register, CCM, trends (pure Python, no LLM required)
 - **LLM:** Llama 3.1-8B via Cerebras (control testing + narratives + analyst chat)
 - **Charts:** Plotly
 
@@ -129,7 +133,8 @@ RampAgent/
 
 ## What the dashboard shows
 
-- **Risk metrics** — spend under monitoring, exposure at risk, expected loss, critical risks, control exceptions
+- **Risk metrics** — spend under monitoring, exposure at risk, expected loss, critical risks, control exceptions, each with a real period-over-period delta
+- **Trend chart** — weekly flagged exposure vs. probability-weighted expected loss
 - **KRI panel** — six indicators with RAG status vs. risk appetite
 - **Risk register** — inherent risks ranked by likelihood × impact, with exposure and mapped controls
 - **Controls (CCM)** — per-control exception rate and effectiveness rating

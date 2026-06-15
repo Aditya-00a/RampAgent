@@ -157,6 +157,7 @@ def main():
         "kris": framework["kris"],
         "controls": framework["controls"],
         "risk_register": framework["risk_register"],
+        "trends": framework["trends"],
         "risk_distribution": risk_dist,
         "category_spend": category_data,
         "department_spend": department_data,

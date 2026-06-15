@@ -294,4 +294,84 @@ def build_risk_framework(risk_df: pd.DataFrame) -> dict:
         "kris": compute_kris(risk_df),
         "controls": compute_controls(risk_df),
         "risk_register": compute_risk_register(risk_df),
+        "trends": compute_trends(risk_df),
+    }
+
+
+# ── Trends / period-over-period ──────────────────────────────────────────────
+
+# For each metric, whether an *increase* is bad ("risk") or just informational
+# ("neutral"). Drives the red/green direction colouring in the UI.
+_TREND_SENTIMENT = {
+    "total_spend": "neutral",
+    "flagged_exposure": "risk",
+    "expected_loss": "risk",
+    "critical_count": "risk",
+    "control_exceptions": "risk",
+}
+
+
+def _period_aggregate(d: pd.DataFrame) -> dict:
+    flagged = d[d["risk_level"] != "LOW"]
+    return {
+        "total_spend": float(d["amount"].sum()),
+        "flagged_exposure": float(flagged["amount"].sum()),
+        "expected_loss": float((flagged["amount"] * flagged["combined_score"]).sum()),
+        "critical_count": int((d["risk_level"] == "CRITICAL").sum()),
+        "control_exceptions": int((d["risk_level"] != "LOW").sum()),
+        "transactions": int(len(d)),
+    }
+
+
+def compute_trends(risk_df: pd.DataFrame) -> dict:
+    """Split the data into a current vs. prior period (by date midpoint) and
+    compute deltas, plus a weekly time series for trend charts."""
+    if "date" not in risk_df.columns or risk_df.empty:
+        return {"available": False, "metrics": {}, "weekly": []}
+
+    df = risk_df.copy()
+    df["date"] = pd.to_datetime(df["date"], errors="coerce")
+    df = df.dropna(subset=["date"])
+    if df.empty:
+        return {"available": False, "metrics": {}, "weekly": []}
+
+    dmin, dmax = df["date"].min(), df["date"].max()
+    mid = dmin + (dmax - dmin) / 2
+    current = df[df["date"] >= mid]
+    prior = df[df["date"] < mid]
+
+    cur_agg, prior_agg = _period_aggregate(current), _period_aggregate(prior)
+
+    metrics = {}
+    for key, sentiment in _TREND_SENTIMENT.items():
+        cv, pv = cur_agg[key], prior_agg[key]
+        delta_pct = ((cv - pv) / pv * 100) if pv else (100.0 if cv else 0.0)
+        direction = "up" if cv > pv else ("down" if cv < pv else "flat")
+        good = None if sentiment == "neutral" else (direction == "down")
+        metrics[key] = {
+            "current": cv, "prior": pv,
+            "delta_pct": round(delta_pct, 1),
+            "direction": direction, "good": good,
+        }
+
+    # Weekly time series (week-starting dates).
+    df["week"] = df["date"].dt.to_period("W").dt.start_time
+    weekly = []
+    for wk, g in df.groupby("week"):
+        fl = g[g["risk_level"] != "LOW"]
+        weekly.append({
+            "week": str(wk.date()),
+            "spend": float(g["amount"].sum()),
+            "exposure": float(fl["amount"].sum()),
+            "expected_loss": float((fl["amount"] * fl["combined_score"]).sum()),
+            "exceptions": int((g["risk_level"] != "LOW").sum()),
+        })
+
+    return {
+        "available": True,
+        "period_days": int((dmax - mid).days),
+        "current": cur_agg,
+        "prior": prior_agg,
+        "metrics": metrics,
+        "weekly": weekly,
     }
