@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Solutions Strategist · Ramp Careers</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --cream:#FBFAF6;--ink:#13130f;--muted:#5c5d55;--dim:#8c8d83;
+  --line:#eae8df;--line-2:#f0eee7;--paper:#ffffff;
+  --lime:#d8fe51;--lime-deep:#c4f02f;
+  --mint:#e6f3ea;--peach:#fcefe0;--lav:#ece9f8;--sky:#e6eefb;
+  --radius:16px;--shadow:0 1px 2px rgba(19,19,15,.04),0 10px 30px rgba(19,19,15,.06);
+}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--cream);color:var(--ink);
+  line-height:1.6;-webkit-font-smoothing:antialiased;font-size:16px}
+a{color:inherit;text-decoration:none}
+svg{display:block}
+
+/* ── Nav ── */
+.nav{position:sticky;top:0;z-index:50;background:rgba(251,250,246,.85);backdrop-filter:saturate(180%) blur(12px);
+  border-bottom:1px solid var(--line)}
+.nav-inner{max-width:1180px;margin:0 auto;padding:.9rem 1.5rem;display:flex;align-items:center;gap:1.2rem}
+.brand{display:flex;align-items:center;gap:.5rem}
+.brand-mark{width:26px;height:26px;border-radius:7px;background:var(--ink);position:relative;overflow:hidden}
+.brand-mark::after{content:'';position:absolute;inset:0;background:
+  linear-gradient(135deg,transparent 45%,var(--lime) 46%,var(--lime) 60%,transparent 61%)}
+.brand-word{font-size:1.3rem;font-weight:800;letter-spacing:-.04em}
+.nav-spacer{flex:1}
+.nav-link{font-size:.88rem;font-weight:600;color:var(--muted)}
+.nav-link:hover{color:var(--ink)}
+.btn{font-family:inherit;font-weight:700;border:none;cursor:pointer;border-radius:999px;transition:transform .12s,box-shadow .2s,background .15s,opacity .15s}
+.btn:active{transform:translateY(1px)}
+.btn-lime{background:var(--lime);color:var(--ink);padding:.6rem 1.25rem;font-size:.88rem}
+.btn-lime:hover{background:var(--lime-deep);box-shadow:0 8px 22px rgba(196,240,47,.45)}
+.btn-dark{background:var(--ink);color:#fff;padding:.6rem 1.25rem;font-size:.88rem}
+.btn-dark:hover{opacity:.88}
+
+/* ── Hero ── */
+.hero-inner{max-width:1180px;margin:0 auto;padding:3rem 1.5rem 1.5rem}
+.crumb{font-size:.8rem;color:var(--dim);font-weight:600;margin-bottom:1.1rem;letter-spacing:.01em}
+.crumb a:hover{color:var(--ink)}
+.eyebrow{display:inline-block;background:var(--lime);color:var(--ink);font-size:.72rem;font-weight:800;
+  letter-spacing:.08em;text-transform:uppercase;padding:.3rem .7rem;border-radius:999px;margin-bottom:1rem}
+.hero h1{font-size:3.2rem;font-weight:900;letter-spacing:-.045em;line-height:1.02;max-width:16ch}
+.chips{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.3rem}
+.chip{display:inline-flex;align-items:center;gap:.4rem;background:var(--paper);border:1px solid var(--line);
+  border-radius:999px;padding:.4rem .85rem;font-size:.8rem;font-weight:600;color:var(--muted)}
+.chip svg{width:14px;height:14px;stroke:var(--dim);stroke-width:1.8;fill:none}
+
+/* ── Hero image band ── */
+.hero-band{max-width:1180px;margin:1.6rem auto 0;padding:0 1.5rem}
+.hero-img{position:relative;height:300px;border-radius:22px;overflow:hidden;background:
+  linear-gradient(120deg,#d8fe51,#bfe9a8 40%,#cfe0f6);box-shadow:var(--shadow)}
+.hero-img img{width:100%;height:100%;object-fit:cover;display:block}
+.hero-img .tagline{position:absolute;left:2rem;bottom:1.6rem;right:2rem;color:#fff;
+  text-shadow:0 2px 18px rgba(0,0,0,.45);font-size:1.45rem;font-weight:800;letter-spacing:-.02em;max-width:30ch}
+.hero-img::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 35%,rgba(0,0,0,.45))}
+
+/* ── Layout ── */
+.wrap{max-width:1180px;margin:0 auto;padding:2.4rem 1.5rem 4rem;display:grid;grid-template-columns:1fr 348px;gap:3.2rem}
+.content{min-width:0}
+
+/* ── Tabs ── */
+.tabs{display:flex;gap:.25rem;border-bottom:1px solid var(--line);margin-bottom:1.9rem;position:sticky;top:58px;
+  background:var(--cream);z-index:10;padding-top:.2rem}
+.tab{background:none;border:none;font-family:inherit;font-size:.95rem;font-weight:700;color:var(--dim);cursor:pointer;
+  padding:.75rem 1.05rem;border-bottom:2px solid transparent;margin-bottom:-1px}
+.tab:hover{color:var(--ink)}
+.tab.active{color:var(--ink);border-bottom-color:var(--ink)}
+.panel{display:none}
+.panel.active{display:block;animation:fade .25s ease}
+@keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+
+/* ── Prose ── */
+.prose h2{font-size:1.6rem;font-weight:800;letter-spacing:-.025em;margin:2.4rem 0 .8rem}
+.prose h2:first-child{margin-top:0}
+.prose p{color:#33342d;margin:.7rem 0}
+.prose .lead{font-size:1.1rem;color:#2b2c25}
+.prose ul{list-style:none;margin:.6rem 0 1rem}
+.prose li{position:relative;padding-left:1.6rem;margin:.55rem 0;color:#33342d}
+.prose li::before{content:'';position:absolute;left:.15rem;top:.62em;width:8px;height:8px;border-radius:50%;
+  background:var(--lime-deep);box-shadow:0 0 0 3px rgba(196,240,47,.28)}
+.prose strong{color:var(--ink);font-weight:700}
+
+/* about ramp image */
+.about-row{display:grid;grid-template-columns:1.4fr 1fr;gap:1.6rem;align-items:center;margin:.6rem 0 .4rem}
+.media{border-radius:var(--radius);overflow:hidden;height:230px;background:linear-gradient(135deg,var(--mint),var(--sky));box-shadow:var(--shadow)}
+.media img{width:100%;height:100%;object-fit:cover}
+
+.callout{background:var(--ink);color:#fff;border-radius:18px;padding:1.6rem 1.8rem;margin:1.6rem 0}
+.callout .big{font-size:1.6rem;font-weight:800;letter-spacing:-.02em;line-height:1.25}
+.callout .big .hl{color:var(--lime)}
+.callout .sub{color:#c7c9bd;font-size:.92rem;margin-top:.5rem}
+
+/* groups */
+.group{border:1px solid var(--line);border-radius:var(--radius);padding:1.25rem 1.45rem;margin:.9rem 0;background:var(--paper);box-shadow:var(--shadow)}
+.group h3{margin:0 0 .4rem;display:flex;align-items:center;gap:.6rem;font-size:1.05rem;font-weight:700}
+.group .num{width:26px;height:26px;border-radius:8px;background:var(--lime);color:var(--ink);font-size:.8rem;
+  font-weight:800;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0}
+
+/* life at ramp gallery */
+.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin:1rem 0}
+.gphoto{position:relative;height:170px;border-radius:14px;overflow:hidden;box-shadow:var(--shadow)}
+.gphoto:nth-child(1){background:linear-gradient(135deg,var(--peach),#f6d9c0)}
+.gphoto:nth-child(2){background:linear-gradient(135deg,var(--lav),#d6cdf2)}
+.gphoto:nth-child(3){background:linear-gradient(135deg,var(--mint),#bfe3c9)}
+.gphoto img{width:100%;height:100%;object-fit:cover}
+.gphoto .cap{position:absolute;left:.8rem;bottom:.7rem;color:#fff;font-weight:700;font-size:.82rem;
+  text-shadow:0 1px 10px rgba(0,0,0,.5);z-index:2}
+.gphoto::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,rgba(0,0,0,.4))}
+
+/* benefits */
+.ben-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin-top:1rem}
+.ben-card{border:1px solid var(--line);border-radius:var(--radius);padding:1.15rem 1.35rem;background:var(--paper)}
+.ben-card:nth-child(1){background:var(--mint)}
+.ben-card:nth-child(2){background:var(--sky)}
+.ben-card:nth-child(3){background:var(--peach)}
+.ben-card:nth-child(4){background:var(--lav)}
+.ben-card h4{font-size:.98rem;font-weight:800;margin-bottom:.55rem;display:flex;align-items:center;gap:.5rem}
+.ben-card ul{margin:0;list-style:none}
+.ben-card li{position:relative;padding-left:1.2rem;font-size:.86rem;color:#33352d;margin:.34rem 0}
+.ben-card li::before{content:'';position:absolute;left:0;top:.6em;width:5px;height:5px;border-radius:50%;background:var(--ink);opacity:.5}
+
+/* ── Sidebar ── */
+.aside{position:sticky;top:86px;align-self:start}
+.apply-card{border:1px solid var(--line);border-radius:20px;padding:1.5rem;box-shadow:var(--shadow);background:var(--paper)}
+.apply-card .ote{font-size:1.5rem;font-weight:900;letter-spacing:-.03em}
+.apply-card .ote-sub{font-size:.78rem;color:var(--dim);margin-top:.15rem}
+.apply-card .equity{display:inline-block;margin-top:.55rem;font-size:.72rem;font-weight:800;color:#3f6212;
+  background:#eef8d2;border:1px solid #dcedb0;border-radius:999px;padding:.22rem .7rem}
+.meta{margin:1.15rem 0;border-top:1px solid var(--line-2);padding-top:1rem}
+.meta-row{display:flex;justify-content:space-between;gap:1rem;padding:.42rem 0;font-size:.85rem}
+.meta-row .k{color:var(--dim);font-weight:600}
+.meta-row .v{color:var(--ink);font-weight:700;text-align:right}
+.apply-card .btn-lime{width:100%;padding:.85rem;font-size:.95rem;margin-top:.4rem}
+.share{display:flex;gap:.5rem;margin-top:.7rem}
+.share button{flex:1;background:var(--paper);border:1px solid var(--line);border-radius:999px;padding:.5rem;cursor:pointer;
+  color:var(--muted);font-size:.78rem;font-weight:600;font-family:inherit}
+.share button:hover{background:var(--cream);color:var(--ink)}
+.demo-link{margin-top:1rem;font-size:.8rem;color:var(--dim);text-align:center}
+.demo-link a{color:#2f6bff;font-weight:700}
+
+/* ── Form ── */
+.form{max-width:640px}
+.form .row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.field{margin-bottom:1.1rem}
+.field label{display:block;font-size:.85rem;font-weight:600;margin-bottom:.35rem}
+.field .req{color:#dc2626}
+.field input,.field textarea,.field select{width:100%;border:1px solid var(--line);border-radius:12px;
+  padding:.7rem .9rem;font-family:inherit;font-size:.9rem;color:var(--ink);background:var(--paper);outline:none;transition:border-color .15s,box-shadow .15s}
+.field input:focus,.field textarea:focus{border-color:var(--lime-deep);box-shadow:0 0 0 3px rgba(196,240,47,.25)}
+.field textarea{min-height:120px;resize:vertical}
+.file{border:1.5px dashed var(--line);border-radius:14px;padding:1.4rem;text-align:center;color:var(--dim);cursor:pointer;font-size:.85rem}
+.file:hover{border-color:var(--lime-deep);background:var(--cream)}
+.form-success{display:none;background:#eef8d2;border:1px solid #dcedb0;border-radius:16px;padding:1.5rem 1.7rem}
+.form-success h3{margin:0 0 .3rem;color:#3f6212;font-size:1.1rem}
+.form-success p{color:#4d7c0f;margin:0;font-size:.9rem}
+
+/* ── Notices / footer ── */
+.notices{max-width:1180px;margin:0 auto;padding:0 1.5rem}
+.notices .box{border-top:1px solid var(--line);padding:1.7rem 0;color:var(--dim);font-size:.8rem;line-height:1.6}
+.notices .box p{margin:.5rem 0;max-width:78ch}
+.foot{background:var(--ink);color:#cfd2c8;margin-top:1rem}
+.foot-inner{max-width:1180px;margin:0 auto;padding:2.2rem 1.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;font-size:.82rem}
+.foot .brand-word{color:#fff}
+.foot a{color:var(--lime)}
+
+@media(max-width:920px){
+  .wrap{grid-template-columns:1fr;gap:1.6rem}
+  .aside{position:static;order:-1}
+  .hero h1{font-size:2.3rem}
+  .about-row,.ben-grid,.gallery{grid-template-columns:1fr}
+  .tabs{top:0}
+  .hero-img{height:220px}
+}
+</style>
+</head>
+<body>
+
+<!-- ── Nav ── -->
+<div class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="/index.html"><span class="brand-mark"></span><span class="brand-word">Ramp</span></a>
+    <div class="nav-spacer"></div>
+    <a class="nav-link" href="/index.html">Product demo</a>
+    <a class="nav-link" href="#">All openings</a>
+    <button class="btn btn-dark" onclick="openApply()">Apply</button>
+  </div>
+</div>
+
+<!-- ── Hero ── -->
+<header>
+  <div class="hero-inner">
+    <div class="crumb"><a href="#">Ramp</a> &nbsp;›&nbsp; <a href="#">Careers</a> &nbsp;›&nbsp; Business Development</div>
+    <span class="eyebrow">We're hiring</span>
+    <h1>AI Solutions Strategist</h1>
+    <div class="chips">
+      <span class="chip"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>New York, NY (HQ)</span>
+      <span class="chip"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>Full time</span>
+      <span class="chip"><svg viewBox="0 0 24 24"><path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M19 21V11l-6-4"/></svg>Hybrid</span>
+      <span class="chip"><svg viewBox="0 0 24 24"><circle cx="9" cy="7" r="4"/><path d="M3 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>Business Development</span>
+    </div>
+  </div>
+  <div class="hero-band">
+    <div class="hero-img">
+      <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1600&q=80&auto=format&fit=crop" alt="Modern office building" loading="lazy" onerror="this.remove()">
+      <div class="tagline">Build the smart infrastructure for finance teams.</div>
+    </div>
+  </div>
+</header>
+
+<!-- ── Body ── -->
+<div class="wrap">
+  <div class="content">
+    <div class="tabs">
+      <button class="tab active" id="t-overview" onclick="showTab('overview',this)">Overview</button>
+      <button class="tab" id="t-application" onclick="showTab('application',this)">Application</button>
+    </div>
+
+    <!-- Overview -->
+    <section class="panel active prose" id="p-overview">
+      <h2>About Ramp</h2>
+      <div class="about-row">
+        <div>
+          <p class="lead">Ramp is building the smart infrastructure for finance teams, embedded in the transaction flow of every dollar a business spends.</p>
+          <p>We automate how over <strong>$200B in annualized spend</strong> flows in and out of <strong>70,000+ companies</strong>: authorizing payments, flagging risk, categorizing spend, and closing books. The problems are high-stakes, data-dense, and unforgiving.</p>
+        </div>
+        <div class="media"><img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=900&q=80&auto=format&fit=crop" alt="Finance and accounting" loading="lazy" onerror="this.remove()"></div>
+      </div>
+      <p>We hire people with high agency and high urgency. We look for <strong>slope over intercept</strong>. We care less about where you trained and more about what you've built. At Ramp, everyone is a builder who owns problems end to end and makes consequential decisions that shape the outcome.</p>
+      <div class="callout">
+        <div class="big">The median Ramp customer <span class="hl">saves 5%</span> and <span class="hl">grows revenue 16%</span> in their first year.</div>
+        <div class="sub">Far in excess of businesses operating without Ramp. We believe every ambitious company deserves the same.</div>
+      </div>
+      <p>If you want to build systems that directly shape how companies move and manage billions, Ramp is the place to do it.</p>
+
+      <h2>About the role</h2>
+      <p>As an <strong>AI Solutions Strategist</strong>, you will sit at the intersection of customers, AI delivery, and Ramp's core product teams. You will partner with enterprise/strategic customers to deeply understand their finance workflows — especially corporate finance and controllership priorities like close, controls, and spend governance — identify high-impact opportunities for AI and automation, and translate those needs into clear problem statements, solution designs, and actionable feedback for Ramp's Product, Engineering, and Go-to-Market teams.</p>
+      <p>This role is for someone who can listen carefully, structure ambiguity, and turn on-the-ground learnings into scalable solutions. It requires high proactivity and a bias to action.</p>
+
+      <h2>What you'll do</h2>
+      <p>No two days are the same, but you can expect to:</p>
+      <div class="group">
+        <h3><span class="num">1</span> Discover and diagnose customer needs</h3>
+        <ul>
+          <li>Run stakeholder interviews and workflow deep dives with Finance, Procurement, AP, and IT teams.</li>
+          <li>Map end-to-end processes and pinpoint the "why" behind pain points (risk, cost, cycle time, compliance, exceptions).</li>
+          <li>Identify where AI can create leverage — intelligent intake, classification, routing, matching, and exception handling.</li>
+        </ul>
+      </div>
+      <div class="group">
+        <h3><span class="num">2</span> Translate needs into clear solution requirements</h3>
+        <ul>
+          <li>Turn qualitative input into crisp requirements: problem statements, success metrics, constraints, and acceptance criteria.</li>
+          <li>Define deployment plans that balance speed, safety, and scalability (MVP → iteration → rollout).</li>
+          <li>Partner with customer teams on change management, operating-model updates, and adoption plans.</li>
+        </ul>
+      </div>
+      <div class="group">
+        <h3><span class="num">3</span> Partner with technical teams to implement AI-powered workflows</h3>
+        <ul>
+          <li>Work closely with Ramp Engineers and AI builders to design and ship solutions that meet real customer workflows.</li>
+          <li>Help specify data inputs, integrations, and governance needs (system-of-record, policy rules, auditability).</li>
+          <li>Support evaluation of models and prompts against customer-specific edge cases and risk tolerance.</li>
+        </ul>
+      </div>
+      <div class="group">
+        <h3><span class="num">4</span> Drive feedback loops into Ramp's core product</h3>
+        <ul>
+          <li>Synthesize learnings across customers into reusable patterns and product opportunities.</li>
+          <li>Write high-signal briefs for Product and Engineering: what customers need, why it matters, and what to build next.</li>
+          <li>Advocate for scalable solutions that reduce custom work over time.</li>
+        </ul>
+      </div>
+      <div class="group">
+        <h3><span class="num">5</span> Communicate impact and guide executives</h3>
+        <ul>
+          <li>Present status, outcomes, and recommendations to audiences ranging from operators to execs.</li>
+          <li>Quantify impact (time saved, error reduction, improved compliance, faster close) and connect it to business outcomes.</li>
+          <li>Create simple narratives, demos, and artifacts that make AI workflows understandable and trustworthy.</li>
+        </ul>
+      </div>
+
+      <h2>What you need</h2>
+      <ul>
+        <li>Strong customer empathy and the ability to earn trust quickly with senior stakeholders.</li>
+        <li>Excellent problem framing: you can turn messy workflows into clear systems and priorities.</li>
+        <li>Comfort operating in ambiguity and iterating quickly while keeping quality high.</li>
+        <li>Clear communication in writing (briefs, requirements, postmortems) and verbally (workshops, exec readouts).</li>
+        <li>A builder mindset: you like shipping, learning, and improving the system.</li>
+        <li>Experience in solutions, implementation, product strategy, consulting, or technical program management.</li>
+        <li>Strong grounding in corporate finance / controllership workflows — accounting close, spend governance/controls, budgeting, procurement, and AP operations.</li>
+        <li>Experience translating finance requirements into system design and configuration (ERP/accounting, procurement, expense management, payments), including integrations, data mapping, and controls.</li>
+        <li>Ability to partner with finance system owners/admins to drive change management, testing (UAT), and rollouts.</li>
+        <li>Familiarity with finance operations workflows (AP, procurement, expenses, cards, accounting close).</li>
+        <li>Exposure to AI-enabled products, automation, or applied ML (you do not need to be an ML engineer).</li>
+        <li>Basic comfort with data concepts and systems integration (APIs, ETL, SQL, spreadsheets, data quality).</li>
+      </ul>
+
+      <h2>Working style</h2>
+      <p>We collaborate best when we're close to the work and close to each other. This role is hybrid in New York, with time in-office to partner tightly with product and engineering teams. Importantly, it requires spending time with customers to understand real workflows, so travel and flexibility are critical to success.</p>
+
+      <h2>Life at Ramp</h2>
+      <div class="gallery">
+        <div class="gphoto"><img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&q=80&auto=format&fit=crop" alt="Team collaborating" loading="lazy" onerror="this.remove()"><span class="cap">Builders, end to end</span></div>
+        <div class="gphoto"><img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80&auto=format&fit=crop" alt="Office workspace" loading="lazy" onerror="this.remove()"><span class="cap">Hybrid in NYC</span></div>
+        <div class="gphoto"><img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=800&q=80&auto=format&fit=crop" alt="Working with customers" loading="lazy" onerror="this.remove()"><span class="cap">Close to customers</span></div>
+      </div>
+
+      <h2>Benefits</h2>
+      <p>Available to all full-time Ramp employees:</p>
+      <div class="ben-grid">
+        <div class="ben-card">
+          <h4>🌍 Global</h4>
+          <ul>
+            <li>Flexible PTO</li><li>Unlimited AI token usage</li>
+            <li>Centralized home-office equipment ordering</li>
+            <li>Health and wellness stipend</li><li>Budget for intra-office travel</li><li>Weekly coffee stipend</li>
+          </ul>
+        </div>
+        <div class="ben-card">
+          <h4>🇺🇸 United States</h4>
+          <ul>
+            <li>100% medical, dental &amp; vision for you; partial for dependents</li>
+            <li>One Medical annual membership</li><li>401(k) with employer match</li>
+            <li>Fertility HRA (up to $10,000/year)</li><li>Parental leave: up to 16 weeks at 100% pay</li>
+            <li>Pet insurance · in-office lunch, snacks &amp; drinks</li><li>Relocation support to NYC or SF</li>
+          </ul>
+        </div>
+        <div class="ben-card">
+          <h4>🇨🇦 Canada</h4>
+          <ul>
+            <li>Group medical, dental &amp; vision via Sun Life</li><li>Life, AD&amp;D, and disability coverage</li>
+            <li>Fertility drug coverage (up to $4,000 lifetime)</li>
+            <li>Group Retirement Plan with match (RRSP + DPSP)</li>
+            <li>Parental leave: up to 16 weeks at 100% pay</li><li>EAP and virtual care via Lumino Health</li>
+          </ul>
+        </div>
+        <div class="ben-card">
+          <h4>🇬🇧 United Kingdom</h4>
+          <ul>
+            <li>Private medical insurance via Freedom Elite</li>
+            <li>Virtual GP and at-home care via eMed x Livi</li>
+            <li>Workplace pension via Penfold (salary sacrifice)</li>
+            <li>Parental leave: up to 16 weeks at 100% pay</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Application -->
+    <section class="panel prose" id="p-application">
+      <h2>Apply for this role</h2>
+      <p>Tell us a bit about yourself. Fields marked <span style="color:#dc2626">*</span> are required.</p>
+      <form class="form" id="apply-form" onsubmit="submitApp(event)">
+        <div class="row">
+          <div class="field"><label>First name <span class="req">*</span></label><input required placeholder="Jane"></div>
+          <div class="field"><label>Last name <span class="req">*</span></label><input required placeholder="Doe"></div>
+        </div>
+        <div class="row">
+          <div class="field"><label>Email <span class="req">*</span></label><input type="email" required placeholder="jane@email.com"></div>
+          <div class="field"><label>Phone</label><input placeholder="(555) 123-4567"></div>
+        </div>
+        <div class="field"><label>Resume / CV <span class="req">*</span></label>
+          <label class="file" for="resume">📎 &nbsp;Click to attach or drop your resume (PDF, DOCX)</label>
+          <input id="resume" type="file" accept=".pdf,.doc,.docx" style="display:none" onchange="this.previousElementSibling.textContent='📎  '+(this.files[0]?this.files[0].name:'Click to attach')">
+        </div>
+        <div class="field"><label>LinkedIn</label><input placeholder="linkedin.com/in/…"></div>
+        <div class="field"><label>Where are you based?</label>
+          <select><option>New York, NY</option><option>San Francisco, CA</option><option>Remote (US)</option><option>Other</option></select></div>
+        <div class="field"><label>Why are you a fit for this role? <span class="req">*</span></label>
+          <textarea required placeholder="Tell us about a finance workflow you've improved with AI/automation, and the impact it had."></textarea></div>
+        <button class="btn btn-lime" type="submit" style="padding:.85rem 1.7rem;font-size:.95rem">Submit application</button>
+      </form>
+      <div class="form-success" id="apply-success">
+        <h3>✓ Application received</h3>
+        <p>Thanks for applying to the AI Solutions Strategist role. This is a demo posting — no data was stored.</p>
+      </div>
+    </section>
+  </div>
+
+  <!-- Sidebar -->
+  <aside class="aside">
+    <div class="apply-card">
+      <div class="ote">$176K – $240K</div>
+      <div class="ote-sub">New York OTE · 75/25 split</div>
+      <span class="equity">+ Offers Equity</span>
+      <div class="meta">
+        <div class="meta-row"><span class="k">Location</span><span class="v">New York, NY (HQ)</span></div>
+        <div class="meta-row"><span class="k">Employment</span><span class="v">Full time</span></div>
+        <div class="meta-row"><span class="k">Location type</span><span class="v">Hybrid</span></div>
+        <div class="meta-row"><span class="k">Department</span><span class="v">Business Development</span></div>
+      </div>
+      <button class="btn btn-lime" onclick="openApply()">Apply for this job</button>
+      <div class="share">
+        <button onclick="copyLink()" id="share-btn">🔗 Copy link</button>
+        <button onclick="window.print()">🖨 Print</button>
+      </div>
+      <p class="ote-sub" style="margin-top:.9rem;line-height:1.5">Final compensation depends on the location and level at which the candidate is hired.</p>
+      <div class="demo-link">↳ See the <a href="/index.html">RampAgent risk-monitoring demo</a></div>
+    </div>
+  </aside>
+</div>
+
+<!-- Notices -->
+<div class="notices">
+  <div class="box">
+    <p><strong>Referral instructions.</strong> If you are being referred for the role, please contact that person to apply on your behalf.</p>
+    <p>Pursuant to the San Francisco Fair Chance Ordinance, we will consider for employment qualified applicants with arrest and conviction records.</p>
+    <p><strong>Beware of recruiting scams:</strong> Ramp will only contact you through official @Ramp.com email addresses and will never ask for payment or sensitive personal information during the hiring process.</p>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="foot">
+  <div class="foot-inner">
+    <a class="brand" href="/index.html"><span class="brand-mark"></span><span class="brand-word">Ramp</span></a>
+    <div>Demo careers page · built alongside the <a href="/index.html">RampAgent</a> risk-monitoring project</div>
+  </div>
+</footer>
+
+<script>
+function showTab(name,btn){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('p-'+name).classList.add('active');
+  (btn||document.getElementById('t-'+name)).classList.add('active');
+}
+function openApply(){showTab('application');window.scrollTo({top:document.querySelector('.tabs').offsetTop-60,behavior:'smooth'});}
+function submitApp(e){e.preventDefault();
+  document.getElementById('apply-form').style.display='none';
+  document.getElementById('apply-success').style.display='block';
+  window.scrollTo({top:document.querySelector('.tabs').offsetTop-60,behavior:'smooth'});}
+function copyLink(){const b=document.getElementById('share-btn');
+  navigator.clipboard?.writeText(location.href).then(()=>{b.textContent='✓ Copied';setTimeout(()=>b.textContent='🔗 Copy link',1600);}).catch(()=>{b.textContent=location.host;});}
+</script>
+</body>
+</html>
