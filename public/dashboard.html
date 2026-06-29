@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard · RampAgent</title>
+<link rel="stylesheet" href="/styles.css">
+<script src="https://cdn.plot.ly/plotly-2.27.0.min.js"></script>
+<style>
+.page{max-width:var(--maxw);margin:0 auto;padding:2rem 1.5rem 4rem}
+/* page header */
+.phead{display:flex;justify-content:space-between;align-items:flex-end;gap:1rem;flex-wrap:wrap;margin-bottom:1.4rem}
+.phead h1{font-size:1.9rem;font-weight:800}
+.phead .sub{color:var(--muted);font-size:.95rem;margin-top:.2rem}
+.phead-right{display:flex;align-items:center;gap:.6rem}
+.status{display:inline-flex;align-items:center;gap:.45rem;background:var(--green-soft);color:var(--green);
+  font-size:.8rem;font-weight:700;padding:.45rem .85rem;border-radius:var(--r-pill);border:1px solid #cdeed8}
+.status .dot{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 0 3px rgba(22,163,74,.18)}
+.period{display:inline-flex;align-items:center;gap:.45rem;background:var(--paper);border:1px solid var(--line);
+  border-radius:var(--r-pill);padding:.45rem .9rem;font-size:.82rem;font-weight:600}
+.period svg{width:14px;height:14px;stroke:var(--muted);stroke-width:1.9;fill:none}
+
+/* tabs */
+.tabbar{display:flex;gap:.3rem;background:var(--paper-2);border:1px solid var(--line);border-radius:var(--r-pill);
+  padding:.3rem;width:fit-content;margin-bottom:1.8rem;flex-wrap:wrap}
+.tabbtn{font-family:inherit;font-size:.88rem;font-weight:700;color:var(--muted);background:none;border:none;cursor:pointer;
+  padding:.5rem 1.1rem;border-radius:var(--r-pill);transition:all .15s}
+.tabbtn:hover{color:var(--ink)}
+.tabbtn.active{background:var(--ink);color:#fff}
+.tabpane{display:none}
+.tabpane.active{display:block;animation:fade .25s ease}
+
+/* KPI cards */
+.kpis{display:grid;grid-template-columns:repeat(5,1fr);gap:1rem;margin-bottom:1.6rem}
+.kpi{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:1.2rem 1.3rem;box-shadow:var(--shadow);
+  transition:transform .18s,box-shadow .18s}
+.kpi:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg)}
+.kpi .l{display:flex;align-items:center;gap:.45rem;font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;
+  color:var(--muted);font-weight:700}
+.kpi .l .ic{width:24px;height:24px;border-radius:7px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.kpi .l .ic svg{width:13px;height:13px;stroke-width:2;fill:none}
+.ic-ink{background:var(--paper-2)}.ic-ink svg{stroke:var(--ink)}
+.ic-red{background:var(--red-soft)}.ic-red svg{stroke:var(--red)}
+.ic-amber{background:var(--amber-soft)}.ic-amber svg{stroke:var(--amber)}
+.ic-lime{background:var(--lime-soft)}.ic-lime svg{stroke:var(--lime-deep)}
+.kpi .v{font-size:1.7rem;font-weight:800;letter-spacing:-.03em;margin-top:.6rem}
+.kpi .d{font-size:.76rem;font-weight:700;margin-top:.3rem;display:flex;align-items:center;gap:.25rem}
+.d-red{color:var(--red)}.d-green{color:var(--green)}.d-muted{color:var(--muted)}
+
+/* panels grid */
+.grid-2{display:grid;grid-template-columns:1.6fr 1fr;gap:1.2rem;margin-bottom:1.2rem}
+.grid-1{margin-bottom:1.2rem}
+.panel{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);overflow:hidden}
+.panel-h{display:flex;justify-content:space-between;align-items:center;padding:1.1rem 1.4rem .4rem}
+.panel-h h3{font-size:1rem;font-weight:700}
+.panel-h .hint{font-size:.78rem;color:var(--dim)}
+.panel-b{padding:.6rem 1.4rem 1.3rem}
+.panel-desc{font-size:.78rem;color:var(--muted);margin:-.1rem 0 .9rem}
+
+/* KRI list */
+.kri{display:flex;align-items:center;justify-content:space-between;padding:.65rem 0;border-bottom:1px solid var(--line-2)}
+.kri:last-child{border-bottom:none}
+.kri .l{display:flex;align-items:center;gap:.6rem;min-width:0}
+.kri .dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
+.kri .dot.RED{background:var(--red)}.kri .dot.AMBER{background:var(--amber)}.kri .dot.GREEN{background:var(--green)}
+.kri .nm{font-size:.82rem;font-weight:600}.kri .dt{font-size:.7rem;color:var(--dim)}
+.kri .rv{text-align:right;flex-shrink:0}
+.kri .val{font-size:.95rem;font-weight:800}
+.kri .val.RED{color:var(--red)}.kri .val.AMBER{color:var(--amber)}.kri .val.GREEN{color:var(--green)}
+
+/* item cells */
+.cell-item{display:flex;align-items:center;gap:.6rem;font-weight:600}
+.item-ic{width:28px;height:28px;border-radius:8px;background:var(--paper-2);border:1px solid var(--line);
+  display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:800;color:var(--muted);flex-shrink:0}
+.btn-act{font-family:inherit;font-size:.74rem;font-weight:700;padding:.4rem .8rem;border-radius:var(--r-pill);cursor:pointer;border:1px solid}
+.btn-block{border-color:#f2c4c4;color:var(--red);background:var(--paper)}.btn-block:hover{background:var(--red-soft)}
+.btn-review{border-color:var(--line);color:var(--ink);background:var(--paper)}.btn-review:hover{background:var(--paper-2)}
+
+/* mini stats */
+.mini{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:1.2rem}
+.mini .m{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:1.1rem 1.3rem;box-shadow:var(--shadow)}
+.mini .m .v{font-size:1.6rem;font-weight:800;letter-spacing:-.02em}
+.mini .m .l{color:var(--muted);font-size:.82rem;margin-top:.1rem}
+
+/* queue */
+.queue .q{display:flex;align-items:center;gap:.8rem;padding:.85rem 0;border-bottom:1px solid var(--line-2)}
+.queue .q:last-child{border-bottom:none}
+.q .av{width:40px;height:40px;border-radius:11px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:.82rem;flex-shrink:0}
+.q .main{flex:1;min-width:0}.q .nm{font-weight:700;font-size:.88rem}.q .me{font-size:.76rem;color:var(--muted)}
+.q .amt{font-weight:800;font-size:.9rem;text-align:right}
+
+/* event log */
+.ev-ic{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.ev-ic svg{width:14px;height:14px;stroke-width:2;fill:none}
+.ev{display:flex;align-items:center;gap:.6rem;font-weight:600}
+
+/* chat */
+.chat-row{display:flex;gap:.6rem}
+.chat-input{flex:1;border:1px solid var(--line);background:var(--paper-2);border-radius:var(--r-pill);padding:.7rem 1.1rem;
+  font-family:inherit;font-size:.9rem;outline:none}
+.chat-input:focus{border-color:var(--lime-deep);background:var(--paper);box-shadow:0 0 0 3px rgba(196,240,47,.22)}
+.chat-resp{margin-top:1rem;padding:1rem 1.2rem;background:var(--paper-2);border:1px solid var(--line-2);border-radius:var(--r);
+  font-size:.88rem;line-height:1.6;display:none}
+.suggest{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.8rem}
+.suggest button{font-family:inherit;font-size:.78rem;font-weight:600;color:var(--muted);background:var(--paper);
+  border:1px solid var(--line);border-radius:var(--r-pill);padding:.4rem .85rem;cursor:pointer}
+.suggest button:hover{border-color:var(--ink);color:var(--ink)}
+
+@media(max-width:980px){.kpis{grid-template-columns:repeat(2,1fr)}.grid-2{grid-template-columns:1fr}}
+@media(max-width:560px){.kpis{grid-template-columns:1fr}.mini{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav"><div class="nav-inner">
+  <a class="brand" href="/"><span class="brand-mark"></span><span class="brand-word">Ramp<b style="color:var(--lime-deep)">Agent</b></span></a>
+  <span class="nav-tag">Risk OS</span>
+  <div class="nav-links">
+    <a class="nav-link" href="/">Overview</a>
+    <a class="nav-link active" href="/dashboard.html">Dashboard</a>
+    <a class="nav-link" href="/careers.html">Careers</a>
+  </div>
+  <div class="nav-spacer"></div>
+  <div class="nav-right">
+    <a class="btn btn-ghost btn-sm" href="/careers.html">We're hiring</a>
+    <a class="btn btn-ink btn-sm" href="/">← Home</a>
+  </div>
+</div></nav>
+
+<div class="page" id="app">
+  <div class="loading" id="loading"><div class="spinner"></div><br>Loading risk analysis…</div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div>
+      <a class="brand" href="/"><span class="brand-mark"></span><span class="brand-word">RampAgent</span></a>
+      <p class="footer-tag">Continuous risk &amp; controls monitoring for corporate spend — AI-driven and audit-ready.</p>
+    </div>
+    <div><h5>Product</h5><a href="/dashboard.html">Dashboard</a><a href="/dashboard.html#register">Risk register</a><a href="/dashboard.html#controls">Controls (CCM)</a></div>
+    <div><h5>Company</h5><a href="/">Overview</a><a href="/careers.html">Careers</a></div>
+  </div>
+  <div class="footer-bottom"><div class="container">
+    <span>Built by Aditya Sakhale · inspired by Ramp</span><span>Demo · synthetic data</span>
+  </div></div>
+</footer>
+
+<script>
+const RISKCOLOR={CRITICAL:'#DC2626',HIGH:'#D97706',MEDIUM:'#2563EB',LOW:'#16A34A'};
+const AV=['#13130f','#7c3aed','#0891b2','#db2777','#ea580c','#16a34a','#2563eb'];
+let DATA=null;
+
+function fmt(n){if(n==null)return '$0';return n>=1000?'$'+Math.round(n).toLocaleString('en-US'):'$'+(+n).toFixed(0)}
+function esc(s){const d=document.createElement('div');d.textContent=s==null?'':s;return d.innerHTML}
+function initials(n){return (n||'?').split(' ').map(w=>w[0]).slice(0,2).join('').toUpperCase()}
+function tagc(l){return 'tag tag-'+(l||'low').toLowerCase()}
+
+(async function(){
+  try{ DATA=await (await fetch('/data/results.json')).json(); render(); }
+  catch(e){ const l=document.getElementById('loading'); if(l)l.innerHTML='<p style="color:#dc2626">Failed to load data: '+esc(e.message)+'</p>'; }
+})();
+
+function ICON(k){return ({
+  spend:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v10M9.5 9.5a2.5 2 0 0 1 5 0c0 1.5-5 1-5 3a2.5 2 0 0 0 5 0"/></svg>',
+  exp:'<svg viewBox="0 0 24 24"><path d="M10.3 3.3a2 2 0 0 1 3.4 0l7.3 12.6a2 2 0 0 1-1.7 3H4.7a2 2 0 0 1-1.7-3z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12" y2="17"/></svg>',
+  loss:'<svg viewBox="0 0 24 24"><polyline points="22 17 13.5 8.5 8.5 13.5 2 7"/><polyline points="16 17 22 17 22 11"/></svg>',
+  crit:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12" y2="16"/></svg>',
+  ctrl:'<svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>'})[k]}
+
+function deltaHTML(key){
+  const t=DATA.trends&&DATA.trends.available&&DATA.trends.metrics&&DATA.trends.metrics[key];
+  if(!t)return '<span class="d d-muted">vs prior period</span>';
+  let cls='d-muted'; if(t.good===true)cls='d-green'; else if(t.good===false)cls='d-red'; else cls=(t.direction==='down'?'d-green':'d-muted');
+  const ar=t.direction==='up'?'↑':(t.direction==='down'?'↓':'→');
+  return `<span class="d ${cls}">${ar} ${Math.abs(t.delta_pct).toFixed(1)}% vs prior ${DATA.trends.period_days}d</span>`;
+}
+
+function kpi(ic,iccls,label,value,key){
+  return `<div class="kpi"><div class="l"><span class="ic ${iccls}">${ICON(ic)}</span>${label}</div>
+    <div class="v">${value}</div>${deltaHTML(key)}</div>`;
+}
+
+function render(){
+  const s=DATA.summary, crit=(DATA.risk_distribution&&DATA.risk_distribution.CRITICAL)||0;
+  document.getElementById('app').innerHTML=`
+  <div class="phead">
+    <div><h1>Risk &amp; Controls</h1><div class="sub">Continuous monitoring across ${s.total_transactions} transactions · ${fmt(s.total_spend)} screened</div></div>
+    <div class="phead-right">
+      <span class="period"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Current period</span>
+      <span class="status"><span class="dot"></span>Monitoring active</span>
+    </div>
+  </div>
+
+  <div class="tabbar">
+    <button class="tabbtn active" data-t="overview" onclick="tab('overview',this)">Overview</button>
+    <button class="tabbtn" data-t="register" onclick="tab('register',this)">Risk Register</button>
+    <button class="tabbtn" data-t="controls" onclick="tab('controls',this)">Controls</button>
+    <button class="tabbtn" data-t="activity" onclick="tab('activity',this)">Activity</button>
+  </div>
+
+  <!-- OVERVIEW -->
+  <section class="tabpane active" id="tp-overview">
+    <div class="kpis">
+      ${kpi('spend','ic-ink','Spend monitored',fmt(s.total_spend),'total_spend')}
+      ${kpi('exp','ic-red','Exposure at risk',fmt(s.flagged_exposure||0),'flagged_exposure')}
+      ${kpi('loss','ic-amber','Expected loss',fmt(s.expected_loss||0),'expected_loss')}
+      ${kpi('crit','ic-red','Critical risks',crit,'critical_count')}
+      ${kpi('ctrl','ic-lime','Control exceptions',s.flagged_count,'control_exceptions')}
+    </div>
+    <div class="grid-2">
+      <div class="panel">
+        <div class="panel-h"><h3>Risk exposure trend</h3><span class="hint">weekly</span></div>
+        <div class="panel-b"><div class="panel-desc">Flagged exposure (bars) vs. probability-weighted expected loss (line), by week.</div>
+          <div id="trend" style="height:280px"></div></div>
+      </div>
+      <div class="panel">
+        <div class="panel-h"><h3>Key risk indicators</h3><span class="hint">vs. appetite</span></div>
+        <div class="panel-b"><div id="kris"></div></div>
+      </div>
+    </div>
+    <div class="grid-1 panel">
+      <div class="panel-h"><h3>Top risk events</h3><span class="hint">highest score</span></div>
+      <div class="panel-b"><div class="panel-desc">Transactions where one or more controls raised an exception, ranked by risk score.</div>
+        <div style="overflow-x:auto"><table class="tbl"><thead><tr><th>Item</th><th>Issue</th><th>Exposure</th><th>Severity</th><th style="text-align:right">Action</th></tr></thead><tbody id="watch"></tbody></table></div></div>
+    </div>
+  </section>
+
+  <!-- REGISTER -->
+  <section class="tabpane" id="tp-register">
+    <div class="mini" id="reg-mini"></div>
+    <div class="panel"><div class="panel-h"><h3>Risk register</h3><span class="hint">likelihood × impact</span></div>
+      <div class="panel-b"><div class="panel-desc">Transaction-level exceptions aggregated into inherent risks, each rated on a 5×5 matrix and mapped to the control that detects it.</div>
+        <div style="overflow-x:auto"><table class="tbl"><thead><tr><th>ID</th><th>Risk</th><th>Category</th><th>Likelihood</th><th>Impact</th><th>Rating</th><th>Events</th><th>Exposure</th><th>Mapped control</th></tr></thead><tbody id="reg"></tbody></table></div></div>
+    </div>
+  </section>
+
+  <!-- CONTROLS -->
+  <section class="tabpane" id="tp-controls">
+    <div class="panel"><div class="panel-h"><h3>Continuous controls monitoring</h3><span class="hint">100% tested</span></div>
+      <div class="panel-b"><div class="panel-desc">Every control runs against all transactions; the exception rate drives its effectiveness rating.</div>
+        <div style="overflow-x:auto"><table class="tbl"><thead><tr><th>Control</th><th>Objective</th><th>Tested</th><th>Exceptions</th><th>Rate</th><th>Exposure</th><th>Effectiveness</th></tr></thead><tbody id="ctrls"></tbody></table></div></div>
+    </div>
+  </section>
+
+  <!-- ACTIVITY -->
+  <section class="tabpane" id="tp-activity">
+    <div class="grid-2">
+      <div class="panel"><div class="panel-h"><h3>Risk event log</h3><span class="hint">most recent</span></div>
+        <div class="panel-b"><div class="panel-desc">Immutable, timestamped evidence trail for every flagged item.</div>
+          <div style="overflow-x:auto"><table class="tbl"><thead><tr><th>Event</th><th>Time</th><th>Actor</th><th>Status</th></tr></thead><tbody id="events"></tbody></table></div></div>
+      </div>
+      <div class="panel"><div class="panel-h"><h3>Review queue</h3><span class="hint" id="q-count"></span></div>
+        <div class="panel-b queue" id="queue"></div></div>
+    </div>
+    <div class="grid-1 panel"><div class="panel-h"><h3>AI risk analyst</h3><span class="hint">Llama 3.1 · Cerebras</span></div>
+      <div class="panel-b">
+        <div class="chat-row"><input class="chat-input" id="chat-in" placeholder='Ask about risk… e.g. "Which control is least effective?"'>
+          <button class="btn btn-ink" id="chat-btn" onclick="ask()">Ask</button></div>
+        <div class="suggest">
+          <button onclick="askQ(this)">Where is our largest exposure?</button>
+          <button onclick="askQ(this)">Which control is least effective?</button>
+          <button onclick="askQ(this)">Summarize our critical risks</button>
+        </div>
+        <div class="chat-resp" id="chat-resp"></div>
+      </div>
+    </div>
+  </section>`;
+
+  renderKpisExtras(); renderKris(); renderWatch(); renderRegister(); renderControls(); renderQueue(); renderEvents(); renderTrend();
+  if(location.hash){const h=location.hash.slice(1); if(document.getElementById('tp-'+h)) tab(h);}
+}
+
+function tab(name,btn){
+  document.querySelectorAll('.tabpane').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tabbtn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tp-'+name).classList.add('active');
+  (btn||document.querySelector(`.tabbtn[data-t="${name}"]`)).classList.add('active');
+  if(name==='overview') setTimeout(renderTrend,30);
+}
+
+function renderKpisExtras(){}
+
+function renderTrend(){
+  const tr=DATA.trends, el=document.getElementById('trend');
+  if(!el||!tr||!tr.available)return;
+  if(typeof Plotly==='undefined'){el.innerHTML='<p class="muted" style="padding:1.4rem 0">Chart library unavailable.</p>';return;}
+  const wk=tr.weekly,x=wk.map(w=>w.week);
+  Plotly.newPlot(el,[
+    {x,y:wk.map(w=>w.exposure),type:'bar',name:'Flagged exposure',marker:{color:'#C4F02F'}},
+    {x,y:wk.map(w=>w.expected_loss),type:'scatter',mode:'lines+markers',name:'Expected loss',line:{color:'#13130f',width:2.5},marker:{size:5,color:'#13130f'}}
+  ],{paper_bgcolor:'transparent',plot_bgcolor:'transparent',font:{family:'Inter',color:'#6A6C61',size:11},
+     height:280,margin:{l:48,r:12,t:8,b:36},barmode:'overlay',
+     legend:{orientation:'h',y:1.14,x:0,font:{size:11}},
+     xaxis:{tickangle:-35,showgrid:false},yaxis:{tickprefix:'$',tickformat:',.0f',gridcolor:'#F2F0E9'}},
+    {displayModeBar:false,responsive:true});
+}
+
+function renderKris(){
+  document.getElementById('kris').innerHTML=(DATA.kris||[]).map(k=>`
+    <div class="kri"><div class="l"><span class="dot ${k.status}"></span>
+      <div><div class="nm">${esc(k.name)}</div><div class="dt">${esc(k.detail)}</div></div></div>
+    <div class="rv"><div class="val ${k.status}">${k.value.toFixed(1)}${k.unit}</div><div class="dt">${k.status}</div></div>
+    </div>`).join('')||'<p class="muted">No KRIs.</p>';
+}
+
+function issueOf(t){return (t.policy_violations&&t.policy_violations[0])||((t.anomaly_flags&&t.anomaly_flags[0])||'Anomaly detected').replace(/_/g,' ')}
+function renderWatch(){
+  document.getElementById('watch').innerHTML=(DATA.flagged_transactions||[]).slice(0,7).map(t=>{
+    const act=(t.risk_level==='CRITICAL'||t.risk_level==='HIGH')?'<button class="btn-act btn-block">Block</button>':'<button class="btn-act btn-review">Review</button>';
+    return `<tr><td><div class="cell-item"><span class="item-ic">${esc(initials(t.vendor))}</span>${esc(t.vendor)}</div></td>
+      <td class="muted">${esc(issueOf(t))}</td><td style="font-weight:700">${fmt(t.amount)}</td>
+      <td><span class="${tagc(t.risk_level)}">${t.risk_level}</span></td>
+      <td style="text-align:right">${act}</td></tr>`;}).join('')||'<tr><td colspan="5" class="muted">No exceptions.</td></tr>';
+}
+
+function renderRegister(){
+  const rr=DATA.risk_register||[];
+  document.getElementById('reg').innerHTML=rr.map(r=>`<tr>
+    <td class="mono dim">${r.risk_id}</td><td style="font-weight:600">${esc(r.risk_name)}</td>
+    <td class="muted">${esc(r.risk_category)}</td><td>${esc(r.likelihood)}</td><td>${esc(r.impact_label)}</td>
+    <td class="rate-${(r.rating||'low').toLowerCase()}">${r.rating}</td><td>${r.events}</td>
+    <td style="font-weight:700">${fmt(r.exposure)}</td><td class="muted">${r.control_id} · ${esc(r.control_name)}</td></tr>`).join('')
+    ||'<tr><td colspan="9" class="muted">No risks.</td></tr>';
+  const crithigh=rr.filter(r=>r.rating==='CRITICAL'||r.rating==='HIGH').length;
+  const totexp=rr.reduce((a,r)=>a+r.exposure,0);
+  document.getElementById('reg-mini').innerHTML=`
+    <div class="m"><div class="v">${rr.length}</div><div class="l">Distinct risks tracked</div></div>
+    <div class="m"><div class="v">${fmt(totexp)}</div><div class="l">Total risk exposure</div></div>
+    <div class="m"><div class="v" style="color:var(--red)">${crithigh}</div><div class="l">Critical / High risks</div></div>`;
+}
+
+function effc(e){const k=(e||'').toLowerCase();return k.startsWith('eff')?'eff-effective':k.startsWith('inef')?'eff-ineffective':'eff-needs'}
+function renderControls(){
+  document.getElementById('ctrls').innerHTML=(DATA.controls||[]).map(c=>`<tr>
+    <td style="font-weight:600">${c.control_id} · ${esc(c.control_name)}</td><td class="muted" style="max-width:300px">${esc(c.objective)}</td>
+    <td>${c.tested}</td><td>${c.exceptions}</td><td style="font-weight:700">${c.exception_rate.toFixed(1)}%</td>
+    <td>${fmt(c.exposure)}</td><td class="${effc(c.effectiveness)}">${esc(c.effectiveness)}</td></tr>`).join('')
+    ||'<tr><td colspan="7" class="muted">No controls.</td></tr>';
+}
+
+function renderQueue(){
+  const q=(DATA.flagged_transactions||[]).slice(0,4);
+  document.getElementById('q-count').textContent=(DATA.flagged_transactions||[]).length+' open';
+  document.getElementById('queue').innerHTML=q.map((t,i)=>`<div class="q">
+    <div class="av" style="background:${AV[i%AV.length]}">${esc(initials(t.employee_name))}</div>
+    <div class="main"><div class="nm">${esc(t.employee_name)}</div><div class="me">${esc(t.department)} · ${esc(t.category)}</div></div>
+    <div><div class="amt">${fmt(t.amount)}</div>
+      <div style="display:flex;gap:.35rem;margin-top:.3rem;justify-content:flex-end">
+        <button class="btn-act btn-review" onclick="this.closest('.q').style.opacity=.4">Review</button></div></div>
+    </div>`).join('')||'<p class="muted">Queue is clear.</p>';
+}
+
+function evMeta(t){
+  if(t.risk_level==='CRITICAL')return{bg:'#FCEBEA',st:'<span class="tag tag-critical">Blocked</span>',sv:'<svg viewBox="0 0 24 24" stroke="#DC2626"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="12"/></svg>'};
+  if(t.risk_level==='HIGH')return{bg:'#FBF0DD',st:'<span class="tag tag-high">Flagged</span>',sv:'<svg viewBox="0 0 24 24" stroke="#D97706"><path d="M10.3 3.3a2 2 0 0 1 3.4 0l7.3 12.6a2 2 0 0 1-1.7 3H4.7a2 2 0 0 1-1.7-3z"/></svg>'};
+  return{bg:'#E9F0FE',st:'<span class="tag tag-medium">Logged</span>',sv:'<svg viewBox="0 0 24 24" stroke="#2563EB"><path d="M9 11l3 3 8-8"/><path d="M20 12v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h9"/></svg>'};
+}
+function renderEvents(){
+  document.getElementById('events').innerHTML=(DATA.flagged_transactions||[]).slice(0,8).map(t=>{
+    const m=evMeta(t), actor=(t.policy_violations&&t.policy_violations.length)?'Policy Engine':'AI Agent';
+    const time=(t.date||'').split(' ')[1]?t.date.split(' ')[1].slice(0,5):(t.date||'').slice(0,10);
+    return `<tr><td><div class="ev"><span class="ev-ic" style="background:${m.bg}">${m.sv}</span>${esc(t.vendor)} · ${fmt(t.amount)}</div></td>
+      <td class="muted">${esc(time)}</td><td class="muted">${actor}</td><td>${m.st}</td></tr>`;}).join('')
+    ||'<tr><td colspan="4" class="muted">No events.</td></tr>';
+}
+
+function askQ(b){document.getElementById('chat-in').value=b.textContent;ask();}
+async function ask(){
+  const inp=document.getElementById('chat-in'),btn=document.getElementById('chat-btn'),resp=document.getElementById('chat-resp');
+  const q=inp.value.trim(); if(!q)return;
+  btn.disabled=true;btn.textContent='Thinking…';resp.style.display='block';resp.textContent='Analyzing…';
+  try{const r=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({question:q})});
+    const d=await r.json();resp.textContent=d.answer||d.error||'No response';}
+  catch(e){resp.textContent='Error: '+e.message;}
+  btn.disabled=false;btn.textContent='Ask';
+}
+</script>
+</body>
+</html>

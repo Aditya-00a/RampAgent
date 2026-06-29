@@ -91,7 +91,7 @@ For every flagged event, an LLM generates a concise, audit-ready narrative expla
 
 ## Tech stack
 
-- **UI:** Light, modern SaaS dashboard — a Streamlit app and a zero-dependency static HTML build, sharing one design language
+- **UI:** Unified Ramp-branded site (cream + lime) — landing, tabbed risk dashboard, and careers page on one shared design system; plus a Streamlit build
 - **ML:** scikit-learn (Isolation Forest), NumPy / Pandas (statistical methods)
 - **Risk engine:** `engine/risk_framework.py` — exposure, KRIs, register, CCM, trends (pure Python, no LLM required)
 - **LLM:** Llama 3.1-8B via Cerebras (control testing + narratives + analyst chat)
@@ -127,7 +127,13 @@ RampAgent/
 │   ├── risk_scorer.py            # Combined risk scoring + narratives
 │   └── risk_framework.py         # Exposure, KRIs, risk register, CCM   ← risk layer
 ├── scripts/precompute.py         # Builds the static dashboard JSON
-├── public/                       # Static HTML dashboard + precomputed results
+├── public/                       # Vercel site (one shared design system)
+│   ├── styles.css                # Ramp design system (cream + lime)
+│   ├── index.html                # Landing page
+│   ├── dashboard.html            # Risk dashboard (tabbed: Overview/Register/Controls/Activity)
+│   ├── careers.html              # AI Solutions Strategist job posting
+│   ├── images/                   # Brand SVG illustrations (no external deps)
+│   └── data/results.json         # Precomputed risk results
 └── api/chat.py                   # Serverless AI risk-analyst endpoint
 ```
 
