@@ -10,6 +10,17 @@
 .crumb{font-size:.8rem;color:var(--dim);font-weight:600;margin-bottom:1rem}
 .crumb a:hover{color:var(--ink)}
 .job-hero h1{font-size:clamp(2.1rem,4.5vw,3rem);font-weight:900;letter-spacing:-.04em;max-width:16ch;margin-top:.7rem}
+.cand-note{margin-top:1rem;max-width:60ch;font-size:.95rem;color:var(--ink-2);background:var(--lime-soft);
+  border:1px solid var(--lime-line);border-radius:var(--r);padding:.85rem 1.1rem}
+.cand-note a{font-weight:700;border-bottom:2px solid var(--lime)}
+.fit{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1.2rem}
+.fit-card{border:1px solid var(--line);border-radius:var(--r);padding:1.3rem 1.4rem;background:var(--paper);box-shadow:var(--shadow)}
+.fit-need{font-weight:800;font-size:.95rem;padding-left:1.7rem;position:relative;line-height:1.4}
+.fit-need::before{content:'';position:absolute;left:0;top:.05rem;width:20px;height:20px;border-radius:6px;background:var(--lime);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='13' height='13' viewBox='0 0 24 24' fill='none' stroke='%2313130f' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:center}
+.fit-have{color:var(--muted);font-size:.9rem;margin-top:.55rem;line-height:1.55}
+.fit-have strong{color:var(--ink)}
+.fit-cta{display:flex;gap:.7rem;flex-wrap:wrap;margin-top:1.6rem}
 .chips{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.2rem}
 .chip{display:inline-flex;align-items:center;gap:.4rem;background:var(--paper);border:1px solid var(--line);
   border-radius:var(--r-pill);padding:.4rem .85rem;font-size:.8rem;font-weight:600;color:var(--muted)}
@@ -83,7 +94,7 @@
 .notices{border-top:1px solid var(--line);padding:1.7rem 0;color:var(--dim);font-size:.8rem;line-height:1.6}
 .notices p{margin:.5rem 0;max-width:78ch}
 
-@media(max-width:920px){.layout{grid-template-columns:1fr;gap:1.6rem}.aside{position:static;order:-1}.about-row,.ben-grid,.gallery{grid-template-columns:1fr}.tabs{top:0}.band{height:220px}}
+@media(max-width:920px){.layout{grid-template-columns:1fr;gap:1.6rem}.aside{position:static;order:-1}.about-row,.ben-grid,.gallery,.fit{grid-template-columns:1fr}.tabs{top:0}.band{height:220px}}
 </style>
 </head>
 <body>
@@ -95,20 +106,21 @@
   <div class="nav-links">
     <a class="nav-link" href="/">Overview</a>
     <a class="nav-link" href="/dashboard.html">Dashboard</a>
-    <a class="nav-link active" href="/careers.html">Careers</a>
+    <a class="nav-link active" href="/careers.html">The Role</a>
   </div>
   <div class="nav-spacer"></div>
   <div class="nav-right">
     <a class="btn btn-ghost btn-sm" href="/dashboard.html">Product demo</a>
-    <a class="btn btn-ink btn-sm" onclick="openApply()" style="cursor:pointer">Apply</a>
+    <a class="btn btn-ink btn-sm" onclick="showTab('fit')" style="cursor:pointer">Why I'm a fit</a>
   </div>
 </div></nav>
 
 <!-- HERO -->
 <header class="job-hero"><div class="container">
-  <div class="crumb"><a href="/">RampAgent</a> &nbsp;›&nbsp; <a href="/careers.html">Careers</a> &nbsp;›&nbsp; Business Development</div>
-  <span class="eyebrow">We're hiring</span>
+  <div class="crumb"><a href="/">RampAgent</a> &nbsp;›&nbsp; <a href="/careers.html">The Role</a> &nbsp;›&nbsp; Business Development</div>
+  <span class="eyebrow">The role I'm targeting</span>
   <h1>AI Solutions Strategist</h1>
+  <p class="cand-note">This is the Ramp role I built <a href="/dashboard.html">RampAgent</a> for. The job description is below — and <a href="#" onclick="showTab('fit');return false">here's exactly how my demo maps to it</a>. — Aditya Sakhale</p>
   <div class="chips">
     <span class="chip"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>New York, NY (HQ)</span>
     <span class="chip"><svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>Full time</span>
@@ -121,7 +133,8 @@
 <div class="container"><div class="layout">
   <div class="content">
     <div class="tabs">
-      <button class="tab active" onclick="showTab('overview',this)">Overview</button>
+      <button class="tab active" onclick="showTab('overview',this)">The role</button>
+      <button class="tab" onclick="showTab('fit',this)">Why I'm a fit</button>
       <button class="tab" onclick="showTab('application',this)">Application</button>
     </div>
 
@@ -201,6 +214,43 @@
       </div>
     </section>
 
+    <section class="pane prose" id="p-fit">
+      <h2>Why I'm a fit</h2>
+      <p class="lead">RampAgent isn't a mockup — it's a working system that exercises the exact skills this role calls for. Here's how it maps to the job description.</p>
+      <div class="fit">
+        <div class="fit-card">
+          <div class="fit-need">Diagnose finance workflows &amp; find where AI creates leverage</div>
+          <div class="fit-have">I turned corporate-spend controllership workflows — close, controls, spend governance — into a system that screens <strong>100% of transactions</strong> with anomaly detection, policy classification, duplicate matching, and exception handling.</div>
+        </div>
+        <div class="fit-card">
+          <div class="fit-need">Translate needs into requirements &amp; success metrics</div>
+          <div class="fit-have">Defined a <strong>risk taxonomy</strong>, KRIs measured against a risk appetite, control-effectiveness thresholds, and a probability-weighted <strong>expected-loss</strong> metric — the acceptance criteria a finance team can act on.</div>
+        </div>
+        <div class="fit-card">
+          <div class="fit-need">Partner with technical teams; specify data, integrations &amp; governance</div>
+          <div class="fit-have">Built the full engine end to end: a data pipeline, <strong>LLM policy-rule extraction</strong>, ensemble ML scoring, an immutable <strong>audit log</strong>, and evaluation of models/prompts against edge cases.</div>
+        </div>
+        <div class="fit-card">
+          <div class="fit-need">Communicate impact &amp; guide executives</div>
+          <div class="fit-have">An exec dashboard quantifies <strong>exposure &amp; expected loss</strong>, rolls risks into a board-ready <strong>register</strong>, and ships an AI analyst that answers questions in plain English.</div>
+        </div>
+        <div class="fit-card">
+          <div class="fit-need">Corporate finance / controllership grounding</div>
+          <div class="fit-have">Modeled real expense-policy controls (limits, pre-approval, receipts, off-hours) and standard <strong>GRC artifacts</strong> — risk register, continuous controls monitoring, KRIs.</div>
+        </div>
+        <div class="fit-card">
+          <div class="fit-need">Comfort with data &amp; systems integration</div>
+          <div class="fit-have">Python (pandas / scikit-learn) pipeline, an <strong>LLM via API</strong>, a serverless endpoint, and structured JSON contracts between the engine and the UI.</div>
+        </div>
+      </div>
+      <div class="fit-cta">
+        <a class="btn btn-lime btn-lg" href="/dashboard.html">Explore the live agent
+          <svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:currentColor;stroke-width:2;fill:none"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        <a class="btn btn-ghost btn-lg" onclick="showTab('application')" style="cursor:pointer">Application form</a>
+        <a class="btn btn-ghost btn-lg" href="https://github.com/Aditya-00a/RampAgent" target="_blank" rel="noopener">View the code ↗</a>
+      </div>
+    </section>
+
     <section class="pane prose" id="p-application">
       <h2>Apply for this role</h2>
       <p>Tell us a bit about yourself. Fields marked <span style="color:var(--red)">*</span> are required.</p>
@@ -253,15 +303,17 @@
     <div><h5>Product</h5><a href="/dashboard.html">Dashboard</a><a href="/dashboard.html#register">Risk register</a><a href="/dashboard.html#controls">Controls (CCM)</a></div>
     <div><h5>Company</h5><a href="/">Overview</a><a href="/careers.html">Careers</a></div>
   </div>
-  <div class="footer-bottom"><div class="container"><span>Built by Aditya Sakhale · inspired by Ramp</span><span>Demo · synthetic data</span></div></div>
+  <div class="footer-bottom"><div class="container"><span>Built by Aditya Sakhale · <a href="https://linkedin.com/in/adityasakhale" target="_blank" rel="noopener">LinkedIn</a> · <a href="https://github.com/Aditya-00a/RampAgent" target="_blank" rel="noopener">GitHub</a> · <a href="mailto:axs10415@nyu.edu">Email</a></span><span>A demo for Ramp · synthetic data</span></div></div>
 </footer>
 
 <script>
+const TAB_ORDER=['overview','fit','application'];
 function showTab(name,btn){
   document.querySelectorAll('.pane').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
-  document.getElementById('p-'+name).classList.add('active');
-  (btn||document.querySelectorAll('.tab')[name==='application'?1:0]).classList.add('active');
+  const pane=document.getElementById('p-'+name); if(pane)pane.classList.add('active');
+  const b=btn||document.querySelectorAll('.tab')[TAB_ORDER.indexOf(name)];
+  if(b)b.classList.add('active');
 }
 function openApply(){showTab('application');window.scrollTo({top:document.querySelector('.tabs').offsetTop-60,behavior:'smooth'});}
 function submitApp(e){e.preventDefault();document.getElementById('apply-form').style.display='none';document.getElementById('apply-success').style.display='block';window.scrollTo({top:document.querySelector('.tabs').offsetTop-60,behavior:'smooth'});}
