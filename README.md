@@ -1,6 +1,6 @@
 # RampAgent — Continuous Risk & Controls Monitoring
 
-> A working demo built by **Aditya Sakhale** for Ramp's **AI Solutions Strategist** role — an end-to-end AI agent that turns corporate-spend controllership workflows into continuous, quantified risk monitoring. [LinkedIn](https://linkedin.com/in/adityasakhale) · live site: `ramp.asion.ai`
+> An end-to-end AI agent that turns corporate-spend controllership workflows into continuous, quantified risk monitoring. Live demo: `ramp.asion.ai`
 
 **An AI-driven continuous controls monitoring (CCM) and financial-risk intelligence platform for corporate spend.** RampAgent screens 100% of transactions through a library of automated controls, quantifies financial exposure, and rolls everything up into the artifacts a risk, internal-audit, or GRC team actually works with: a **risk register**, **Key Risk Indicators (KRIs)** measured against a defined risk appetite, and **control-effectiveness ratings**.
 
