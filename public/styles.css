@@ -138,4 +138,6 @@ h1,h2,h3,h4{letter-spacing:-.025em;line-height:1.1;color:var(--ink)}
 @media(max-width:560px){
   .footer-inner{grid-template-columns:1fr}
   .section{padding:3.2rem 0}
+  .nav-right .btn-ghost{display:none}
+  .nav-tag{display:none}
 }

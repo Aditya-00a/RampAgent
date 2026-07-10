@@ -10,6 +10,19 @@
 
 ---
 
+## The 3-minute live demo
+
+Open the dashboard and press **▶ Go live** (or land on `/dashboard.html#live`).
+
+1. **Watch the feed** (~30s) — transactions stream in and get screened in real time: most clear, some get flagged with the exact signal that fired. The session counters (screened / flagged / exposure) tick up as it works.
+2. **Try to sneak one past** (~60s) — press an **Inject a scenario** button: a duplicate charge, a split payment structured just under the approval threshold, or a 2:47 AM first-time-vendor spend. The agent catches it mid-stream, writes a narrative, and drops it at the top of the review queue.
+3. **Show the evidence trail** (~60s) — click the flagged card: the drawer shows the composed risk score, every detection signal and policy citation, the expected-loss math (`amount × score`), and the AI narrative. Press **Block** — the action lands in the immutable event log, attributed to you.
+4. **Ask the analyst** (~30s) — on the Activity tab, ask *"Which control is least effective?"*. Answers come from Llama 3.1 (Cerebras) grounded in the live data; if the LLM endpoint is unreachable, a deterministic analyst computes the same answer client-side, so the demo never stalls.
+
+> The feed replays the scored synthetic dataset through the agent's real decision path; injected scenarios are screened with the same rules. For the LLM analyst on Vercel, set `CEREBRAS_API_KEY` in the project's environment variables.
+
+---
+
 ## Why this matters
 
 Traditional expense review is **sample-based, after-the-fact, and manual** — auditors test a small sample of transactions weeks or months after the spend. RampAgent demonstrates the shift to **continuous controls monitoring**: every transaction is tested against every control, in real time, with risks quantified in dollars and prioritised by inherent severity.

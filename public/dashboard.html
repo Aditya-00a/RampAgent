@@ -106,6 +106,74 @@
   border:1px solid var(--line);border-radius:var(--r-pill);padding:.4rem .85rem;cursor:pointer}
 .suggest button:hover{border-color:var(--ink);color:var(--ink)}
 
+/* live monitor */
+.live-dot{width:8px;height:8px;border-radius:50%;background:var(--red);display:inline-block;margin-left:.45rem;
+  animation:pulse 1.2s ease infinite;vertical-align:1px}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(220,38,38,.4)}70%{box-shadow:0 0 0 7px rgba(220,38,38,0)}100%{box-shadow:0 0 0 0 rgba(220,38,38,0)}}
+.feed{min-height:420px}
+.feed-card{display:flex;align-items:center;justify-content:space-between;gap:.8rem;padding:.8rem .9rem;margin-bottom:.55rem;
+  background:var(--paper);border:1px solid var(--line);border-radius:12px;animation:slideIn .3s ease;transition:opacity .4s,border-color .3s,background .3s}
+@keyframes slideIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+.feed-card.flagged{border-color:#f2c4c4;background:#fffbfb;cursor:pointer}
+.feed-card.flagged:hover{border-color:var(--red)}
+.feed-card.injected{border-color:var(--lime-deep);box-shadow:0 0 0 3px rgba(196,240,47,.25)}
+.feed-card.gone{opacity:0}
+.fc-left{display:flex;align-items:center;gap:.6rem;min-width:0}
+.fc-vendor{font-weight:700;font-size:.86rem}.fc-meta{font-size:.72rem;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.fc-right{text-align:right;flex-shrink:0}.fc-amt{font-weight:800;font-size:.9rem}
+.fc-status{font-size:.72rem;font-weight:700;margin-top:.2rem;display:flex;align-items:center;gap:.35rem;justify-content:flex-end;color:var(--muted)}
+.fc-reason{font-size:.7rem;color:var(--red);margin-top:.15rem;max-width:230px;margin-left:auto;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.spin-sm{width:11px;height:11px;border:2px solid var(--line);border-top-color:var(--ink);border-radius:50%;animation:rot .7s linear infinite;display:inline-block}
+@keyframes rot{to{transform:rotate(360deg)}}
+.live-stat{display:flex;justify-content:space-between;align-items:baseline;padding:.6rem 0;border-bottom:1px solid var(--line-2)}
+.live-stat:last-child{border:none}
+.live-stat .k{font-size:.8rem;color:var(--muted);font-weight:600}
+.live-stat .n{font-size:1.25rem;font-weight:800;transition:transform .15s}
+.live-stat .n.bump{transform:scale(1.18)}
+.inject-btn{display:flex;align-items:flex-start;gap:.6rem;width:100%;text-align:left;font-family:inherit;background:var(--paper);
+  border:1px solid var(--line);border-radius:12px;padding:.75rem .9rem;cursor:pointer;margin-bottom:.55rem;transition:border-color .15s,transform .15s}
+.inject-btn:hover{border-color:var(--ink);transform:translateY(-1px)}
+.inject-btn:disabled{opacity:.45;cursor:default;transform:none}
+.inject-btn .t{font-weight:700;font-size:.84rem}.inject-btn .d{font-size:.72rem;color:var(--muted);margin-top:.1rem}
+.inject-btn .em{font-size:1rem;line-height:1.4}
+.live-note{font-size:.72rem;color:var(--dim);line-height:1.5;margin-top:.9rem}
+
+/* drawer */
+.ovl{position:fixed;inset:0;background:rgba(19,19,15,.4);opacity:0;pointer-events:none;transition:opacity .25s;z-index:60}
+.ovl.open{opacity:1;pointer-events:auto}
+.drawer{position:fixed;top:0;right:-480px;width:min(460px,92vw);height:100%;background:var(--paper);z-index:61;
+  transition:right .28s cubic-bezier(.2,.8,.25,1);box-shadow:-18px 0 50px rgba(19,19,15,.15);display:flex;flex-direction:column}
+.drawer.open{right:0}
+.dr-h{padding:1.3rem 1.5rem 1rem;border-bottom:1px solid var(--line)}
+.dr-close{position:absolute;top:1rem;right:1rem;background:var(--paper-2);border:1px solid var(--line);border-radius:50%;
+  width:32px;height:32px;font-size:1rem;cursor:pointer;font-family:inherit}
+.dr-b{padding:1.2rem 1.5rem;overflow-y:auto;flex:1}
+.dr-sec{margin-bottom:1.4rem}
+.dr-sec h4{font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:800;margin-bottom:.6rem}
+.meter{height:10px;background:var(--paper-2);border-radius:99px;overflow:hidden;margin:.4rem 0}
+.meter i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,#D97706,#DC2626)}
+.sig{display:flex;gap:.55rem;align-items:flex-start;padding:.45rem 0;font-size:.84rem;border-bottom:1px solid var(--line-2)}
+.sig:last-child{border:none}
+.sig .b{width:7px;height:7px;border-radius:50%;margin-top:.42rem;flex-shrink:0}
+.dr-grid{display:grid;grid-template-columns:1fr 1fr;gap:.5rem .9rem;font-size:.83rem}
+.dr-grid .k{color:var(--muted)}.dr-grid .v{font-weight:600;text-align:right}
+.dr-narr{background:var(--lime-soft);border:1px solid var(--lime-line);border-radius:12px;padding:.9rem 1rem;font-size:.84rem;line-height:1.55}
+.dr-foot{padding:1rem 1.5rem;border-top:1px solid var(--line);display:flex;gap:.6rem}
+.dr-foot .btn{flex:1;justify-content:center}
+.btn-danger{background:var(--red);color:#fff;border:none}
+.btn-danger:hover{background:#b91c1c}
+
+/* toast */
+.toast{position:fixed;bottom:1.4rem;left:50%;transform:translate(-50%,80px);background:var(--ink);color:#fff;
+  padding:.75rem 1.3rem;border-radius:var(--r-pill);font-size:.86rem;font-weight:600;z-index:70;transition:transform .3s;box-shadow:var(--shadow-lg)}
+.toast.show{transform:translate(-50%,0)}
+
+/* chat extras */
+.chat-resp .src{display:block;margin-top:.7rem;font-size:.7rem;color:var(--dim);font-weight:600}
+.chat-resp ul{margin:.4rem 0 .4rem 1.1rem}
+.status.live{background:var(--red-soft);color:var(--red);border-color:#f2c4c4}
+.status.live .dot{background:var(--red);box-shadow:0 0 0 3px rgba(220,38,38,.15);animation:pulse 1.2s infinite}
+
 @media(max-width:980px){.kpis{grid-template-columns:repeat(2,1fr)}.grid-2{grid-template-columns:1fr}}
 @media(max-width:560px){.kpis{grid-template-columns:1fr}.mini{grid-template-columns:1fr}}
 </style>
@@ -131,6 +199,11 @@
   <div class="loading" id="loading"><div class="spinner"></div><br>Loading risk analysis…</div>
 </div>
 
+<!-- DRAWER + TOAST -->
+<div class="ovl" id="ovl" onclick="closeDrawer()"></div>
+<aside class="drawer" id="drawer" aria-label="Transaction detail"></aside>
+<div class="toast" id="toast"></div>
+
 <!-- FOOTER -->
 <footer class="footer">
   <div class="footer-inner">
@@ -149,7 +222,8 @@
 <script>
 const RISKCOLOR={CRITICAL:'#DC2626',HIGH:'#D97706',MEDIUM:'#2563EB',LOW:'#16A34A'};
 const AV=['#13130f','#7c3aed','#0891b2','#db2777','#ea580c','#16a34a','#2563eb'];
-let DATA=null;
+let DATA=null,FLAGMAP=new Map();
+const SESSION_EVENTS=[];
 
 function fmt(n){if(n==null)return '$0';return n>=1000?'$'+Math.round(n).toLocaleString('en-US'):'$'+(+n).toFixed(0)}
 function esc(s){const d=document.createElement('div');d.textContent=s==null?'':s;return d.innerHTML}
@@ -157,7 +231,12 @@ function initials(n){return (n||'?').split(' ').map(w=>w[0]).slice(0,2).join('')
 function tagc(l){return 'tag tag-'+(l||'low').toLowerCase()}
 
 (async function(){
-  try{ DATA=await (await fetch('/data/results.json')).json(); render(); }
+  try{
+    DATA=await (await fetch('/data/results.json')).json();
+    (DATA.flagged_transactions||[]).forEach(t=>FLAGMAP.set(t.transaction_id,t));
+    render();
+    if(location.hash==='#live') setTimeout(()=>{if(!LIVE.on)toggleLive();},500);
+  }
   catch(e){ const l=document.getElementById('loading'); if(l)l.innerHTML='<p style="color:#dc2626">Failed to load data: '+esc(e.message)+'</p>'; }
 })();
 
@@ -188,12 +267,14 @@ function render(){
     <div><h1>Risk &amp; Controls</h1><div class="sub">Continuous monitoring across ${s.total_transactions} transactions · ${fmt(s.total_spend)} screened</div></div>
     <div class="phead-right">
       <span class="period"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Current period</span>
-      <span class="status"><span class="dot"></span>Monitoring active</span>
+      <span class="status" id="status-pill"><span class="dot"></span><span id="status-txt">Monitoring active</span></span>
+      <button class="btn btn-ink btn-sm" id="live-btn" onclick="toggleLive()">▶&nbsp; Go live</button>
     </div>
   </div>
 
   <div class="tabbar">
     <button class="tabbtn active" data-t="overview" onclick="tab('overview',this)">Overview</button>
+    <button class="tabbtn" data-t="live" onclick="tab('live',this)">Live Monitor<span id="live-tab-dot" style="display:none" class="live-dot"></span></button>
     <button class="tabbtn" data-t="register" onclick="tab('register',this)">Risk Register</button>
     <button class="tabbtn" data-t="controls" onclick="tab('controls',this)">Controls</button>
     <button class="tabbtn" data-t="activity" onclick="tab('activity',this)">Activity</button>
@@ -223,6 +304,40 @@ function render(){
       <div class="panel-h"><h3>Top risk events</h3><span class="hint">highest score</span></div>
       <div class="panel-b"><div class="panel-desc">Transactions where one or more controls raised an exception, ranked by risk score.</div>
         <div style="overflow-x:auto"><table class="tbl"><thead><tr><th>Item</th><th>Issue</th><th>Exposure</th><th>Severity</th><th style="text-align:right">Action</th></tr></thead><tbody id="watch"></tbody></table></div></div>
+    </div>
+  </section>
+
+  <!-- LIVE MONITOR -->
+  <section class="tabpane" id="tp-live">
+    <div class="grid-2">
+      <div class="panel">
+        <div class="panel-h"><h3>Incoming transactions</h3><span class="hint" id="feed-hint">press ▶ Go live</span></div>
+        <div class="panel-b">
+          <div class="panel-desc">Every swipe is screened in real time — anomaly ensemble, policy tests, duplicate &amp; velocity checks. Click a flagged item for the full evidence trail.</div>
+          <div class="feed" id="feed"><p class="muted" style="padding:2.5rem 0;text-align:center">The feed is idle. Press <b>▶ Go live</b> to start screening.</p></div>
+        </div>
+      </div>
+      <div>
+        <div class="panel" style="margin-bottom:1.2rem">
+          <div class="panel-h"><h3>This session</h3><span class="hint">live</span></div>
+          <div class="panel-b">
+            <div class="live-stat"><span class="k">Transactions screened</span><span class="n" id="ls-screened">0</span></div>
+            <div class="live-stat"><span class="k">Exceptions flagged</span><span class="n" id="ls-flagged" style="color:var(--red)">0</span></div>
+            <div class="live-stat"><span class="k">Exposure detected</span><span class="n" id="ls-exposure">$0</span></div>
+            <div class="live-stat"><span class="k">Avg screening latency</span><span class="n" style="color:var(--green)">0.6s</span></div>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="panel-h"><h3>Inject a scenario</h3><span class="hint">try to sneak one past</span></div>
+          <div class="panel-b">
+            <div class="panel-desc">Drop a crafted fraud pattern into the stream and watch the agent catch it.</div>
+            <button class="inject-btn" data-s="dup" onclick="inject('dup',this)"><span class="em">🧾</span><span><span class="t">Duplicate charge</span><br><span class="d">Same vendor, same amount, 4 minutes apart</span></span></button>
+            <button class="inject-btn" data-s="split" onclick="inject('split',this)"><span class="em">✂️</span><span><span class="t">Split payment</span><br><span class="d">Two invoices just under the approval threshold</span></span></button>
+            <button class="inject-btn" data-s="hours" onclick="inject('hours',this)"><span class="em">🌙</span><span><span class="t">After-hours spend</span><br><span class="d">First-time vendor, 2:47 AM on a Saturday</span></span></button>
+            <p class="live-note">The feed replays the scored synthetic dataset through the agent's real decision path; injected scenarios are screened with the same rules.</p>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -305,13 +420,20 @@ function renderKris(){
 }
 
 function issueOf(t){return (t.policy_violations&&t.policy_violations[0])||((t.anomaly_flags&&t.anomaly_flags[0])||'Anomaly detected').replace(/_/g,' ')}
+function actionHTML(t){
+  if(t._status==='BLOCKED')return '<span class="tag tag-critical">Blocked ✓</span>';
+  if(t._status==='REVIEWED')return '<span class="tag tag-low">Reviewed ✓</span>';
+  return (t.risk_level==='CRITICAL'||t.risk_level==='HIGH')
+    ?`<button class="btn-act btn-block" onclick="event.stopPropagation();actOn('${t.transaction_id}','BLOCKED')">Block</button>`
+    :`<button class="btn-act btn-review" onclick="event.stopPropagation();actOn('${t.transaction_id}','REVIEWED')">Review</button>`;
+}
 function renderWatch(){
-  document.getElementById('watch').innerHTML=(DATA.flagged_transactions||[]).slice(0,7).map(t=>{
-    const act=(t.risk_level==='CRITICAL'||t.risk_level==='HIGH')?'<button class="btn-act btn-block">Block</button>':'<button class="btn-act btn-review">Review</button>';
-    return `<tr><td><div class="cell-item"><span class="item-ic">${esc(initials(t.vendor))}</span>${esc(t.vendor)}</div></td>
+  document.getElementById('watch').innerHTML=(DATA.flagged_transactions||[]).slice(0,7).map(t=>
+    `<tr style="cursor:pointer" onclick="openDrawer('${t.transaction_id}')">
+      <td><div class="cell-item"><span class="item-ic">${esc(initials(t.vendor))}</span>${esc(t.vendor)}</div></td>
       <td class="muted">${esc(issueOf(t))}</td><td style="font-weight:700">${fmt(t.amount)}</td>
       <td><span class="${tagc(t.risk_level)}">${t.risk_level}</span></td>
-      <td style="text-align:right">${act}</td></tr>`;}).join('')||'<tr><td colspan="5" class="muted">No exceptions.</td></tr>';
+      <td style="text-align:right">${actionHTML(t)}</td></tr>`).join('')||'<tr><td colspan="5" class="muted">No exceptions.</td></tr>';
 }
 
 function renderRegister(){
@@ -340,14 +462,14 @@ function renderControls(){
 }
 
 function renderQueue(){
-  const q=(DATA.flagged_transactions||[]).slice(0,4);
-  document.getElementById('q-count').textContent=(DATA.flagged_transactions||[]).length+' open';
-  document.getElementById('queue').innerHTML=q.map((t,i)=>`<div class="q">
+  const open=(DATA.flagged_transactions||[]).filter(t=>!t._status);
+  document.getElementById('q-count').textContent=open.length+' open';
+  document.getElementById('queue').innerHTML=open.slice(0,4).map((t,i)=>`<div class="q" style="cursor:pointer" onclick="openDrawer('${t.transaction_id}')">
     <div class="av" style="background:${AV[i%AV.length]}">${esc(initials(t.employee_name))}</div>
     <div class="main"><div class="nm">${esc(t.employee_name)}</div><div class="me">${esc(t.department)} · ${esc(t.category)}</div></div>
     <div><div class="amt">${fmt(t.amount)}</div>
       <div style="display:flex;gap:.35rem;margin-top:.3rem;justify-content:flex-end">
-        <button class="btn-act btn-review" onclick="this.closest('.q').style.opacity=.4">Review</button></div></div>
+        <button class="btn-act btn-review" onclick="event.stopPropagation();actOn('${t.transaction_id}','REVIEWED')">Review</button></div></div>
     </div>`).join('')||'<p class="muted">Queue is clear.</p>';
 }
 
@@ -357,24 +479,227 @@ function evMeta(t){
   return{bg:'#E9F0FE',st:'<span class="tag tag-medium">Logged</span>',sv:'<svg viewBox="0 0 24 24" stroke="#2563EB"><path d="M9 11l3 3 8-8"/><path d="M20 12v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h9"/></svg>'};
 }
 function renderEvents(){
-  document.getElementById('events').innerHTML=(DATA.flagged_transactions||[]).slice(0,8).map(t=>{
+  const sess=SESSION_EVENTS.map(e=>`<tr><td><div class="ev"><span class="ev-ic" style="background:${e.bg}">${e.sv}</span>${e.title}</div></td>
+    <td class="muted">just now</td><td class="muted">${esc(e.actor)}</td><td>${e.st}</td></tr>`).join('');
+  const hist=(DATA.flagged_transactions||[]).filter(t=>!t._injected).slice(0,8-Math.min(SESSION_EVENTS.length,6)).map(t=>{
     const m=evMeta(t), actor=(t.policy_violations&&t.policy_violations.length)?'Policy Engine':'AI Agent';
     const time=(t.date||'').split(' ')[1]?t.date.split(' ')[1].slice(0,5):(t.date||'').slice(0,10);
     return `<tr><td><div class="ev"><span class="ev-ic" style="background:${m.bg}">${m.sv}</span>${esc(t.vendor)} · ${fmt(t.amount)}</div></td>
-      <td class="muted">${esc(time)}</td><td class="muted">${actor}</td><td>${m.st}</td></tr>`;}).join('')
-    ||'<tr><td colspan="4" class="muted">No events.</td></tr>';
+      <td class="muted">${esc(time)}</td><td class="muted">${actor}</td><td>${m.st}</td></tr>`;}).join('');
+  document.getElementById('events').innerHTML=(sess+hist)||'<tr><td colspan="4" class="muted">No events.</td></tr>';
+}
+function logEvent(title,kind,actor){
+  const m=kind==='block'?{bg:'#FCEBEA',sv:'<svg viewBox="0 0 24 24" stroke="#DC2626"><circle cx="12" cy="12" r="9"/><line x1="5.5" y1="5.5" x2="18.5" y2="18.5"/></svg>',st:'<span class="tag tag-critical">Blocked</span>'}
+    :kind==='review'?{bg:'#E6F5EC',sv:'<svg viewBox="0 0 24 24" stroke="#16A34A"><path d="M20 6 9 17l-5-5"/></svg>',st:'<span class="tag tag-low">Reviewed</span>'}
+    :{bg:'#FBF0DD',sv:'<svg viewBox="0 0 24 24" stroke="#D97706"><path d="M10.3 3.3a2 2 0 0 1 3.4 0l7.3 12.6a2 2 0 0 1-1.7 3H4.7a2 2 0 0 1-1.7-3z"/></svg>',st:'<span class="tag tag-high">Flagged</span>'};
+  SESSION_EVENTS.unshift({title,actor,bg:m.bg,sv:m.sv,st:m.st});
+  if(SESSION_EVENTS.length>6)SESSION_EVENTS.pop();
+  renderEvents();
 }
 
+/* ============ LIVE MONITOR ============ */
+const LIVE={on:false,timer:null,i:0,stream:[],screened:0,flagged:0,exposure:0,seq:0};
+function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+function buildStream(){
+  const r=mulberry32(41),arr=[...(DATA.all_transactions||[])];
+  for(let i=arr.length-1;i>0;i--){const j=Math.floor(r()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]]}
+  return arr;
+}
+function toggleLive(){
+  const btn=document.getElementById('live-btn'),pill=document.getElementById('status-pill'),
+        txt=document.getElementById('status-txt'),dot=document.getElementById('live-tab-dot');
+  if(LIVE.on){
+    LIVE.on=false;clearInterval(LIVE.timer);
+    btn.innerHTML='▶&nbsp; Go live';pill.classList.remove('live');txt.textContent='Monitoring active';dot.style.display='none';
+    document.getElementById('feed-hint').textContent='paused';
+    return;
+  }
+  if(!LIVE.stream.length)LIVE.stream=buildStream();
+  LIVE.on=true;
+  btn.innerHTML='■&nbsp; Stop';pill.classList.add('live');txt.textContent='Live · screening feed';dot.style.display='inline-block';
+  document.getElementById('feed-hint').textContent='streaming';
+  tab('live');
+  const first=document.querySelector('#feed p'); if(first)first.remove();
+  tick(); LIVE.timer=setInterval(tick,1900);
+}
+function tick(){
+  if(LIVE.i>=LIVE.stream.length)LIVE.i=0;
+  pushCard(LIVE.stream[LIVE.i++]);
+}
+function pushCard(tx,injected){
+  const feed=document.getElementById('feed'),id='fc-'+(++LIVE.seq);
+  const full=FLAGMAP.get(tx.transaction_id)||tx;
+  const el=document.createElement('div');
+  el.className='feed-card'+(injected?' injected':'');el.id=id;
+  el.innerHTML=`<div class="fc-left"><span class="item-ic">${esc(initials(tx.vendor))}</span>
+      <div><div class="fc-vendor">${esc(tx.vendor)}${injected?' <span class="tag tag-medium" style="font-size:.62rem;vertical-align:1px">INJECTED</span>':''}</div>
+      <div class="fc-meta">${esc(tx.employee_name||'—')} · ${esc(tx.category||'')}</div></div></div>
+    <div class="fc-right"><div class="fc-amt">${fmt(tx.amount)}</div>
+      <div class="fc-status"><span class="spin-sm"></span>Screening…</div></div>`;
+  feed.prepend(el);
+  [...feed.children].slice(9).forEach(c=>{c.classList.add('gone');setTimeout(()=>c.remove(),380);});
+  setTimeout(()=>resolveCard(el,full,injected),injected?900:650);
+}
+function resolveCard(el,tx,injected){
+  if(!document.getElementById(el.id))return;
+  const st=el.querySelector('.fc-status');
+  const isFlag=FLAGMAP.has(tx.transaction_id)||tx._injected;
+  LIVE.screened++;
+  if(isFlag){
+    LIVE.flagged++;LIVE.exposure+=tx.amount;
+    el.classList.add('flagged');
+    el.onclick=()=>openDrawer(tx.transaction_id);
+    st.innerHTML=`<span class="${tagc(tx.risk_level)}">${tx.risk_level}</span>`;
+    st.insertAdjacentHTML('afterend',`<div class="fc-reason">${esc(issueOf(tx))}</div>`);
+    if(injected){
+      logEvent(esc(tx.vendor)+' · '+fmt(tx.amount)+' — injected scenario caught','flag','AI Agent');
+      showToast('Caught in 0.9s — now at the top of the review queue');
+    }
+  }else{
+    st.innerHTML='<span style="color:var(--green)">✓ Cleared</span>';
+  }
+  bump('ls-screened',LIVE.screened);bump('ls-flagged',LIVE.flagged);bump('ls-exposure',fmt(LIVE.exposure));
+}
+function bump(id,val){const n=document.getElementById(id);if(!n)return;n.textContent=val;n.classList.remove('bump');void n.offsetWidth;n.classList.add('bump');}
+
+/* ---- scenario injection ---- */
+const SCENARIOS={
+  dup:()=>({vendor:'Figma',employee_name:'Priya Natarajan',department:'Design',category:'Software - SaaS',amount:1188.00,
+    description:'Annual seat renewal — submitted twice',receipt_attached:true,pre_approved:false,risk_level:'CRITICAL',combined_score:0.94,
+    anomaly_flags:['duplicate_charge (Figma · $1,188.00 seen 4 min ago)','velocity_spike (2 charges / 4 min)'],
+    policy_violations:['$1,188.00 exceeds $500.00 policy limit','Duplicate of TXN-0233 (same vendor, same amount, same card)'],
+    narrative:'Exact duplicate of a charge screened 4 minutes earlier — same vendor, amount and card. Classic double-submission or replay pattern. Recommend blocking the second charge and notifying the cardholder.'}),
+  split:()=>({vendor:'Oakview Consulting LLC',employee_name:'Marcus Webb',department:'Operations',category:'Professional Services',amount:2450.00,
+    description:'Invoice 2 of 2 — project kickoff',receipt_attached:false,pre_approved:false,risk_level:'CRITICAL',combined_score:0.91,
+    anomaly_flags:['split_payment_pattern (2 × $2,450 · 11 min apart)','just_below_threshold ($2,500 approval limit)','first_time_vendor (Oakview Consulting LLC)'],
+    policy_violations:['Combined $4,900.00 exceeds $2,500.00 pre-approval threshold','Missing receipt for amount over $75.00'],
+    narrative:'Two invoices of $2,450 to a first-time vendor, 11 minutes apart — each just under the $2,500 pre-approval threshold. Structuring pattern consistent with approval-limit evasion. Recommend blocking and requiring a single pre-approved PO.'}),
+  hours:()=>({vendor:'ExoticCars Rental',employee_name:'Dana Kimura',department:'Sales',category:'Travel - Ground Transport',amount:4890.00,
+    description:'Premium vehicle rental',receipt_attached:false,pre_approved:false,risk_level:'CRITICAL',combined_score:0.96,
+    anomaly_flags:['off_hours_activity (Sat 02:47 AM)','zscore_outlier ($4,890 vs avg $60 for category)','first_time_vendor (ExoticCars Rental)','isolation_forest'],
+    policy_violations:['$4,890.00 exceeds $500.00 policy limit','Missing receipt for amount over $75.00','No pre-approval on file'],
+    narrative:'A $4,890 charge to a first-time luxury vendor at 2:47 AM on a Saturday — 80× the category average, no receipt, no pre-approval. Highest-severity pattern in the taxonomy. Recommend immediate block and cardholder verification.'})
+};
+let INJ=0;
+function inject(kind,btn){
+  const tx=SCENARIOS[kind]();
+  tx.transaction_id='TXN-INJ-'+(++INJ);
+  tx.date=new Date().toISOString().slice(0,16).replace('T',' ');
+  tx._injected=true;
+  FLAGMAP.set(tx.transaction_id,tx);
+  DATA.flagged_transactions.unshift(tx);
+  if(!LIVE.on)toggleLive();
+  pushCard(tx,true);
+  setTimeout(()=>{renderQueue();renderWatch();},1100);
+  if(btn){btn.disabled=true;setTimeout(()=>btn.disabled=false,4000);}
+}
+
+/* ============ DRAWER ============ */
+function openDrawer(id){
+  const t=FLAGMAP.get(id); if(!t)return;
+  const dr=document.getElementById('drawer');
+  const sigs=(t.anomaly_flags||[]).map(s=>`<div class="sig"><span class="b" style="background:var(--amber)"></span>${esc(s.replace(/_/g,' '))}</div>`).join('')
+    ||'<div class="sig"><span class="b" style="background:var(--line)"></span>No anomaly signals</div>';
+  const pols=(t.policy_violations||[]).map(s=>`<div class="sig"><span class="b" style="background:var(--red)"></span>${esc(s)}</div>`).join('')
+    ||'<div class="sig"><span class="b" style="background:var(--line)"></span>No policy findings</div>';
+  const score=t.combined_score||0, eloss=t.amount*score;
+  dr.innerHTML=`
+    <div class="dr-h">
+      <button class="dr-close" onclick="closeDrawer()">✕</button>
+      <span class="${tagc(t.risk_level)}">${t.risk_level}</span>
+      <h2 style="font-size:1.3rem;font-weight:800;margin-top:.5rem">${esc(t.vendor)} · ${fmt(t.amount)}</h2>
+      <div class="muted" style="font-size:.8rem;margin-top:.25rem">${esc(t.transaction_id)} · ${esc(t.date||'')}</div>
+    </div>
+    <div class="dr-b">
+      <div class="dr-sec"><h4>Risk score</h4>
+        <div style="display:flex;justify-content:space-between;font-size:.84rem"><span>Combined score <span class="muted">(anomaly ×0.55 + policy ×0.45)</span></span><b>${score.toFixed(2)}</b></div>
+        <div class="meter"><i style="width:${Math.round(score*100)}%"></i></div>
+        <div style="font-size:.8rem;color:var(--muted)">Expected loss = ${fmt(t.amount)} × ${score.toFixed(2)} = <b style="color:var(--ink)">${fmt(eloss)}</b></div>
+      </div>
+      <div class="dr-sec"><h4>Detection signals</h4>${sigs}</div>
+      <div class="dr-sec"><h4>Policy findings</h4>${pols}</div>
+      <div class="dr-sec"><h4>AI narrative</h4><div class="dr-narr">${esc(t.narrative||'—')}</div></div>
+      <div class="dr-sec"><h4>Details</h4><div class="dr-grid">
+        <span class="k">Employee</span><span class="v">${esc(t.employee_name||'—')}</span>
+        <span class="k">Department</span><span class="v">${esc(t.department||'—')}</span>
+        <span class="k">Category</span><span class="v">${esc(t.category||'—')}</span>
+        <span class="k">Receipt attached</span><span class="v">${t.receipt_attached?'Yes':'No'}</span>
+        <span class="k">Pre-approved</span><span class="v">${t.pre_approved?'Yes':'No'}</span>
+        <span class="k">Status</span><span class="v">${t._status||'Open'}</span>
+      </div></div>
+    </div>
+    <div class="dr-foot">
+      <button class="btn btn-danger" onclick="actOn('${t.transaction_id}','BLOCKED');closeDrawer()">Block transaction</button>
+      <button class="btn btn-ghost" onclick="actOn('${t.transaction_id}','REVIEWED');closeDrawer()">Mark reviewed</button>
+    </div>`;
+  dr.classList.add('open');document.getElementById('ovl').classList.add('open');
+}
+function closeDrawer(){document.getElementById('drawer').classList.remove('open');document.getElementById('ovl').classList.remove('open');}
+function actOn(id,status){
+  const t=FLAGMAP.get(id); if(!t||t._status)return;
+  t._status=status;
+  logEvent(esc(t.vendor)+' · '+fmt(t.amount)+(status==='BLOCKED'?' blocked':' marked reviewed'),status==='BLOCKED'?'block':'review','You');
+  renderWatch();renderQueue();
+  showToast(status==='BLOCKED'?'Transaction blocked — evidence written to the audit log':'Marked reviewed — evidence written to the audit log');
+}
+let TOAST_T=null;
+function showToast(msg){
+  const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');
+  clearTimeout(TOAST_T);TOAST_T=setTimeout(()=>t.classList.remove('show'),3200);
+}
+
+/* ============ AI ANALYST ============ */
+function mdlite(s){
+  return esc(s).replace(/\*\*(.+?)\*\*/g,'<b>$1</b>')
+    .split(/\n/).map(l=>l.trim()).filter(Boolean)
+    .map(l=>/^[-*•]\s/.test(l)?'<li>'+l.replace(/^[-*•]\s/,'')+'</li>':'<p style="margin:.3rem 0">'+l+'</p>')
+    .join('').replace(/(<li>.*?<\/li>)+/g,m=>'<ul>'+m+'</ul>');
+}
+function localAnalyst(q){
+  if(!DATA||!DATA.summary)return 'Data is still loading — try again in a moment.';
+  const s=DATA.summary,lq=q.toLowerCase();
+  const worst=[...(DATA.controls||[])].sort((a,b)=>b.exception_rate-a.exception_rate)[0]||{control_id:'—',control_name:'—',exceptions:0,tested:0,exception_rate:0,exposure:0,effectiveness:'—'};
+  const reg=[...(DATA.risk_register||[])].sort((a,b)=>b.exposure-a.exposure);
+  if(!reg.length)reg.push({risk_id:'—',risk_name:'—',exposure:0,events:0,rating:'—'});
+  const crit=(DATA.flagged_transactions||[]).filter(t=>t.risk_level==='CRITICAL');
+  if(/(largest|biggest|top|where).*(exposure|risk)|exposure.*(largest|biggest|where)/.test(lq)){
+    const byV={};(DATA.flagged_transactions||[]).forEach(t=>byV[t.vendor]=(byV[t.vendor]||0)+t.amount);
+    const tv=Object.entries(byV).sort((a,b)=>b[1]-a[1]).slice(0,3);
+    return `The largest concentration is **${reg[0].risk_name}** (${reg[0].risk_id}): ${fmt(reg[0].exposure)} across ${reg[0].events} events, rated **${reg[0].rating}**.\nTop vendors by flagged exposure:\n${tv.map(([v,a])=>`- ${v} — ${fmt(a)}`).join('\n')}\nTotal flagged exposure is **${fmt(s.flagged_exposure)}** (${s.exposure_rate.toFixed(1)}% of monitored spend); probability-weighted expected loss is **${fmt(s.expected_loss)}**.`;
+  }
+  if(/control/.test(lq)&&/(least|worst|ineffective|weak|effective)/.test(lq)){
+    return `**${worst.control_id} · ${worst.control_name}** is the weakest control: ${worst.exceptions} exceptions out of ${worst.tested} tested (a **${worst.exception_rate.toFixed(1)}%** exception rate, ${fmt(worst.exposure)} exposure), rated **${worst.effectiveness}**.\nA control failing this often usually means the policy limit is set below real spending behavior — recommend recalibrating the limit or adding an approval step rather than treating each event as an exception.`;
+  }
+  if(/critical/.test(lq)){
+    const top=crit.slice(0,3);
+    return `There are **${crit.length} critical risk events** carrying ${fmt(s.critical_exposure)} of exposure. The highest-scoring:\n${top.map(t=>`- ${t.vendor} — ${fmt(t.amount)} (${issueOf(t)})`).join('\n')}\nRecommend clearing the review queue for critical items first; they drive ${(s.critical_exposure/s.flagged_exposure*100).toFixed(0)}% of flagged exposure.`;
+  }
+  if(/(who|employee|person)/.test(lq)){
+    const ei=DATA.executive_insights||{};
+    return `**${ei.highest_risk_employee}** has the most flagged activity (${ei.highest_risk_employee_flags} exceptions). The riskiest category is **${ei.highest_risk_category}** — ${ei.highest_risk_category_flags} flags on ${fmt(ei.highest_risk_category_spend)} of spend.`;
+  }
+  return `Across **${s.total_transactions} transactions** (${fmt(s.total_spend)}), the agent flagged **${s.flagged_count}** exceptions — ${fmt(s.flagged_exposure)} of exposure, ${fmt(s.expected_loss)} expected loss.\n- Largest risk: **${reg[0].risk_name}** (${fmt(reg[0].exposure)}, ${reg[0].rating})\n- Weakest control: **${worst.control_name}** (${worst.exception_rate.toFixed(1)}% exception rate)\n- Critical events: **${crit.length}**\nAsk about exposure, controls, critical risks, or specific employees.`;
+}
 function askQ(b){document.getElementById('chat-in').value=b.textContent;ask();}
 async function ask(){
   const inp=document.getElementById('chat-in'),btn=document.getElementById('chat-btn'),resp=document.getElementById('chat-resp');
-  const q=inp.value.trim(); if(!q)return;
+  const q=inp.value.trim(); if(!q||btn.disabled)return;
   btn.disabled=true;btn.textContent='Thinking…';resp.style.display='block';resp.textContent='Analyzing…';
-  try{const r=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({question:q})});
-    const d=await r.json();resp.textContent=d.answer||d.error||'No response';}
-  catch(e){resp.textContent='Error: '+e.message;}
+  try{
+    const r=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({question:q}),signal:AbortSignal.timeout(15000)});
+    const d=await r.json();
+    if(!r.ok||!d.answer)throw new Error(d.error||'no answer');
+    resp.innerHTML=mdlite(d.answer)+'<span class="src">Llama 3.1 · Cerebras · grounded in this dashboard’s data</span>';
+  }catch(e){
+    resp.innerHTML=mdlite(localAnalyst(q))+'<span class="src">Deterministic analysis computed from the loaded dataset (LLM endpoint unavailable)</span>';
+  }
   btn.disabled=false;btn.textContent='Ask';
 }
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape')closeDrawer();
+  if(e.key==='Enter'&&document.activeElement&&document.activeElement.id==='chat-in')ask();
+});
 </script>
 </body>
 </html>
